@@ -13,7 +13,7 @@ class CreateDriversTable extends Migration
      */
     public function up()
     {
-        Schema::create('driver', function (Blueprint $table) {
+        Schema::create('drivers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('family');
