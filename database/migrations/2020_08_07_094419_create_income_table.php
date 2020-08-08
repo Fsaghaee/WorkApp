@@ -18,6 +18,7 @@ class CreateIncomeTable extends Migration
             $table->string('file_location');
             $table->string('amount');
             $table->date('payed_date');
+            $table->tinyInteger('company_id');
         });
         }
 

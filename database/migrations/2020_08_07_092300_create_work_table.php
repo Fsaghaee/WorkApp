@@ -22,6 +22,7 @@ class CreateWorkTable extends Migration
             $table->date('start_break')->nullable();
             $table->date('end_break')->nullable();
             $table->string('working_account')->nullable();
+            $table->tinyInteger('driver_id');
 
         });
     }
