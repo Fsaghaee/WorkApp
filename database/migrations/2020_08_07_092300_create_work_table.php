@@ -13,7 +13,7 @@ class CreateWorkTable extends Migration
      */
     public function up()
     {
-        Schema::create('work', function (Blueprint $table) {
+        Schema::create('works', function (Blueprint $table) {
             $table->id();
             $table->date('working_day')->nullable();
             $table->tinyInteger('orders')->nullable();

@@ -13,7 +13,7 @@ class CreatePayslipTable extends Migration
      */
     public function up()
     {
-        Schema::create('payslip', function (Blueprint $table) {
+        Schema::create('payslips', function (Blueprint $table) {
             $table->id();
             $table->date('due_date');
             $table->string('status');
