@@ -20,7 +20,7 @@ class CreateWorkTable extends Migration
             $table->date('start_working')->nullable();
             $table->date('end_working')->nullable();
             $table->date('start_break')->nullable();
-            $table->date('start_break')->nullable();
+            $table->date('end_break')->nullable();
             $table->string('working_account')->nullable();
 
         });

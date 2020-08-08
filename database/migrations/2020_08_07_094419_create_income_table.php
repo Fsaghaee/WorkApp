@@ -15,9 +15,11 @@ class CreateIncomeTable extends Migration
     {
         Schema::create('income', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('file_location');
+            $table->string('amount');
+            $table->date('payed_date');
         });
-    }
+        }
 
     /**
      * Reverse the migrations.

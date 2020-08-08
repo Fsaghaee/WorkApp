@@ -13,7 +13,7 @@ class CreateInvoiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoive', function (Blueprint $table) {
+        Schema::create('invoice', function (Blueprint $table) {
             $table->id();
             $table->date('payed_date');
             $table->string('status');
