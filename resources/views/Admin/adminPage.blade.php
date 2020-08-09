@@ -11,7 +11,6 @@
 
 
 
-    <h1> this is the centercontent of AdminPage Page</h1>
 @stop
 @section('footer')
 

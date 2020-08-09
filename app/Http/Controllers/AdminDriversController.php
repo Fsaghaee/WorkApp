@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Driver;
 use Illuminate\Http\Request;
 
 class AdminDriversController extends Controller
@@ -34,7 +35,15 @@ class AdminDriversController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $driver = new Driver();
+        $driver->name = $request->name;
+        $driver -> family= $request->family;
+        $driver -> address= $request->address;
+
+
+
+        return  $driver->save();;
     }
 
     /**

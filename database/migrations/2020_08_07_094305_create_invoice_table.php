@@ -20,6 +20,8 @@ class CreateInvoiceTable extends Migration
             $table->string('title');
             $table->string('slip_file_location');
             $table->tinyInteger('company_id');
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
 
         });
     }

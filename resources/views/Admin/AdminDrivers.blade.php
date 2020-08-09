@@ -1,23 +1,52 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
+
+@extends('Layout.pageLayout')
 
 
-    <title>Klosterneueburg Page</title>
+@section('MainPart')
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-</head>
-<body>
-<div class="container">
-
-<h4>test</h4>
-
-</div>
+<h4>this is the main part of drivers' page</h4>
+@stop
+@section('centercontent')
 
 
+    {!! Form::open(['method'=>'POST','action'=>'AdminDriversController@store']) !!}
+
+    {!! form::label('name','Name :') !!}
+    {!! form::text('name',null,['class'=>'form-control']) !!}
+
+    {!! form::label('family','Family :') !!}
+    {!! form::text('family',null,['class'=>'form-control']) !!}
+<br>
+    {!! form::label('birthday','B irthday :') !!}
+
+    {!! form::date('birthday',null,['class'=>'form-control']) !!}
+
+    {!! form::label('address','Address :') !!}
+    {!! form::text('address',null,['class'=>'form-control']) !!}
+<br>
+    {!! form::label('working_account','Account :') !!}
+    {!! form::text('working_account',null,['class'=>'form-control']) !!}
+
+    {!! form::label('insurance_number','Insurance Number :') !!}
+    {!! form::text('insurance_number',null,['class'=>'form-control']) !!}
+<br>
+    {!! form::label('payment_method','Payment :') !!}
+    {!! form::text('payment_method',null,['class'=>'form-control']) !!}
+
+    {!! form::label('bank_account','Bank Account :') !!}
+    {!! form::text('bank_account',null,['class'=>'form-control']) !!}
+<br>
+        {!! form::submit('Add Driver',['class'=>'btn btn-primary']) !!}
 
 
-</body>
-</html>
+    {!! Form::close() !!}
+
+
+@stop
+@section('footer')
+
+
+    <h1> this is the footer of AdminPage Page</h1>
+
+@stop
+

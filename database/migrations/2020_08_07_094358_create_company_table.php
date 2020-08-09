@@ -21,6 +21,8 @@ class CreateCompanyTable extends Migration
             $table->string('ATU_number')->nullable();
             $table->string('address');
             $table->string('tell');
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

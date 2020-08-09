@@ -19,6 +19,8 @@ class CreatePayslipTable extends Migration
             $table->string('status');
             $table->string('slip_file_location');
             $table->tinyInteger('driver_id');
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
 
         });
     }

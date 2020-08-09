@@ -24,10 +24,12 @@ class CreateDriversTable extends Migration
             $table->date('birthday')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('bank_account')->nullable();
-            $table->string('password');
-            $table->date('register_date');
-            $table->date('unregister_date');
-            $table->tinyInteger('company_id');
+            $table->string('password')->nullable();
+            $table->date('register_date')->nullable();
+            $table->date('unregister_date')->nullable();
+            $table->tinyInteger('company_id')->nullable();
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
 
         });
     }

@@ -23,6 +23,8 @@ class CreateWorkTable extends Migration
             $table->date('end_break')->nullable();
             $table->string('working_account')->nullable();
             $table->tinyInteger('driver_id');
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
 
         });
     }

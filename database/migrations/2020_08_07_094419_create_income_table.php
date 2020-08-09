@@ -19,6 +19,8 @@ class CreateIncomeTable extends Migration
             $table->string('amount');
             $table->date('payed_date');
             $table->tinyInteger('company_id');
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
         }
 
