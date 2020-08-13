@@ -19,12 +19,15 @@ Route::get('/', function () {
 
 
 Route::resource('/userlogin','LoginController');
-
 Route::resource('/admin','AdminPageController');
-
 Route::resource('/admin-profile','AdminProfileController');
-
 Route::resource('/admin-drivers','AdminDriversController');
-
 Route::resource('/admin-invoices','AdminInvoicesController');
 Route::resource('/admin-income','AdminIncomeController');
+
+Route::get('/register', 'RegistrationController@create');
+Route::post('register', 'RegistrationController@store');
+
+Route::get('/login', 'LoginController@create');
+Route::post('/login', 'LoginController@store');
+Route::get('/logout', 'LoginController@destroy');

@@ -2,10 +2,26 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Company extends Model
+class Company extends Authenticatable
 {
+
+
+    protected $fillable = [
+        'name','family','bank_account','address','tell', 'email', 'password',
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+
     public function drivers(){
         return $this->hasMany('App/Driver','company_id');
     }

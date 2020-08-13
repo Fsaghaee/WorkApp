@@ -28,8 +28,8 @@ class CreateDriversTable extends Migration
             $table->date('register_date')->nullable();
             $table->date('unregister_date')->nullable();
             $table->tinyInteger('company_id')->nullable();
-            $table->timestamp('updated_at');
-            $table->timestamp('created_at');
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
 
         });
     }
