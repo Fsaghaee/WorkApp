@@ -18,7 +18,7 @@ class LoginController extends Controller
             ]);
         }
 
-        return redirect()->to('/games');
+        return redirect()->to('/');
     }
 
     public function destroy()

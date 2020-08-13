@@ -2,6 +2,15 @@
 @section('MainPart')
 
     <h2>Register</h2>
+
+ <!-- @if( auth()->check() )
+        <li class="nav-item">
+            <a class="nav-link" href="#">{{ auth()->user()->id }}</a>
+        </li>
+    @endif
+
+-->
+
     <form method="POST" action="/register">
         {{ csrf_field() }}
         <div class="form-group">
@@ -45,5 +54,4 @@
 
     @stop
 @section('footer')
-    <h6>and this is the footer of the page how how you doing you doing </h6>
 @stop

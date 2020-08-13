@@ -3,8 +3,30 @@
 
 
 @section('MainPart')
+   <h5> {{auth()->user()->name }}'s  Drivers :</h5>
 
-<h4>this is the main part of drivers' page</h4>
+    <table style="width: 500px;">
+        <tr>
+            <th> Name </th>
+            <th> Family </th>
+            <th> ID</th>
+            <th> Address </th>
+            <th> Account</th>
+        </tr>
+
+    @foreach($drivers as $driver)
+            <tr>
+                <td> {{$driver->name}} </td>
+                <td> {{$driver->family}} </td>
+                <td> {{$driver->id}} </td>
+                <td> {{$driver->address}}
+                <td> {{$driver->working_account}} </td>
+            </tr>
+    @endforeach
+
+
+        </table>
+    <br>
 @stop
 @section('centercontent')
 
@@ -16,6 +38,11 @@
 
     {!! form::label('family','Family :') !!}
     {!! form::text('family',null,['class'=>'form-control']) !!}
+
+
+    {!! form::hidden('company_id', auth()->user()->id ,['class'=>'form-control']) !!}
+
+
 <br>
     {!! form::label('birthday','B irthday :') !!}
 

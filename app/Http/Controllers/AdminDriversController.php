@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Driver;
 use Illuminate\Http\Request;
 
@@ -14,78 +15,48 @@ class AdminDriversController extends Controller
      */
     public function index()
     {
-        return view('Admin/AdminDrivers');
+        $company=Company::findorfail(auth()->user()->id );
+         //whithout ()
+        $drivers = $company->drivers;
+
+        return view('Admin/AdminDrivers', compact('drivers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-
+    // we should complete all (some misses)
         $driver = new Driver();
         $driver->name = $request->name;
         $driver -> family= $request->family;
         $driver -> address= $request->address;
+        $driver -> working_account= $request->working_account;
+        $driver -> company_id= $request->company_id;
 
-
-
-        return  $driver->save();;
+        $driver->save();
+       // return $request->company_id;
+        return redirect()->to('admin-drivers');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
