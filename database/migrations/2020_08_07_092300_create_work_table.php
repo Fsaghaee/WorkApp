@@ -17,12 +17,15 @@ class CreateWorkTable extends Migration
             $table->id();
             $table->date('working_day')->nullable();
             $table->tinyInteger('orders')->nullable();
+            $table->tinyInteger('company_id')->nullable();
             $table->date('start_working')->nullable();
             $table->date('end_working')->nullable();
-            $table->date('start_break')->nullable();
-            $table->date('end_break')->nullable();
+            $table->float('break')->nullable();
             $table->string('working_account')->nullable();
+            $table->string('location')->nullable();
             $table->tinyInteger('driver_id');
+            $table->float('wetter_temp');
+            $table->text('wetter_main');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
 

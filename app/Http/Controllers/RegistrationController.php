@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Company;
+use App\User;
 
 class RegistrationController extends Controller
 {
@@ -23,11 +23,11 @@ class RegistrationController extends Controller
             'password' => 'required'
         ]);
 
-        $user = Company::create(request(['name', 'email','address','tell','family','bank_account', 'password']));
+        $user = User::create(request(['name', 'email','address','tell','family','bank_account', 'password','company_id']));
 
        //7 auth()->login($user);
 
-        return redirect()->to('/games');
+        return redirect()->to('/');
     }
 
 

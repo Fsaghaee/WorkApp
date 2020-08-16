@@ -46,6 +46,7 @@
             <label for="password">Password:</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
+        <input type="hidden" class="form-control" id="company_id" name="company_id" value=0>
 
         <div class="form-group">
             <button style="cursor:pointer" type="submit" class="btn btn-primary">Submit</button>

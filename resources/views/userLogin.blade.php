@@ -23,12 +23,13 @@
 
 @stop
 @section('centercontent')
+<a href="/register"> Register new Company </a>
+
 
 
 
 @stop
 @section('footer')
-
 
 
 @stop

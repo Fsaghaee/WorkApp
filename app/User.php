@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Company extends Authenticatable
+class User extends Authenticatable
 {
 
 
     protected $fillable = [
-        'name','family','bank_account','address','tell', 'email', 'password',
+        'name','family','bank_account','address','tell', 'email', 'password','company_id'
     ];
 
     protected $hidden = [
@@ -22,9 +22,18 @@ class Company extends Authenticatable
     }
 
 
-    public function drivers(){
-        return $this->hasMany('App\Driver','company_id');
+
+    public function works(){
+        return $this->hasMany('App\Work','driver_id');
     }
+
+
+    public function slips(){
+
+        return $this->hasMany('App\Payslip','driver_id');
+    }
+
+
     public function incomes(){
         return $this->hasMany('App\Incomes','company_id');
     }

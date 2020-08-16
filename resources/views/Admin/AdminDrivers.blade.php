@@ -63,6 +63,18 @@
     {!! form::label('bank_account','Bank Account :') !!}
     {!! form::text('bank_account',null,['class'=>'form-control']) !!}
 <br>
+
+    {!! form::label('tell','Tell :') !!}
+    {!! form::text('tell',null,['class'=>'form-control']) !!}
+
+    {!! form::label('email','Email :') !!}
+    {!! form::text('email',null,['class'=>'form-control']) !!}
+    <br>
+    <br>
+    {!! form::label('password','Password :') !!}
+    {!! form::password('password',null,['class'=>'form-control']) !!}
+
+
         {!! form::submit('Add Driver',['class'=>'btn btn-primary']) !!}
 
 

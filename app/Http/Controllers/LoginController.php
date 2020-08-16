@@ -6,10 +6,22 @@ namespace App\Http\Controllers;
 class LoginController extends Controller
 {
     public function create()
+{
+   return view('/');
+}
+    public function index()
     {
-        return view('userLogin');
-    }
+        if(auth()->user()){
+        if( auth()->user()->company_id == 0){
+           return view('adminPage');
 
+        }elseif ( auth()->user()->company_id !=0) {
+           return view('Driver/mainPage');
+
+        }}else
+
+            return redirect()->to('userlogin');
+    }
     public function store()
     {
         if (auth()->attempt(request(['email', 'password'])) == false) {
@@ -17,14 +29,20 @@ class LoginController extends Controller
                 'message' => 'The email or password is incorrect, please try again'
             ]);
         }
+        if( auth()->user()->company_id == 0){
+            return redirect()->to('/admin')  ->with('warning',"Successfull");
 
-        return redirect()->to('/');
+        }elseif ( auth()->user()->company_id !=0) {
+            return redirect()->to('/driver')  ->with('warning',"Successfull");
+
+        }
     }
 
     public function destroy()
     {
         auth()->logout();
 
-        return redirect()->to('userLogin');
+        return redirect('/');
+
     }
 }
