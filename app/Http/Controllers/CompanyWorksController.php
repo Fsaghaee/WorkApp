@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 class CompanyWorksController extends Controller
 {
     /**
@@ -15,16 +12,12 @@ class CompanyWorksController extends Controller
      */
     public function index()
     {
-
         $allworks = DB::table('works')
             ->join('users','works.driver_id','=','users.id')
             ->select('works.*','users.name')
             ->where('works.company_id','=',auth()->user()->id)->get();
-
-
         return view('Admin/CompanyWorks',compact('allworks'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +27,6 @@ class CompanyWorksController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -45,7 +37,6 @@ class CompanyWorksController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
@@ -56,7 +47,6 @@ class CompanyWorksController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -67,7 +57,6 @@ class CompanyWorksController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -79,7 +68,6 @@ class CompanyWorksController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *

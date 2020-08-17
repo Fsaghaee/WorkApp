@@ -9,7 +9,7 @@ class User extends Authenticatable
 
 
     protected $fillable = [
-        'name','family','bank_account','address','tell', 'email', 'password','company_id'
+        'name', 'family', 'bank_account', 'address', 'tell', 'email', 'password', 'company_id'
     ];
 
     protected $hidden = [
@@ -22,23 +22,26 @@ class User extends Authenticatable
     }
 
 
-
-    public function works(){
-        return $this->hasMany('App\Work','driver_id');
+    public function works()
+    {
+        return $this->hasMany('App\Work', 'driver_id');
     }
 
 
-    public function slips(){
+    public function slips()
+    {
 
-        return $this->hasMany('App\Payslip','driver_id');
+        return $this->hasMany('App\Payslip', 'driver_id');
     }
 
 
-    public function incomes(){
-        return $this->hasMany('App\Incomes','company_id');
+    public function incomes()
+    {
+        return $this->hasMany('App\Incomes', 'company_id');
     }
 
-    public function invoices(){
-        return $this->hasMany('App\Invoice','company_id');
+    public function invoices()
+    {
+        return $this->hasMany('App\Invoice', 'company_id');
     }
 }

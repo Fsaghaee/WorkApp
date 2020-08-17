@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <?php date_default_timezone_set("Europe/Berlin");
+    setlocale(LC_TIME, "de_DE.utf8");
+    ?>
+
     <meta charset="utf-8">
 
 

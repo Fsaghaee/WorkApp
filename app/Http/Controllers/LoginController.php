@@ -1,8 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
-
 class LoginController extends Controller
 {
     public function create()
@@ -14,12 +11,9 @@ class LoginController extends Controller
         if(auth()->user()){
         if( auth()->user()->company_id == 0){
            return view('adminPage');
-
         }elseif ( auth()->user()->company_id !=0) {
            return view('Driver/mainPage');
-
         }}else
-
             return redirect()->to('userlogin');
     }
     public function store()
@@ -31,18 +25,13 @@ class LoginController extends Controller
         }
         if( auth()->user()->company_id == 0){
             return redirect()->to('/admin')  ->with('warning',"Successfull");
-
         }elseif ( auth()->user()->company_id !=0) {
             return redirect()->to('/driver')  ->with('warning',"Successfull");
-
         }
     }
-
     public function destroy()
     {
         auth()->logout();
-
         return redirect('/');
-
     }
 }
