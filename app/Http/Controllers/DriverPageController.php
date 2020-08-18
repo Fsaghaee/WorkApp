@@ -18,11 +18,10 @@ class DriverPageController extends Controller
                 return view('Admin/adminPage');
             } elseif (auth()->user()->company_id != 0) {
 
-
-
                 $slips = Payslip::all()->where('driver_id','=',auth()->user()->id);
 
                 $works = Work::all()->where('driver_id', auth()->user()->id);
+
                 return view('Driver/mainPage', compact('works','slips'));
             }
         }

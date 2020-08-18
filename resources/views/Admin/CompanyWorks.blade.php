@@ -1,15 +1,18 @@
 @extends('Layout.pageLayout')
 @section('MainPart')
-    <div style="margin-left: 20px;">
-<a href="/logout" >Log out</a>
-<a href="/admin"> Main</a>
-<a href="/admin-drivers"> Drivers</a>
+
+    <div style="margin-left: 20px;  border-bottom: 6px solid green;padding: 10px; ">
+        <a   style="font-size:5vw; border: 2px solid green; padding: 10px;margin-right: 10px; "   href="/logout">  Log out  </a>
+        <a style="font-size:5vw; border: 2px solid green; padding: 10px;margin-right: 10px; "   href="/admin">  Main  </a>
+        <a   style="font-size:5vw; border: 2px solid green; padding: 10px;margin-right: 10px; "   href="/admin-drivers">  Drivers  </a>
+
     </div>
+
 @stop
 
 @section('centercontent')
     <div style="margin: 20px;">
-    <table style="width: 90%;">
+    <table style="width: 99%; font-size:2vw;">
         <tr>
             <th> Month</th>
             <th> Working Day</th>

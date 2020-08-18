@@ -13,8 +13,8 @@ class AdminDriversController extends Controller
             if (auth()->user()->company_id == 0) {
                 $drivers = User::all()->where('company_id', (auth()->user()->id));
                 return view('Admin/AdminDrivers', compact('drivers'));
-            } elseif (auth()->user() - company_id != 0) {
-                return 'driver Page';
+            } elseif (auth()->user() -> company_id != 0) {
+                return view('Driver/mainPage');
             }
         }
         return view('userLogin');

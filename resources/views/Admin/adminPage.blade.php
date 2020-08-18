@@ -1,19 +1,20 @@
 @extends('Layout.pageLayout')
 @section('MainPart')
-    <div style="margin: 20px;">
-        <a href="/logout">Log out</a>
-        <a href="/admin-drivers"> Drivers</a>
-        <a href="/company-works"> All orders</a>
+    <div style="margin-left: 20px;  border-bottom: 6px solid green;padding: 10px; ">
+        <a  style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px; "  href="/logout">  Log out  </a>
+        <a  style="font-size:5vw; border: 2px solid green; padding: 10px ; margin-right: 10px; "  href="/admin-drivers">  Drivers </a>
+        <a   style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px;"  href="/company-works">  All orders  </a>
 
     </div>
 @stop
 @section('centercontent')
     <div style="margin: 20px;">
 
-        <h3>Today : {{date('yy-m-d')}}</h3>
-
+        <h3 style="font-size:6vw;">Today : {{date('yy-m-d')}}</h3>
+<br>
 
         <?php
+        echo '<h6 style="font-size:5vw;">';
         $date = date('yy-m-d');
         $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
         $response = json_decode($response, true);
@@ -21,6 +22,8 @@
             ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
         echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
         echo '<br>';
+        echo '<br>';
+
         $date = date('yy-m-d', strtotime($date . ' +1 day'));
         $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
         $response = json_decode($response, true);
@@ -33,13 +36,14 @@
 
 
 
+            echo '</h6>';
 
 
 
         ?>
         <br>
 
-        <table style="width: 90%;">
+        <table style="width: 100%; font-size:2vw; border-top: 6px solid green; margin: 5px; ">
             <tr>
                 <th> Working Day</th>
                 <th> Orders</th>

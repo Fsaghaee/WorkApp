@@ -32,11 +32,13 @@
 <body>
 
 <div class="container-fluid">
+
+
+<?php setlocale(LC_TIME, "de_DE"); ?>
+
             @yield('MainPart')
 
 
-
-<div id="dropDownSelect1"></div>
 
 <!--===============================================================================================-->
 <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
