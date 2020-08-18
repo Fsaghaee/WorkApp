@@ -26,7 +26,6 @@ class CreateUserTable extends Migration
                         $table->string('remember_token')->nullable();
                         $table->timestamp('updated_at')->useCurrent();
                         $table->timestamp('created_at')->useCurrent();
-                        $table->string('working_account')->nullable();
                         $table->string('working_email')->nullable()->unique();
                         $table->string('insurance_number')->nullable();
                         $table->date('birthday')->nullable();

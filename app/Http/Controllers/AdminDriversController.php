@@ -34,7 +34,7 @@ class AdminDriversController extends Controller
                 'email' => 'required|email',
                 'password' => 'required'
             ]);
-            $user = User::create(request(['name', 'family', 'email', 'address', 'tell', 'bank_account', 'password', 'company_id']));
+            $user = User::create(request(['name', 'family', 'email', 'address', 'tell','payment_method', 'bank_account', 'password', 'company_id']));
             return redirect()->to('admin-drivers');
         }
         elseif ($request->has('form2')) {

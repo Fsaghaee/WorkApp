@@ -1,6 +1,6 @@
 @extends('Layout.pageLayout')
 @section('MainPart')
-
+    <div style="margin: 20px;">
     <h2>Register</h2>
 
  <!-- @if( auth()->check() )
@@ -10,7 +10,8 @@
     @endif
 
 -->
-
+    <div class="login">
+        <div class="heading">
     <form method="POST" action="/register">
         {{ csrf_field() }}
         <div class="form-group">
@@ -52,7 +53,9 @@
             <button style="cursor:pointer" type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
-
+        </div>
+    </div>
+    </div>
     @stop
 @section('footer')
 @stop
