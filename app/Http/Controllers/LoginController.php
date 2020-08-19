@@ -10,9 +10,9 @@ class LoginController extends Controller
     {
         if(auth()->user()){
         if( auth()->user()->company_id == 0){
-           return view('adminPage');
+           return route('admin.index');
         }elseif ( auth()->user()->company_id !=0) {
-           return view('Driver/mainPage');
+           return route('driver.index');
         }}else
             return redirect()->to('userlogin');
     }

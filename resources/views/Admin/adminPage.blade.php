@@ -2,8 +2,8 @@
 @section('MainPart')
     <div style="margin-left: 20px;  border-bottom: 6px solid green;padding: 10px; ">
         <a  style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px; "  href="/logout">  Log out  </a>
-        <a  style="font-size:5vw; border: 2px solid green; padding: 10px ; margin-right: 10px; "  href="/admin-drivers">  Drivers </a>
-        <a   style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px;"  href="/company-works">  All orders  </a>
+        <a  style="font-size:5vw; border: 2px solid green; padding: 10px ; margin-right: 10px; "  href="{{route('admin-drivers.index')}}">  Drivers </a>
+        <a   style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px;"  href="{{route('company-works.index')}}">  All orders  </a>
 
     </div>
 @stop

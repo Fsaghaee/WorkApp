@@ -18,8 +18,8 @@ class CreateWorkTable extends Migration
             $table->date('working_day')->nullable();
             $table->tinyInteger('orders')->nullable();
             $table->tinyInteger('company_id')->nullable();
-            $table->date('start_working')->nullable();
-            $table->date('end_working')->nullable();
+            $table->string('start_working')->nullable();
+            $table->string('end_working')->nullable();
             $table->float('break')->nullable();
             $table->string('working_account')->nullable();
             $table->string('location')->nullable();
