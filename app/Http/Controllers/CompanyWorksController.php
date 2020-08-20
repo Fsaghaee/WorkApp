@@ -14,7 +14,7 @@ class CompanyWorksController extends Controller
     {
         $allworks = DB::table('works')
             ->join('users','works.driver_id','=','users.id')
-            ->select('works.*','users.name')
+            ->select('works.*','users.name')->orderBy('works.working_day','desc')
             ->where('works.company_id','=',auth()->user()->id)->get();
         return view('Admin/CompanyWorks',compact('allworks'));
     }

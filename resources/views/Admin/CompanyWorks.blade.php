@@ -49,7 +49,7 @@
             </tr>
     <?php
     if (date('d', strtotime($workingDay)) == 15 || date('d', strtotime($workingDay)) == 1) {
-        echo '<tr><td> Total : <td></td></td><td>' . $total . '</td><td>' . $total * 5.4 .' €' . '</td></tr>';
+        echo '<tr><td> Total : <td></td></td><td>' . $total . '</td><td>' . $total * 1.3 .' €' . '</td></tr>';
         $workingDay = 0;
     }
     ?>
