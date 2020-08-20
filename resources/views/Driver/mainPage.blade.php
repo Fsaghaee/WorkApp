@@ -117,7 +117,7 @@
 
 
         {!! form::label('working_account','Account :') !!}
-        {!! form:: select('location',array(''=>'Select','FarzadU1'=>'FarzadU1','FarzadU2'=>'FarzadU2','FarzadU3'=>'FarzadU3','FarzadU4'=>'FarzadU4')) !!}
+        {!! form:: select('working_accoun',array(''=>'Select','FarzadU1'=>'FarzadU1','FarzadU2'=>'FarzadU2','FarzadU3'=>'FarzadU3','FarzadU4'=>'FarzadU4','FarzadS'=>'FarzadS')) !!}
 
         <br>
         {!! form::label('start_working','Start Time :') !!}
