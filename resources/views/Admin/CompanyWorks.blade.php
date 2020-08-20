@@ -37,6 +37,7 @@
                 <td> {{$work->name}} </td>
 
                 <?php
+                $workingDay = $work->working_day;
                 if($work->location == 'Klosterneuburg'){
                     echo  '<td style="background-color: #6c757d;">'.$work->location.'</td>';
                 }elseif ($work->location == 'Wien'){
@@ -55,7 +56,7 @@
     <?php
     if (date('d', strtotime($workingDay)) == 15 || date('d', strtotime($workingDay)) == 1) {
         echo '<tr><td> Total : <td></td></td><td>' . $total . '</td><td>' . $total * 5.4 .' €' . '</td></tr>';
-        $workingDay = 0;
+        $workingDay = null;
     }
     ?>
     @endforeach
