@@ -41,7 +41,7 @@
                     $color = 'white';
                 }
                 ?>
-                <tr style="background-color:<?php echo $color ?>;">
+                <tr style="background-color:<?php echo $color ?>; text-align: center;">
                     <td>{{date('M',strtotime( $work->working_day ))}}</td>
                     <td>{{date('m-d D', strtotime($work->working_day))}} </td>
 
@@ -65,6 +65,7 @@
                     <td> {{$work->wetter_temp}} </td>
                 </tr>
                 <?php
+                    $total += $work->orders;
                 if (date('d', strtotime($workingDay)) == 15 || date('d', strtotime($workingDay)) == 1) {
                     echo '<tr><td> Total : <td></td></td><td>' . $total . '</td><td>' . $total * 5.4 . ' €' . '</td></tr>';
                     $workingDay = null;
