@@ -50,8 +50,12 @@ class DriverPageController extends Controller
         $work->orders = $request->orders;
         $work->driver_id = $request->driver_id;
         $work->company_id = $request->company_id;
-        $work->wetter_temp = $request->wetter_temp;
-        $work->wetter_main   = $request->wetter_main;
+
+        $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' .  $request->working_day);
+        $response = json_decode($response, true);
+        $work->wetter_temp =  $response['forecast']['forecastday'][0]['day']['maxtemp_c'];
+        $work->wetter_main =   $response['forecast']['forecastday'][0]['day']['condition']['text'];
+        $response['forecast']['forecastday'][0]['day']['condition']['icon'];
         $work->break = $request->break;
         $work->working_account = $request->working_account;
         $work->start_working = $request->start_working;

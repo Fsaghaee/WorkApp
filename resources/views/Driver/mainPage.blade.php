@@ -92,10 +92,25 @@
 
         <br>
 
+        <?php
 
+        $TempDate = array(
+             date('yy-m-d', strtotime(now())) =>   date('M-d D', strtotime(now() ))
+,             date('yy-m-d', strtotime(now() . ' -1 day')) =>   date('M-d D', strtotime(now() . ' -1 day'))
+,             date('yy-m-d', strtotime(now() . ' -2 day')) =>   date('M-d D', strtotime(now() . ' -2 day'))
+,             date('yy-m-d', strtotime(now() . ' -3 day')) =>   date('M-d D', strtotime(now() . ' -3 day'))
+,             date('yy-m-d', strtotime(now() . ' -4 day')) =>   date('M-d D', strtotime(now() . ' -4 day'))
+,             date('yy-m-d', strtotime(now() . ' -5 day')) =>   date('M-d D', strtotime(now() . ' -5 day'))
+
+        );
+
+
+
+
+        ?>
         {!! Form::open(['method'=>'POST','action'=>'DriverPageController@store','style'=>'font-size:5vw;margin: 30px;']) !!}
 
-        {!! form::hidden('working_day',now(),['class'=>'form-control']) !!}
+        {!! form::select('working_day',$TempDate,['class'=>'form-control']) !!}
 
         {!! form::label('orders','Orders :') !!}
         {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:5vw;']) !!}
@@ -121,8 +136,7 @@
 
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
-        {!! form::hidden('wetter_temp', $response['forecast']['forecastday'][0]['day']['maxtemp_c'] ,['class'=>'form-control']) !!}
-        {!! form::hidden('wetter_main',$response['forecast']['forecastday'][0]['day']['condition']['text'],['class'=>'form-control']) !!}
+
 
 
         {!! form::hidden('driver_id', auth()->user()->id ,['class'=>'form-control']) !!}
