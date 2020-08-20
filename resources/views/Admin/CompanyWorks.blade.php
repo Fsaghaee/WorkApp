@@ -15,16 +15,14 @@
     <table style="width: 99%; font-size:2vw;">
         <tr>
             <th> Month</th>
-            <th> Working Day</th>
-            <th> Orders</th>
+            <th> Day</th>
             <th> Name</th>
             <th> Location</th>
             <th>Account</th>
-
             <th> Hours </th>
-            <th> Break </th>
-            <th> Total </th>
+
             <th> Earned </th>
+            <th> Orders</th>
             <th> Weather </th>
             <th> Temp </th>
         </tr>
@@ -35,16 +33,13 @@
         @foreach($allworks as $work)
             <tr>
                 <td>{{date('M',strtotime( $work->working_day ))}}</td>
-                <td> {{$work->working_day}} </td>
-                <td> {{$work->orders}} </td>
+                <td> {{date('m-d D',strtotime( $work->working_day ))}} </td>
                 <td> {{$work->name}} </td>
                 <td> {{$work->location}} </td>
                 <td> {{$work->working_account}} </td>
-
-                <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working))/(60*60) ?>   </td>
-                <td> {{$work->break}} </td>
                 <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working))/(60*60)- $work->break ?>   </td>
                 <td> {{$work->orders * 1.3}}  </td>
+                <td> {{$work->orders}} </td>
                 <td> {{$work->wetter_main}} </td>
                 <td> {{$work->wetter_temp}} </td>
                 <?php

@@ -117,7 +117,7 @@
 
 
         {!! form::label('working_account','Account :') !!}
-        {!! form:: select('location',array('FarzadU1'=>'FarzadU1','FarzadU2'=>'FarzadU2','FarzadU3'=>'FarzadU3','FarzadU4'=>'FarzadU4')) !!}
+        {!! form:: select('location',array(''=>'Select','FarzadU1'=>'FarzadU1','FarzadU2'=>'FarzadU2','FarzadU3'=>'FarzadU3','FarzadU4'=>'FarzadU4')) !!}
 
         <br>
         {!! form::label('start_working','Start Time :') !!}
@@ -132,7 +132,7 @@
 
 
         {!! form::label('location','Locations :') !!}
-        {!! form:: select('location',array('Klosterneuburg'=>'Klosterneuburg','Wien'=>'Wien')) !!}
+        {!! form:: select('location',array(''=>'Select','Klosterneuburg'=>'Klosterneuburg','Wien'=>'Wien')) !!}
 
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
