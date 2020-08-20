@@ -2,7 +2,7 @@
 
 @section('MainPart')
     <div style="margin-left: 20px;  border-bottom: 6px solid green;padding: 10px; ">
-        <a  style="font-size:5vw; border: 2px solid green; padding: 10px; "  href="/logout">Log out</a>
+        <a style="font-size:5vw; border: 2px solid green; padding: 10px; " href="/logout">Log out</a>
     </div>
 @stop
 
@@ -95,12 +95,13 @@
         <?php
 
         $TempDate = array(
-             date('yy-m-d', strtotime(now())) =>   date('M-d D', strtotime(now() ))
-,             date('yy-m-d', strtotime(now() . ' -1 day')) =>   date('M-d D', strtotime(now() . ' -1 day'))
-,             date('yy-m-d', strtotime(now() . ' -2 day')) =>   date('M-d D', strtotime(now() . ' -2 day'))
-,             date('yy-m-d', strtotime(now() . ' -3 day')) =>   date('M-d D', strtotime(now() . ' -3 day'))
-,             date('yy-m-d', strtotime(now() . ' -4 day')) =>   date('M-d D', strtotime(now() . ' -4 day'))
-,             date('yy-m-d', strtotime(now() . ' -5 day')) =>   date('M-d D', strtotime(now() . ' -5 day'))
+            date('yy-m-d', strtotime(now())) => date('M-d D', strtotime(now()))
+        , date('yy-m-d', strtotime(now() . ' -1 day')) => date('M-d D', strtotime(now() . ' -1 day'))
+        , date('yy-m-d', strtotime(now() . ' -2 day')) => date('M-d D', strtotime(now() . ' -2 day'))
+        , date('yy-m-d', strtotime(now() . ' -3 day')) => date('M-d D', strtotime(now() . ' -3 day'))
+        , date('yy-m-d', strtotime(now() . ' -4 day')) => date('M-d D', strtotime(now() . ' -4 day'))
+        , date('yy-m-d', strtotime(now() . ' -5 day')) => date('M-d D', strtotime(now() . ' -5 day'))
+        , date('yy-m-d', strtotime(now() . ' -5 day')) => date('M-d D', strtotime(now() . ' -6 day'))
 
         );
 
