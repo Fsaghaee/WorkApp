@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Payslip;
 use App\User;
 use App\Work;
 use Illuminate\Http\Request;
+
 class DriverPageController extends Controller
 {
     /**
@@ -17,16 +20,14 @@ class DriverPageController extends Controller
             if (auth()->user()->company_id == 0) {
                 return view('Admin/adminPage');
             } elseif (auth()->user()->company_id != 0) {
-
-                $slips = Payslip::all()->where('driver_id','=',auth()->user()->id);
-
+                $slips = Payslip::all()->where('driver_id', '=', auth()->user()->id);
                 $works = Work::all()->where('driver_id', auth()->user()->id);
-
-                return view('Driver/mainPage', compact('works','slips'));
+                return view('Driver/mainPage', compact('works', 'slips'));
             }
         }
         return view('userLogin');
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,6 +37,7 @@ class DriverPageController extends Controller
     {
         //
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -50,20 +52,20 @@ class DriverPageController extends Controller
         $work->orders = $request->orders;
         $work->driver_id = $request->driver_id;
         $work->company_id = $request->company_id;
-
-        $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' .  $request->working_day);
+        $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $request->working_day);
         $response = json_decode($response, true);
-        $work->wetter_temp =  $response['forecast']['forecastday'][0]['day']['maxtemp_c'];
-        $work->wetter_main =   $response['forecast']['forecastday'][0]['day']['condition']['text'];
+        $work->wetter_temp = $response['forecast']['forecastday'][0]['day']['maxtemp_c'];
+        $work->wetter_main = $response['forecast']['forecastday'][0]['day']['condition']['text'];
         $response['forecast']['forecastday'][0]['day']['condition']['icon'];
         $work->break = $request->break;
         $work->working_account = $request->working_account;
         $work->start_working = $request->start_working;
-        $work->end_working=$request->end_working;
-        $work->location=$request->location;
+        $work->end_working = $request->end_working;
+        $work->location = $request->location;
         $user->works()->save($work);
         return redirect()->to('/driver');
     }
+
     /**
      * Display the specified resource.
      *
@@ -74,6 +76,7 @@ class DriverPageController extends Controller
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -84,6 +87,7 @@ class DriverPageController extends Controller
     {
         //
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -95,6 +99,7 @@ class DriverPageController extends Controller
     {
         //
     }
+
     /**
      * Remove the specified resource from storage.
      *

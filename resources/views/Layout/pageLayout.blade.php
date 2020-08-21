@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-
-
     <meta charset="utf-8">
-
     <title>Klosterneueburg Page</title>
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
@@ -30,42 +27,27 @@
     <!--===============================================================================================-->
 </head>
 <body>
-
 <div class="container-fluid">
-
-
 <?php setlocale(LC_TIME, "de_DE"); ?>
-
-            @yield('MainPart')
-
-
-
+@yield('MainPart')
 <!--===============================================================================================-->
-<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/bootstrap/js/popper.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/daterangepicker/moment.min.js"></script>
-<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-<script src="js/main.js"></script>
-
-
-@yield('centercontent')
-
-
-
-
-
-@yield('footer')
-
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    @yield('centercontent')
+    @yield('footer')
 </div>
 </body>
 </html>

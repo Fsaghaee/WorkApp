@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+
 class AdminIncomeController extends Controller
 {
     /**
@@ -12,6 +15,7 @@ class AdminIncomeController extends Controller
     {
         return view('Admin/AdminIncome');
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -21,6 +25,7 @@ class AdminIncomeController extends Controller
     {
         //
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -31,6 +36,7 @@ class AdminIncomeController extends Controller
     {
         //
     }
+
     /**
      * Display the specified resource.
      *
@@ -41,6 +47,7 @@ class AdminIncomeController extends Controller
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -51,6 +58,7 @@ class AdminIncomeController extends Controller
     {
         //
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -62,6 +70,7 @@ class AdminIncomeController extends Controller
     {
         //
     }
+
     /**
      * Remove the specified resource from storage.
      *
