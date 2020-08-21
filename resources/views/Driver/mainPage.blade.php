@@ -88,7 +88,7 @@
         <br>
         <table style="width: 90%; font-size:5vw; border-top: 6px solid green; margin: 30px; ">
             <tr>
-                <th> File</th>
+                <th>Pay slips/Lohnzetteln :</th>
             </tr>
             @if(isset( $slips))
                 @foreach($slips as $slip)
