@@ -50,21 +50,8 @@
                 @endforeach
             @endif
         </table>
-        <table style="width: 90%; font-size:5vw; border-top: 6px solid green; margin: 30px; ">
-            <tr>
-                <th> File</th>
-            </tr>
-            @if(isset( $slips))
-                @foreach($slips as $slip)
-                    <tr>
-                        <td>
-                            <a style="font-size:5vw;"
-                               href=" {{$slip->slip_file_location}}">   <?php echo str_replace(auth()->user()->id . '_', '', str_replace('.pdf', '', str_replace('payslips/', '', $slip->slip_file_location))); ?></a>
-                        </td>
-                    </tr>
-                @endforeach
-            @endif
-        </table>
+        <br>
+
         <br>
         <?php
         $TempDate = array(
@@ -98,5 +85,21 @@
         {!! form::hidden('driver_id', auth()->user()->id ,['class'=>'form-control']) !!}
         {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:5vw; padding:20px;margin: 30px;']) !!}
         {!! Form::close() !!}
+        <br>
+        <table style="width: 90%; font-size:5vw; border-top: 6px solid green; margin: 30px; ">
+            <tr>
+                <th> File</th>
+            </tr>
+            @if(isset( $slips))
+                @foreach($slips as $slip)
+                    <tr>
+                        <td>
+                            <a style="font-size:5vw;"
+                               href=" {{$slip->slip_file_location}}">   <?php echo str_replace(auth()->user()->id . '_', '', str_replace('.pdf', '', str_replace('payslips/', '', $slip->slip_file_location))); ?></a>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
+        </table>
     </div>
 @stop
