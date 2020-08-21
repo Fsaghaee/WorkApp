@@ -14,20 +14,18 @@
 
 @section('centercontent')
     <div style="margin: 20px;">
-        <table style="width: 99%; font-size:2vw; padding: 5px; ">
+        <table style="width: 99%; font-size:2vw; padding: 5px;text-align: center; ">
             <tr>
-
-
-                <th> Day</th>
-                <th> Name</th>
-                <th> Location</th>
+                <th>Day</th>
+                <th>Name</th>
+                <th>Location</th>
                 <th>Account</th>
-                <th> Hours</th>
+                <th>Hours</th>
 
-                <th> Earned</th>
+                <th>Earned</th>
                 <th style="border-left: #000000 2px solid; padding-left: 5px;"> Orders</th>
-                <th> Weather</th>
-                <th> Temp</th>
+                <th>Weather</th>
+                <th>Temp</th>
             </tr>
             <?php
             $total = 0;
@@ -53,9 +51,9 @@
 
                     <?php
                     if ($work->location == 'Klosterneuburg') {
-                        echo '<td style="background-color: #6c757d;">' . $work->location . '</td>';
+                        echo '<td style="background-color: #6c757d;">' . $work->location[0] . '</td>';
                     } elseif ($work->location == 'Wien') {
-                        echo '<td style="background-color: #1e7e34;">' . $work->location . '</td>';
+                        echo '<td style="background-color: #1e7e34;">' . $work->location[0] . '</td>';
                     }
 
                     ?>

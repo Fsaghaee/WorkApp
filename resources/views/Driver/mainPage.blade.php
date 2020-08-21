@@ -44,11 +44,13 @@
         echo '</h6>';
 
         ?>
-        <table style="width: 90%; font-size:5vw; border-top: 6px solid green ;margin: 30px;">
+        <table style="width: 90%; font-size:5vw; border-top: 6px solid green ;margin: 30px; text-align: center;">
             <tr>
                 <th> Day</th>
 
                 <th> Orders</th>
+                <th> Account</th>
+                <th> Location</th>
 
 
             </tr>
@@ -56,8 +58,10 @@
             @if(isset( $works))
                 @foreach($works as $work)
                     <tr>
-                        <td> {{$work->working_day}} </td>
+                        <td>  {{date('m-d',strtotime( $work->working_day))}} </td>
                         <td> {{$work->orders}} </td>
+                        <td> {{$work->working_account}} </td>
+                        <td> {{$work->location[0]}} </td>
 
                     </tr>
                 @endforeach

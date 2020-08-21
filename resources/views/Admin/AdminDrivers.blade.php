@@ -11,7 +11,7 @@
 
                 <h5 style="font-size:10vw;"> {{auth()->user()->name }}'s Drivers :</h5>
                 <br>
-                <table style="width: 98%; font-size:3vw; border-top: 6px solid green ;margin: 10px;">
+                <table style="width: 98%; font-size:3vw; border-top: 6px solid green ;margin: 10px; text-align: center;">
                     <tr>
                         <th> Name</th>
                         <th> Family</th>

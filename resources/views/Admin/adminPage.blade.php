@@ -45,7 +45,6 @@
 
         <table style="width: 100%; font-size:2vw; border-top: 6px solid green; margin: 5px; ">
             <tr>
-                <th> Working Day</th>
                 <th> Orders</th>
                 <th> Name</th>
                 <th> Location</th>
@@ -58,10 +57,9 @@
             @if($works)
             @foreach($works as $work)
                 <tr>
-                    <td> {{$work->working_day}} </td>
                     <td> {{$work->orders}} </td>
                     <td> {{$work->name}} </td>
-                    <td> {{$work->location}} </td>
+                    <td> {{$work->location[0]}} </td>
                     <td> {{$work->wetter_main}} </td>
                     <td> {{$work->wetter_temp}} </td>
                     <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) ?>   </td>
