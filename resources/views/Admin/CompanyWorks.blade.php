@@ -30,8 +30,8 @@
             <?php
             $total = 0;
             $workingDay = null;
-            echo ' <br>Vom : '.date('M-16'). '   Bis : '.date('M-t') .' : <h4>  '. $workssecond .'  -  '. $workssecond * 5.4. ' € </h4>' ;
-            echo ' <br>Vom : '.date('M-1'). '   Bis : '.date('M-15') .' :  <h4>'. $worksfirst .'  -  '. $worksfirst * 5.4. ' € </h4><br>';
+            echo ' <br>Vom : ' . date('M-16') . '   Bis : ' . date('M-t') . ' : <h4>  ' . $workssecond . '  -  ' . $workssecond * 5.4 . ' € </h4>';
+            echo ' <br>Vom : ' . date('M-1') . '   Bis : ' . date('M-15') . ' :  <h4>' . $worksfirst . '  -  ' . $worksfirst * 5.4 . ' € </h4><br>';
             ?>
 
             @foreach($allworks as $work)
@@ -70,13 +70,7 @@
 
                     <td> {{$work->wetter_temp}} </td>
                 </tr>
-                <?php
-                $total += $work->orders;
-                if (date('d', strtotime($workingDay)) == 16 || date('d', strtotime($workingDay)) == date('t', strtotime($workingDay))) {
-                    echo '<tr><td> Total : <td></td></td><td>' . $total . '</td><td>' . $total * 5.4 . ' €' . '</td><td>' . $total * 1.3 . ' €' . '</td></tr>';
-                    $workingDay = null;
-                }
-                ?>
+
             @endforeach
 
         </table>
