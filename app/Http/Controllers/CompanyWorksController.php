@@ -16,7 +16,14 @@ class CompanyWorksController extends Controller
             ->join('users','works.driver_id','=','users.id')
             ->select('works.*','users.name')->orderBy('works.working_day','desc')
             ->where('works.company_id','=',auth()->user()->id)->get();
-        return view('Admin/CompanyWorks',compact('allworks'));
+
+        $worksfirst = DB::table('works')->where('working_day','>=',date('yy-m-01'))
+            ->where('working_day','<=',date('yy-m-15'))->sum('orders');
+        $workssecond = DB::table('works')->where('working_day','>=',date('yy-m-16'))
+            ->where('working_day','<=',date('yy-m-t'))->sum('orders');
+
+
+        return view('Admin/CompanyWorks',compact('allworks','worksfirst','workssecond'));
     }
     /**
      * Show the form for creating a new resource.

@@ -30,7 +30,10 @@
             <?php
             $total = 0;
             $workingDay = null;
+            echo date('yy-m-t') .' :  '. $workssecond .'  '. $workssecond * 5.4. ' €' ;
+            echo '<br>'.date('yy-m-15') .' :  '. $worksfirst .'  '. $worksfirst * 5.4. ' €';
             ?>
+
             @foreach($allworks as $work)
                 <?php
                 $color = '';

@@ -1,9 +1,12 @@
 @extends('Layout.pageLayout')
 @section('MainPart')
     <div style="margin-left: 20px;  border-bottom: 6px solid green;padding: 10px; ">
-        <a  style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px; "  href="/logout">  Log out  </a>
-        <a  style="font-size:5vw; border: 2px solid green; padding: 10px ; margin-right: 10px; "  href="{{route('admin-drivers.index')}}">  Drivers </a>
-        <a   style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px;"  href="{{route('company-works.index')}}">  All orders  </a>
+        <a style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px; " href="/logout"> Log
+            out </a>
+        <a style="font-size:5vw; border: 2px solid green; padding: 10px ; margin-right: 10px; "
+           href="{{route('admin-drivers.index')}}"> Drivers </a>
+        <a style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px;"
+           href="{{route('company-works.index')}}"> All orders </a>
 
     </div>
 @stop
@@ -11,7 +14,7 @@
     <div style="margin: 20px;">
 
         <h3 style="font-size:6vw;">Today : {{date('yy-m-d')}}</h3>
-<br>
+        <br>
 
         <?php
         echo '<h6 style="font-size:5vw;">';
@@ -36,7 +39,7 @@
 
 
 
-            echo '</h6>';
+        echo '</h6>';
 
 
 
@@ -55,21 +58,21 @@
                 <th> Total</th>
             </tr>
             @if($works)
-            @foreach($works as $work)
-                <tr>
-                    <td> {{$work->orders}} </td>
-                    <td> {{$work->name}} </td>
-                    <td> {{$work->location[0]}} </td>
-                    <td> {{$work->wetter_main}} </td>
-                    <td> {{$work->wetter_temp}} </td>
-                    <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) ?>   </td>
-                    <td> {{$work->break}} </td>
-                    <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break ?>   </td>
-                </tr>
+                @foreach($works as $work)
+                    <tr>
+                        <td> {{$work->orders}} </td>
+                        <td> {{$work->name}} </td>
+                        <td> {{$work->location[0]}} </td>
+                        <td> {{$work->wetter_main}} </td>
+                        <td> {{$work->wetter_temp}} </td>
+                        <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) ?>   </td>
+                        <td> {{$work->break}} </td>
+                        <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break ?>   </td>
+                    </tr>
         </table>
     </div>
     @endforeach
-@endif
+    @endif
 
 @stop
 @section('footer')

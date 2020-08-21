@@ -15,7 +15,6 @@
                     <tr>
                         <th> Name</th>
                         <th> Family</th>
-                        <th> ID</th>
                         <th> Address</th>
                         <th> Payment</th>
                         <th> Tell</th>
@@ -25,7 +24,6 @@
                         <tr>
                             <td> {{$driver->name}} </td>
                             <td> {{$driver->family}} </td>
-                            <td> {{$driver->id}} </td>
                             <td> {{$driver->address}}</td>
                             <td> {{$driver->payment_method}}</td>
 
