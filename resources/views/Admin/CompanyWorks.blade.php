@@ -14,9 +14,10 @@
 
 @section('centercontent')
     <div style="margin: 20px;">
-        <table style="width: 99%; font-size:2vw;">
+        <table style="width: 99%; font-size:2vw; padding: 5px; ">
             <tr>
-                <th> Month</th>
+
+
                 <th> Day</th>
                 <th> Name</th>
                 <th> Location</th>
@@ -24,7 +25,7 @@
                 <th> Hours</th>
 
                 <th> Earned</th>
-                <th> Orders</th>
+                <th style="border-left: #000000 2px solid; padding-left: 5px;"> Orders</th>
                 <th> Weather</th>
                 <th> Temp</th>
             </tr>
@@ -42,8 +43,7 @@
                 }
                 ?>
                 <tr style="background-color:<?php echo $color ?>; text-align: center;">
-                    <td>{{date('M',strtotime( $work->working_day ))}}</td>
-                    <td>{{date('m-d D', strtotime($work->working_day))}} </td>
+                    <td>{{date('M-d D', strtotime($work->working_day))}} </td>
 
                     <td> {{$work->name}} </td>
 
@@ -60,14 +60,17 @@
                     <td> {{$work->working_account}} </td>
                     <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break ?>   </td>
                     <td> {{$work->orders * 1.3}}  </td>
-                    <td> {{$work->orders}} </td>
+                    <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
                     <td> {{$work->wetter_main}} </td>
+
+
+
                     <td> {{$work->wetter_temp}} </td>
                 </tr>
                 <?php
                     $total += $work->orders;
                 if (date('d', strtotime($workingDay)) == 15 || date('d', strtotime($workingDay)) == 1) {
-                    echo '<tr><td> Total : <td></td></td><td>' . $total . '</td><td>' . $total * 5.4 . ' €' . '</td></tr>';
+                    echo '<tr><td> Total : <td></td></td><td>' . $total . '</td><td>' . $total * 5.4 . ' €' . '</td><td>' . $total * 1.3 . ' €' . '</td></tr>';
                     $workingDay = null;
                 }
                 ?>
