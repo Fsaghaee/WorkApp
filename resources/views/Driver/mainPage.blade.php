@@ -53,7 +53,6 @@
         <table style="width: 90%; font-size:5vw; border-top: 6px solid green; margin: 30px; ">
             <tr>
                 <th> File</th>
-                <th> Status</th>
             </tr>
             @if(isset( $slips))
                 @foreach($slips as $slip)
@@ -62,7 +61,6 @@
                             <a style="font-size:5vw;"
                                href=" {{$slip->slip_file_location}}">   <?php echo str_replace(auth()->user()->id . '_', '', str_replace('.pdf', '', str_replace('payslips/', '', $slip->slip_file_location))); ?></a>
                         </td>
-                        <td> {{$slip->status}} </td>
                     </tr>
                 @endforeach
             @endif
