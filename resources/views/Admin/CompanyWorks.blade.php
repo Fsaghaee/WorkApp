@@ -36,19 +36,22 @@
             @foreach($allworks as $work)
                 <?php
                 $color = '';
+
                 if (date('D', strtotime($work->working_day)) == 'Sun' || date('D', strtotime($work->working_day)) == 'Sat') {
                     $color = '#57b846';
                 } else {
                     $color = 'white';
                 }
+
+                $workingDay = $work->working_day;
+
                 ?>
-                <tr style="background-color:<?php echo $color ?>; text-align: center;">
+                <tr style=" background-color:<?php echo $color ?>; text-align: center;">
                     <td>{{date('M-d D', strtotime($work->working_day))}} </td>
 
                     <td> {{$work->name}} </td>
 
                     <?php
-                    $workingDay = $work->working_day;
                     if ($work->location == 'Klosterneuburg') {
                         echo '<td style="background-color: #6c757d;">' . $work->location . '</td>';
                     } elseif ($work->location == 'Wien') {
@@ -64,12 +67,11 @@
                     <td> {{$work->wetter_main}} </td>
 
 
-
                     <td> {{$work->wetter_temp}} </td>
                 </tr>
                 <?php
-                    $total += $work->orders;
-                if (date('d', strtotime($workingDay)) == 15 || date('d', strtotime($workingDay)) == 1) {
+                $total += $work->orders;
+                if (date('d', strtotime($workingDay)) == 16 || date('d', strtotime($workingDay)) == date('t', strtotime($workingDay))) {
                     echo '<tr><td> Total : <td></td></td><td>' . $total . '</td><td>' . $total * 5.4 . ' €' . '</td><td>' . $total * 1.3 . ' €' . '</td></tr>';
                     $workingDay = null;
                 }
