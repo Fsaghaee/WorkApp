@@ -30,8 +30,8 @@
             <?php
             $total = 0;
             $workingDay = null;
-            echo date('yy-m-t') .' :  '. $workssecond .'  '. $workssecond * 5.4. ' €' ;
-            echo '<br>'.date('yy-m-15') .' :  '. $worksfirst .'  '. $worksfirst * 5.4. ' €';
+            echo ' <br>Vom : '.date('M-16'). '   Bis : '.date('M-t') .' : <h4>  '. $workssecond .'  -  '. $workssecond * 5.4. ' € </h4>' ;
+            echo ' <br>Vom : '.date('M-1'). '   Bis : '.date('M-15') .' :  <h4>'. $worksfirst .'  -  '. $worksfirst * 5.4. ' € </h4><br>';
             ?>
 
             @foreach($allworks as $work)
