@@ -11,12 +11,12 @@
 
                 <h5 style="font-size:10vw;"> {{auth()->user()->name }}'s Drivers :</h5>
                 <br>
-                <table style="width: 98%; font-size:2vw; border-top: 6px solid green ;margin: 10px; text-align: center;">
+                <table style="width: 98%; font-size:1.2vw; border-top: 6px solid green ;margin: 10px; text-align: center;">
                     <tr>
                         <th> Name</th>
                         <th> Family</th>
                         <th> Address</th>
-                        <th> Payment</th>
+
                         <th> Tell</th>
                         <th> Bank account</th>
                     </tr>
@@ -25,7 +25,7 @@
                             <td> {{$driver->name}} </td>
                             <td> {{$driver->family}} </td>
                             <td> {{$driver->address}}</td>
-                            <td> {{$driver->payment_method}}</td>
+
 
                             <td> {{$driver->tell}}</td>
                             <td> {{$driver->bank_account}}</td>
