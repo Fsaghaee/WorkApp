@@ -56,7 +56,7 @@
                     break;
             }
         }
-        echo '<h6> Avarage Mon :' . $avarageDayOrders['Mon'] / $avarageDayNumbers['Mon'];
+        echo '<h6> Avarage Mon :' . $avarageDayOrders['Mon'] / $avarageDayNumbers['Mon'].'<br>';
         echo ' Avarage Thu :' . $avarageDayOrders['Thu'] / $avarageDayNumbers['Thu'] . '<br>';
         echo ' Avarage Wed :' . $avarageDayOrders['Wed'] / $avarageDayNumbers['Wed'] . '<br>';
        echo ' Avarage Tue :' . $avarageDayOrders['Tue'] / $avarageDayNumbers['Tue'] . '<br>';
