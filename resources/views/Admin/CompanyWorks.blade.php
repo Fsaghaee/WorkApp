@@ -18,7 +18,7 @@
 
         foreach ($allworks as $work) {
 
-            if ($work->location = 'Klosterneuburg') {
+            if ($work->location == 'Klosterneuburg') {
                 switch (date('D', strtotime($work->working_day))) {
 
 
