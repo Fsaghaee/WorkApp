@@ -47,6 +47,7 @@
                     break;
                 case 'Sat':
                     $avarageDayNumbers['Sat'] += 1;
+                   $avarageDayOrders['Sat'] += $work->orders;
                     $avarageDayOrders['Sat'] += $work->orders;
 
                     break;
@@ -59,10 +60,10 @@
         echo '<h6> Avarage Mon :' . $avarageDayOrders['Mon'] / $avarageDayNumbers['Mon'];
         echo ' Avarage Thu :' . $avarageDayOrders['Thu'] / $avarageDayNumbers['Thu'] . '<br>';
         echo ' Avarage Wed :' . $avarageDayOrders['Wed'] / $avarageDayNumbers['Wed'] . '<br>';
-        echo ' Avarage Tue :' . $avarageDayOrders['Tue'] / $avarageDayNumbers['Tue'] . '<br>';
-        echo ' Avarage Fri :' . $avarageDayOrders['Fri'] / $avarageDayNumbers['Fri'] . '<br>';
-        echo ' Avarage Sat :' . $avarageDayOrders['Sat'] / $avarageDayNumbers['Sat'] . '<br>';
-        echo ' Avarage Son :' . $avarageDayOrders['Son'] / $avarageDayNumbers['Son'] . '<br>';
+     //   echo ' Avarage Tue :' . $avarageDayOrders['Tue'] / $avarageDayNumbers['Tue'] . '<br>';
+       echo ' Avarage Fri :' . $avarageDayOrders['Fri'] / $avarageDayNumbers['Fri'] . '<br>';
+        //echo ' Avarage Sat :' . $avarageDayOrders['Sat'] / $avarageDayNumbers['Sat'] . '<br>';
+        //echo ' Avarage Son :' . $avarageDayOrders['Son'] / $avarageDayNumbers['Son'] . '<br>';
         echo '</h6>'
         ?>
 
