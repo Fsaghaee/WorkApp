@@ -12,7 +12,7 @@
     <div style="margin: 20px;">
 
 
-        <?php
+    <?php
         $avarageDayNumbers = array('Mon' => 0, 'Thu' => 0, 'Wed' => 0, 'Tue' => 0, 'Fri' => 0, 'Sat' => 0, 'Sun' => 0);
         $avarageDayOrders = array('Mon' => 0, 'Thu' => 0, 'Wed' => 0, 'Tue' => 0, 'Fri' => 0, 'Sat' => 0, 'Sun' => 0);
 
@@ -58,14 +58,19 @@
                 }
             }
         }
-        echo '<h6> Avarage Mon :' . $avarageDayOrders['Mon'] / $avarageDayNumbers['Mon'] . '<br>';
+        echo '<div class ="row">';
+        echo '<div class="col">
+        <h6>
+        Avarage Mon :' . $avarageDayOrders['Mon'] / $avarageDayNumbers['Mon'] . '<br>';
         echo ' Avarage Thu :' . $avarageDayOrders['Thu'] / $avarageDayNumbers['Thu'] . '<br>';
         echo ' Avarage Wed :' . $avarageDayOrders['Wed'] / $avarageDayNumbers['Wed'] . '<br>';
         echo ' Avarage Tue :' . $avarageDayOrders['Tue'] / $avarageDayNumbers['Tue'] . '<br>';
+        echo '</h6></div><div class="col"><h6>';
         echo ' Avarage Fri :' . $avarageDayOrders['Fri'] / $avarageDayNumbers['Fri'] . '<br>';
         echo ' Avarage Sat :' . $avarageDayOrders['Sat'] / $avarageDayNumbers['Sat'] . '<br>';
         echo ' Avarage Son :' . $avarageDayOrders['Sun'] / $avarageDayNumbers['Sun'] . '<br>';
-        echo '</h6>'
+        echo '</h6>';
+        echo '</div></div>';
         ?>
 
         <table style="width: 99%; font-size:2vw; padding: 5px;text-align: center; ">
@@ -98,24 +103,24 @@
                 }
                 $workingDay = $work->working_day;
                 ?>
-                <tr style=" background-color:<?php echo $color ?>; text-align: center;">
-                    <td>{{date('M-d D', strtotime($work->working_day))}} </td>
-                    <td> {{$work->name}} </td>
-                    <?php
-                    if ($work->location == 'Klosterneuburg') {
-                        echo '<td style="background-color: #6c757d;">' . $work->location[0] . '</td>';
-                    } elseif ($work->location == 'Wien') {
-                        echo '<td style="background-color: #1e7e34;">' . $work->location[0] . '</td>';
-                    }
-                    ?>
-                    <td> {{$work->working_account}} </td>
-                    <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break ?>   </td>
-                    <td> {{$work->orders * 1.3}}  </td>
-                    <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
-                    <td> {{$work->wetter_main}} </td>
-                    <td> {{$work->wetter_temp}} </td>
-                </tr>
-            @endforeach
+        <tr style=" background-color:<?php echo $color ?>; text-align: center;">
+            <td>{{date('M-d D', strtotime($work->working_day))}} </td>
+            <td> {{$work->name}} </td>
+            <?php
+            if ($work->location == 'Klosterneuburg') {
+                echo '<td style="background-color: #6c757d;">' . $work->location[0] . '</td>';
+            } elseif ($work->location == 'Wien') {
+                echo '<td style="background-color: #1e7e34;">' . $work->location[0] . '</td>';
+            }
+            ?>
+            <td> {{$work->working_account}} </td>
+            <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break ?>   </td>
+            <td> {{$work->orders * 1.3}}  </td>
+            <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
+            <td> {{$work->wetter_main}} </td>
+            <td> {{$work->wetter_temp}} </td>
+        </tr>
+        @endforeach
         </table>
 
     </div>
