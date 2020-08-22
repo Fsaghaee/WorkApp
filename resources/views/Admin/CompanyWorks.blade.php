@@ -13,8 +13,8 @@
 
 
         <?php
-        $avarageDayNumbers = array('Mon' => 0, 'Thu' => 0, 'Wed' => 0, 'Tue' => 0, 'Fri' => 0, 'Sat' => 0, 'Son' => 0);
-        $avarageDayOrders = array('Mon' => 0, 'Thu' => 0, 'Wed' => 0, 'Tue' => 0, 'Fri' => 0, 'Sat' => 0, 'Son' => 0);
+        $avarageDayNumbers = array('Mon' => 0, 'Thu' => 0, 'Wed' => 0, 'Tue' => 0, 'Fri' => 0, 'Sat' => 0, 'Sun' => 0);
+        $avarageDayOrders = array('Mon' => 0, 'Thu' => 0, 'Wed' => 0, 'Tue' => 0, 'Fri' => 0, 'Sat' => 0, 'Sun' => 0);
 
 
         foreach ($allworks as $work) {
