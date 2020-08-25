@@ -45,7 +45,7 @@ class CompanyWorksController extends Controller
             ->join('users', 'works.driver_id', '=', 'users.id')->select('name')
             ->where('working_day', '<=', $second)
             ->where('driver_id', '=', $driver)->sum('orders');
-        return '<br><h5>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  </h5><br>';
+        return '<br><h5>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  </h5>';
     }
 
 
