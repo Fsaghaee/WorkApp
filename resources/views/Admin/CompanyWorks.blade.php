@@ -90,7 +90,7 @@
         foreach ($allDrivers as $driver) {
             echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16'), date('yy-m-t'), $driver->driver_id);
         }
-        echo '</div>';
+        echo '<br></div>';
 
         ?>
         <table style="width: 99%; font-size:2vw; padding: 5px;text-align: center; ">
