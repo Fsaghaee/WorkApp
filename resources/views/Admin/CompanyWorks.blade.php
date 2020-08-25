@@ -90,10 +90,91 @@
         foreach ($allDrivers as $driver) {
             echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16'), date('yy-m-t'), $driver->driver_id);
         }
-        echo '<br></div>';
+        echo '<br></div></div>';
 
         ?>
-        <table style="width: 99%; font-size:2vw; padding: 5px;text-align: center; ">
+
+<br>
+        <div class="row">
+
+            <div   class="col"><input type="text" id="inputName" , onkeyup="NameSearch()" placeholder="Name"/></div>
+
+            <div class="col">  <select id="inputLocation" onclick="LocationSearch()" style="font-size: 1vw;">
+                    <option value="">Select</option>
+                    <option value="K">Klosterneuburg</option>
+                    <option value="W">Wien</option>
+                </select></div>
+            <div class="col"><input type="text" id="inputAccount"  onkeyup="AccountSearch()" placeholder="Account"/></div>
+            <br>
+        </div>
+
+
+
+
+<script>
+
+    function NameSearch() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("inputName");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("driverTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function LocationSearch() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("inputLocation");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("driverTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+
+    function AccountSearch() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("inputAccount");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("driverTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+</script>
+
+
+        <table style="width: 99%; font-size:2vw; padding: 5px;text-align: center; " id="driverTable">
             <tr>
                 <th>Day</th>
                 <th>Name</th>

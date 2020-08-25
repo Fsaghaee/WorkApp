@@ -34,7 +34,7 @@ class CompanyWorksController extends Controller
         $allDrivers = DB::table('works')->select('driver_id')->distinct()->get();
 
 
-        return view('Admin/CompanyWorks', compact('allworks', 'worksfirst', 'workssecond', 'worksLasrSecond','allDrivers'));
+        return view('Admin/CompanyWorks', compact('allworks', 'worksfirst', 'workssecond', 'worksLasrSecond', 'allDrivers'));
     }
 
 

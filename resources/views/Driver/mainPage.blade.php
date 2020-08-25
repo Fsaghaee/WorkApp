@@ -68,7 +68,7 @@
         {!! form::label('working_day','Date/Datum :') !!}
         {!! form::select('working_day',$TempDate,['class'=>'form-control']) !!}
         {!! form::label('orders','Orders/Bestellungen :') !!}
-        {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:4vw;','placeholder'=>'0']) !!}
+        {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:4vw;','placeholder'=>'0','required']) !!}
         {!! form::label('working_account','Account/Konto :') !!}
         {!! form:: select('working_account',array(''=>'Select/Auswählen','FarzadU1'=>'FarzadU1','FarzadU2'=>'FarzadU2','FarzadU3'=>'FarzadU3','FarzadU4'=>'FarzadU4','FarzadS'=>'FarzadS')) !!}
         <br>

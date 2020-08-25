@@ -17,7 +17,7 @@ class LoginController extends Controller
                 return route('driver.index');
             }
         } else
-            return redirect()->to('userlogin');
+            return redirect()->to('logout');
     }
 
     public function store()
