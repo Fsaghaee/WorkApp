@@ -75,7 +75,7 @@
         {!! form::label('start_working','Start Time/Startzeit :') !!}
         {!! form::time('start_working',now()->setTime(11,0,0),['class'=>'form-control','style'=>'font-size:4vw;']) !!}
         {!! form::label('end_working','End Time/Endzeit :') !!}
-        {!! form::time('end_working',now()->setTime(23,0,0),['class'=>'form-control','style'=>'font-size:4vw;']) !!}
+        {!! form::time('end_working',now()->setTime(22,30,0),['class'=>'form-control','style'=>'font-size:4vw;']) !!}
         {!! form::label('break','Break/Pause (Std) :') !!}
         {!! Form::number('break', null, ['class' => 'form-control','step' => '0.5','min'=>0,'style'=>'font-size:4vw;','placeholder'=>'0.5']) !!}
         {!! form::label('location','Locations/Ort :') !!}

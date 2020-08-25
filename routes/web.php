@@ -21,7 +21,7 @@ Route::get('/', function () {
             return view('Driver/mainPage');
         }
     } else
-        return view('userLogin');
+        return view('/logout');
 });
 Route::resource('/company-works', 'CompanyWorksController');
 Route::resource('/driver', 'DriverPageController');
