@@ -16,7 +16,7 @@ Route::get('/', function () {
     // return view('userLogin');
     if (auth()->user()) {
         if (auth()->user()->company_id == 0) {
-            return view('admin/adminPage');
+            return view('Admin/adminPage');
         } elseif (auth()->user()->company_id != 0) {
             return view('Driver/mainPage');
         }
