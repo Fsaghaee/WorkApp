@@ -13,15 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    // return view('userLogin');
-    if (auth()->user()) {
-        if (auth()->user()->company_id == 0) {
-            return view('Admin/adminPage');
-        } elseif (auth()->user()->company_id != 0) {
-            return view('Driver/mainPage');
-        }
-    } else
-        return view('userLogin');
+
+    return view('userLogin');
 });
 Route::resource('/company-works', 'CompanyWorksController');
 Route::resource('/driver', 'DriverPageController');
