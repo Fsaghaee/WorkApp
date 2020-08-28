@@ -18,13 +18,13 @@
         echo '<h7>Klosterneuburg</h7>';
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
         echo '<tr>';
-        echo '<th>Day</th>';
-        echo '<th>Sum</th>';
+        echo '<th style="padding-left: 110px;">Day</th>';
+        echo '<th style="padding-left: 90px;">Sum</th>';
         echo '</tr>';
 
         foreach ($klosSum as $t) {
             echo '<tr>';
-            echo '<td>' . $t->working_day . ' </td><td> ' . $t->total . '</td>';
+            echo '<td style="padding-left: 90px;">' . date('m-d D',strtotime( $t->working_day))  . ' </td><td style="padding-left: 90px;"> ' . $t->total . '</td>';
             echo '</tr>';
         }
         echo '</table>';
@@ -34,12 +34,12 @@
         echo '<h7>Wien</h7>';
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
         echo '<tr style="text-align: center;">';
-        echo '<th>Day</th>';
-        echo '<th>Sum</th>';
+        echo '<th style="padding-left: 110px;">Day</th>';
+        echo '<th style="padding-left: 90px;"> Sum</th>';
         echo '</tr>';
         foreach ($WienSum as $t) {
             echo '<tr>';
-            echo '<td>' . $t->working_day . ' </td><td> ' . $t->total . '</td>';
+            echo '<td style="padding-left: 90px;">' . date('m-d D',strtotime( $t->working_day)) . ' </td><td style="padding-left: 90px;"> ' . $t->total . '</td>';
             echo '</tr>';
         }
         echo '</table>';
@@ -50,7 +50,7 @@
 
         foreach ($avgKlos as $x) {
             echo '<tr>';
-            echo '<td>' . $x->day . ' </td><td> ' . round($x->av, 2) . '</td>';
+            echo '<td style="padding-left: 90px;">' . $x->day . ' </td><td style="padding-left: 90px;"> ' . round($x->av, 2) . '</td>';
             echo '</tr>';
 
         }
@@ -60,7 +60,7 @@
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
         foreach ($avgWien as $x) {
             echo '<tr>';
-            echo '<td>' . $x->day . ' </td><td> ' . round($x->av, 2) . '</td>';
+            echo '<td style="padding-left: 90px;">' . $x->day . ' </td><td style="padding-left: 90px;"> ' . round($x->av, 2) . '</td>';
             echo '</tr>';
 
         }
