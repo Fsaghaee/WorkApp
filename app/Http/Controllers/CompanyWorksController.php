@@ -47,7 +47,7 @@ class CompanyWorksController extends Controller
 
         $avgWien = DB::table(function ($query) {
             $query->selectRaw('working_day,sum(orders) as total')
-                ->from('works')->where('location', '=', 'Klosterneuburg')
+                ->from('works')->where('location', '=', 'Wien')
                 ->groupBy('working_day')->orderBy('working_day', 'desc');
         })
             ->selectraw(' DAYNAME(working_day) as day , AVG(total) as av ')
