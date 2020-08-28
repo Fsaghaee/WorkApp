@@ -132,7 +132,7 @@
                         $workingDay = $work->working_day;
                         ?>
                         <tr style=" background-color:<?php echo $color ?>; text-align: center;">
-                            <td style="font-size: 1vw;">{{date('M-d D', strtotime($work->working_day))}} </td>
+                            <td>{{date('M-d D', strtotime($work->working_day))}} </td>
                             <td> {{$work->name}} </td>
                             <?php
                             if ($work->location == 'Klosterneuburg') {
