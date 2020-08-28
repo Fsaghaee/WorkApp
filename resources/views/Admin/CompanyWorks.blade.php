@@ -48,7 +48,7 @@
         echo '<div class="col">';
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
 
-        foreach ($temp as $x) {
+        foreach ($avgKlos as $x) {
             echo '<tr>';
             echo '<td>' . $x->day . ' </td><td> ' . round($x->av, 2) . '</td>';
             echo '</tr>';
