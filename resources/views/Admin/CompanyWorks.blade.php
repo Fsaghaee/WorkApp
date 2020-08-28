@@ -142,7 +142,7 @@
                             }
                             ?>
                             <td> {{$work->working_account}} </td>
-                            <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break ?>   </td>
+                            <td><?php echo round( abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break,2) ?>   </td>
                             <td> {{$work->orders * 1.3}}  </td>
                             <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
                             <td> {{$work->wetter_main}} </td>
