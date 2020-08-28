@@ -36,11 +36,20 @@ class CompanyWorksController extends Controller
         $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day', 'desc')->get();
         $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day', 'desc')->get();;
 
-        $avgKlos = DB::table('works')-> selectraw(' DAYNAME(working_day) as day , AVG(orders) as av ')->where('location', '=', 'Klosterneuburg')->groupBy('day')->get();
-        $avgWien = DB::table('works')-> selectraw(' DAYNAME(working_day) as day , AVG(orders) as av ')->where('location', '=', 'Wien')->groupBy('day')->get();
+        $temp = DB::table(function ($query) {
+            $query->selectRaw('working_day,sum(orders) as total')
+                ->from('works')->where('location', '=', 'Klosterneuburg')
+                ->groupBy('working_day')->orderBy('working_day', 'desc');
+        })
+            ->selectraw(' DAYNAME(working_day) as day , AVG(total) as av ')
+            ->groupBy('day')->get();
 
 
-        return view('Admin/CompanyWorks', compact('allworks', 'worksfirst', 'workssecond', 'worksLasrSecond', 'allDrivers', 'klosSum', 'WienSum', 'avgKlos','avgWien'));
+        $avgKlos = DB::table('works')->selectraw(' DAYNAME(working_day) as day , AVG(orders) as av ')->where('location', '=', 'Klosterneuburg')->groupBy('day')->get();
+        $avgWien = DB::table('works')->selectraw(' DAYNAME(working_day) as day , AVG(orders) as av ')->where('location', '=', 'Wien')->groupBy('day')->get();
+
+
+        return view('Admin/CompanyWorks', compact('allworks', 'worksfirst', 'workssecond', 'worksLasrSecond', 'allDrivers', 'klosSum', 'WienSum', 'avgKlos', 'avgWien', 'temp'));
     }
 
 
