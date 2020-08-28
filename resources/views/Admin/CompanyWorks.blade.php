@@ -96,15 +96,62 @@
         <br>
         <div class="row">
 
-            <div class="col"><input type="text" id="inputName" , onkeyup="NameSearch()" placeholder="Name"/></div>
-
-            <div class="col"><select id="inputLocation" onclick="LocationSearch()" style="font-size: 1vw;">
+            <div class="col-3">
+                <input type="text" id="inputName" , onkeyup="NameSearch()" placeholder="Name"/><br>
+                <select id="inputLocation" onclick="LocationSearch()" style="font-size: 1vw;">
                     <option value="">Select</option>
                     <option value="K">Klosterneuburg</option>
                     <option value="W">Wien</option>
-                </select></div>
-            <div class="col"><input type="text" id="inputAccount" onkeyup="AccountSearch()" placeholder="Account"/>
+                </select><br>
+                <input type="text" id="inputAccount" onkeyup="AccountSearch()" placeholder="Account"/>
             </div>
+
+            <div class="col-9">
+
+                <table style="overflow-y: scroll;width: 100%;display: block;height: 350px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;" id="driverTable">
+                    <tr>
+                        <th>Day</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Account</th>
+                        <th>Hours</th>
+                        <th>Earned</th>
+                        <th style="border-left: #000000 2px solid; padding-left: 5px;"> Orders</th>
+                        <th>Weather</th>
+                        <th>Temp</th>
+                    </tr>
+
+                    @foreach($allworks as $work)
+                        <?php
+                        $color = '';
+                        if (date('D', strtotime($work->working_day)) == 'Sun' || date('D', strtotime($work->working_day)) == 'Sat') {
+                            $color = '#57b846';
+                        } else {
+                            $color = 'white';
+                        }
+                        $workingDay = $work->working_day;
+                        ?>
+                        <tr style=" background-color:<?php echo $color ?>; text-align: center;">
+                            <td>{{date('M-d D', strtotime($work->working_day))}} </td>
+                            <td> {{$work->name}} </td>
+                            <?php
+                            if ($work->location == 'Klosterneuburg') {
+                                echo '<td style="background-color: #6c757d;">' . $work->location[0] . '</td>';
+                            } elseif ($work->location == 'Wien') {
+                                echo '<td style="background-color: #1e7e34;">' . $work->location[0] . '</td>';
+                            }
+                            ?>
+                            <td> {{$work->working_account}} </td>
+                            <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break ?>   </td>
+                            <td> {{$work->orders * 1.3}}  </td>
+                            <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
+                            <td> {{$work->wetter_main}} </td>
+                            <td> {{$work->wetter_temp}} </td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+
             <br>
         </div>
 
@@ -172,47 +219,5 @@
         </script>
 
 
-        <table style="width: 99%; font-size:2vw; padding: 5px;text-align: center; " id="driverTable">
-            <tr>
-                <th>Day</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Account</th>
-                <th>Hours</th>
-                <th>Earned</th>
-                <th style="border-left: #000000 2px solid; padding-left: 5px;"> Orders</th>
-                <th>Weather</th>
-                <th>Temp</th>
-            </tr>
-
-            @foreach($allworks as $work)
-                <?php
-                $color = '';
-                if (date('D', strtotime($work->working_day)) == 'Sun' || date('D', strtotime($work->working_day)) == 'Sat') {
-                    $color = '#57b846';
-                } else {
-                    $color = 'white';
-                }
-                $workingDay = $work->working_day;
-                ?>
-                <tr style=" background-color:<?php echo $color ?>; text-align: center;">
-                    <td>{{date('M-d D', strtotime($work->working_day))}} </td>
-                    <td> {{$work->name}} </td>
-                    <?php
-                    if ($work->location == 'Klosterneuburg') {
-                        echo '<td style="background-color: #6c757d;">' . $work->location[0] . '</td>';
-                    } elseif ($work->location == 'Wien') {
-                        echo '<td style="background-color: #1e7e34;">' . $work->location[0] . '</td>';
-                    }
-                    ?>
-                    <td> {{$work->working_account}} </td>
-                    <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break ?>   </td>
-                    <td> {{$work->orders * 1.3}}  </td>
-                    <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
-                    <td> {{$work->wetter_main}} </td>
-                    <td> {{$work->wetter_temp}} </td>
-                </tr>
-            @endforeach
-        </table>
     </div>
 @stop
