@@ -13,8 +13,8 @@
 
 
         <?php
-echo '<div class="row">';
-echo '<div class="col">';
+        echo '<div class="row">';
+        echo '<div class="col">';
         echo '<h7>Klosterneuburg</h7>';
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
         echo '<tr>';
@@ -28,8 +28,8 @@ echo '<div class="col">';
             echo '</tr>';
         }
         echo '</table>';
-echo '</div>';
-echo '<div class="col">';
+        echo '</div>';
+        echo '<div class="col">';
 
         echo '<h7>Wien</h7>';
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
@@ -37,71 +37,37 @@ echo '<div class="col">';
         echo '<th>Day</th>';
         echo '<th>Sum</th>';
         echo '</tr>';
-
         foreach ($WienSum as $t) {
             echo '<tr>';
             echo '<td>' . $t->working_day . ' </td><td> ' . $t->total . '</td>';
             echo '</tr>';
         }
         echo '</table>';
-echo '</div></div>';
-
-        $avarageDayNumbers = array('Mon' => 0, 'Thu' => 0, 'Wed' => 0, 'Tue' => 0, 'Fri' => 0, 'Sat' => 0, 'Sun' => 0);
-        $avarageDayOrders = array('Mon' => 0, 'Thu' => 0, 'Wed' => 0, 'Tue' => 0, 'Fri' => 0, 'Sat' => 0, 'Sun' => 0);
-
-        foreach ($allworks as $work) {
-
-            if ($work->location == 'Klosterneuburg') {
-                switch (date('D', strtotime($work->working_day))) {
-
-
-                    case 'Mon':
-                        $avarageDayNumbers['Mon'] += 1;
-                        $avarageDayOrders['Mon'] += $work->orders;
-                        break;
-                    case 'Thu':
-                        $avarageDayNumbers['Thu'] += 1;
-                        $avarageDayOrders['Thu'] += $work->orders;
-
-                        break;
-                    case 'Wed':
-                        $avarageDayNumbers['Wed'] += 1;
-                        $avarageDayOrders['Wed'] += $work->orders;
-
-                        break;
-                    case 'Tue':
-                        $avarageDayNumbers['Tue'] += 1;
-                        $avarageDayOrders['Tue'] += $work->orders;
-
-                        break;
-                    case 'Fri':
-                        $avarageDayNumbers['Fri'] += 1;
-                        $avarageDayOrders['Fri'] += $work->orders;
-
-                        break;
-                    case 'Sat':
-                        $avarageDayNumbers['Sat'] += 1;
-                        $avarageDayOrders['Sat'] += $work->orders;
-
-                        break;
-                    case 'Sun':
-                        $avarageDayNumbers['Sun'] += 1;
-                        $avarageDayOrders['Sun'] += $work->orders;
-                        break;
-                }
-            }
-        }
-        echo '<div class ="row">';
-        echo '<div class="col"><h6>Avarage Mon :' . $avarageDayOrders['Mon'] / $avarageDayNumbers['Mon'] . '<br>';
-        echo ' Avarage Thu :' . $avarageDayOrders['Thu'] / $avarageDayNumbers['Thu'] . '<br>';
-        echo ' Avarage Wed :' . $avarageDayOrders['Wed'] / $avarageDayNumbers['Wed'] . '<br>';
-        echo ' Avarage Tue :' . $avarageDayOrders['Tue'] / $avarageDayNumbers['Tue'] . '<br>';
-        echo '</h6></div><div class="col"><h6>';
-        echo ' Avarage Fri :' . $avarageDayOrders['Fri'] / $avarageDayNumbers['Fri'] . '<br>';
-        echo ' Avarage Sat :' . $avarageDayOrders['Sat'] / $avarageDayNumbers['Sat'] . '<br>';
-        echo ' Avarage Son :' . $avarageDayOrders['Sun'] / $avarageDayNumbers['Sun'] . '<br>';
-        echo '</h6>';
         echo '</div></div>';
+        echo '<div class="row">';
+        echo '<div class="col">';
+        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
+
+        foreach ($avgKlos as $x) {
+            echo '<tr>';
+            echo '<td>' . $x->day . ' </td><td> ' . round($x->av, 2) . '</td>';
+            echo '</tr>';
+
+        }
+        echo '</table>';
+        echo '</div>';
+        echo '<div class="col">';
+        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
+        foreach ($avgWien as $x) {
+            echo '<tr>';
+            echo '<td>' . $x->day . ' </td><td> ' . round($x->av, 2) . '</td>';
+            echo '</tr>';
+
+        }
+        echo '</table>';
+        echo '</div></div>';
+
+
         $total = 0;
         $workingDay = null;
         echo '<div class ="row">';
