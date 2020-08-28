@@ -11,6 +11,7 @@
 @stop
 @section('centercontent')
 
+
     <?php
     $dataPoints01= array();
     $dataPoints02= array();
@@ -95,6 +96,40 @@
                 @endforeach
         </table>
     </div>
+    <script>
+        window.onload = function () {
+
+            var chart01 = new CanvasJS.Chart("Kloster", {
+                title: {
+                    text: "Klosterneuburg"
+                },
+                axisY: {
+                    title: "Orders"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: <?php echo json_encode($dataPoints01, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            var chart02 = new CanvasJS.Chart("wien", {
+                title: {
+                    text: "Wien"
+                },
+                axisY: {
+                    title: "Orders"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: <?php echo json_encode($dataPoints02, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            chart01.render();
+            chart02.render();
+
+        }
+
+
+    </script>
     @endif
 
 @stop
