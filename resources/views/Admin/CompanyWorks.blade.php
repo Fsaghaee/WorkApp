@@ -97,13 +97,13 @@
         <div class="row">
 
             <div class="col-3">
-                <input type="text" id="inputName" , onkeyup="NameSearch()" placeholder="Name"/><br>
-                <select id="inputLocation" onclick="LocationSearch()" style="font-size: 1vw;">
+                <input type="text" id="inputName" style="margin-top: 10px;" onkeyup="NameSearch()" placeholder="Name"/><br>
+                <select id="inputLocation"   onclick="LocationSearch()" style="margin-top: 20px; font-size: 1vw;">
                     <option value="">Select</option>
                     <option value="K">Klosterneuburg</option>
                     <option value="W">Wien</option>
                 </select><br>
-                <input type="text" id="inputAccount" onkeyup="AccountSearch()" placeholder="Account"/>
+                <input type="text" style="margin-top: 20px;"  id="inputAccount" onkeyup="AccountSearch()" placeholder="Account"/>
             </div>
 
             <div class="col-9">
@@ -132,7 +132,7 @@
                         $workingDay = $work->working_day;
                         ?>
                         <tr style=" background-color:<?php echo $color ?>; text-align: center;">
-                            <td>{{date('M-d D', strtotime($work->working_day))}} </td>
+                            <td style="font-size: 1vw;">{{date('M-d D', strtotime($work->working_day))}} </td>
                             <td> {{$work->name}} </td>
                             <?php
                             if ($work->location == 'Klosterneuburg') {
