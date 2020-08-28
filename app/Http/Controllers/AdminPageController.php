@@ -25,7 +25,14 @@ class AdminPageController extends Controller
                     ->join('users', 'works.driver_id', '=', 'users.id')
                     ->select('works.*', 'users.name')
                     ->where('works.company_id', '=', auth()->user()->id)->where('working_day', '=', date('yy-m-d'))->get();
-                return view('Admin/adminPage', compact('works'));
+
+
+
+                $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day')->get();
+                $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day')->get();;
+
+
+                return view('Admin/adminPage', compact('works','klosSum','WienSum'));
             } elseif (auth()->user()->company_id != 0) {
                 return view('Driver/mainPage');
             }

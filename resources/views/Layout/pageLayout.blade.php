@@ -24,6 +24,40 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script>
+        window.onload = function () {
+
+            var chart01 = new CanvasJS.Chart("Kloster", {
+                title: {
+                    text: "Klosterneuburg"
+                },
+                axisY: {
+                    title: "Orders"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: <?php echo json_encode($dataPoints01, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            var chart02 = new CanvasJS.Chart("wien", {
+                title: {
+                    text: "Wien"
+                },
+                axisY: {
+                    title: "Orders"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: <?php echo json_encode($dataPoints02, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            chart01.render();
+            chart02.render();
+
+        }
+
+
+    </script>
     <!--===============================================================================================-->
 </head>
 <body>
