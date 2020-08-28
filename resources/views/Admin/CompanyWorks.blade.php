@@ -13,6 +13,39 @@
 
 
         <?php
+echo '<div class="row">';
+echo '<div class="col">';
+        echo '<h7>Klosterneuburg</h7>';
+        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
+        echo '<tr>';
+        echo '<th>Day</th>';
+        echo '<th>Sum</th>';
+        echo '</tr>';
+
+        foreach ($klosSum as $t) {
+            echo '<tr>';
+            echo '<td>' . $t->working_day . ' </td><td> ' . $t->total . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+echo '</div>';
+echo '<div class="col">';
+
+        echo '<h7>Wien</h7>';
+        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
+        echo '<tr style="text-align: center;">';
+        echo '<th>Day</th>';
+        echo '<th>Sum</th>';
+        echo '</tr>';
+
+        foreach ($WienSum as $t) {
+            echo '<tr>';
+            echo '<td>' . $t->working_day . ' </td><td> ' . $t->total . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+echo '</div></div>';
+
         $avarageDayNumbers = array('Mon' => 0, 'Thu' => 0, 'Wed' => 0, 'Tue' => 0, 'Fri' => 0, 'Sat' => 0, 'Sun' => 0);
         $avarageDayOrders = array('Mon' => 0, 'Thu' => 0, 'Wed' => 0, 'Tue' => 0, 'Fri' => 0, 'Sat' => 0, 'Sun' => 0);
 
@@ -94,84 +127,83 @@
 
         ?>
 
-<br>
+        <br>
         <div class="row">
 
-            <div   class="col"><input type="text" id="inputName" , onkeyup="NameSearch()" placeholder="Name"/></div>
+            <div class="col"><input type="text" id="inputName" , onkeyup="NameSearch()" placeholder="Name"/></div>
 
-            <div class="col">  <select id="inputLocation" onclick="LocationSearch()" style="font-size: 1vw;">
+            <div class="col"><select id="inputLocation" onclick="LocationSearch()" style="font-size: 1vw;">
                     <option value="">Select</option>
                     <option value="K">Klosterneuburg</option>
                     <option value="W">Wien</option>
                 </select></div>
-            <div class="col"><input type="text" id="inputAccount"  onkeyup="AccountSearch()" placeholder="Account"/></div>
+            <div class="col"><input type="text" id="inputAccount" onkeyup="AccountSearch()" placeholder="Account"/>
+            </div>
             <br>
         </div>
 
 
+        <script>
 
-
-<script>
-
-    function NameSearch() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("inputName");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("driverTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+            function NameSearch() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("inputName");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("driverTable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
                 }
             }
-        }
-    }
 
-    function LocationSearch() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("inputLocation");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("driverTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[2];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+            function LocationSearch() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("inputLocation");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("driverTable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[2];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
                 }
             }
-        }
-    }
 
 
-    function AccountSearch() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("inputAccount");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("driverTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[3];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+            function AccountSearch() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("inputAccount");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("driverTable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[3];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
                 }
             }
-        }
-    }
 
-</script>
+        </script>
 
 
         <table style="width: 99%; font-size:2vw; padding: 5px;text-align: center; " id="driverTable">

@@ -33,8 +33,10 @@ class CompanyWorksController extends Controller
 
         $allDrivers = DB::table('works')->select('driver_id')->distinct()->get();
 
+        $klosSum = DB::table('works')->select('working_day',DB::raw('sum(orders) as total'))->where('location','=','Klosterneuburg')->groupBy('working_day')->get();
+        $WienSum = DB::table('works')->select('working_day',DB::raw('sum(orders) as total'))->where('location','=','Wien')->groupBy('working_day')->get();
 
-        return view('Admin/CompanyWorks', compact('allworks', 'worksfirst', 'workssecond', 'worksLasrSecond', 'allDrivers'));
+        return view('Admin/CompanyWorks', compact('allworks', 'worksfirst', 'workssecond', 'worksLasrSecond', 'allDrivers','klosSum','WienSum'));
     }
 
 
