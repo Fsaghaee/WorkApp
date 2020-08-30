@@ -25,8 +25,10 @@
         $border="";
         foreach ($klosSum as $t) {
 
-            if(date('m-d', strtotime($t->working_day)) == date('m-t', strtotime($t->working_day)) || date('m-d', strtotime($t->working_day)) == date('m-15', strtotime($t->working_day)) ){
+            if((date('m-d', strtotime($t->working_day)) == date('m-t', strtotime($t->working_day))) || (date('m-d', strtotime($t->working_day)) == date('m-15', strtotime($t->working_day)))){
                 $border = "border-top: 4px solid black; padding-top : 5px;";
+            }else {
+                $border="";
             }
 
 
