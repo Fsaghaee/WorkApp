@@ -22,14 +22,22 @@
         echo '<th style="padding-left: 90px;padding-right: 90px;">Sum</th>';
         echo '</tr>';
 
+        $border="";
         foreach ($klosSum as $t) {
+
+            if(date('m-d', strtotime($t->working_day)) == date('m-t', strtotime($t->working_day)) || date('m-d', strtotime($t->working_day)) == date('m-15', strtotime($t->working_day)) ){
+                $border = "border-top: 4px solid black; padding-top : 5px;";
+            }
+
+
+
             if (($t->total * 5.4) < 60) {
                 echo '<tr>';
-                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: #57b846;">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #57b846;"> ' . $t->total . '</td>';
+                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: #57b846;'. $border.' ">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #57b846; '. $border.' "> ' . $t->total . '</td>';
                 echo '</tr>';
             } else {
                 echo '<tr>';
-                echo '<td style="padding-left: 90px;padding-right: 90px;">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . $t->total . '</td>';
+                echo '<td style="padding-left: 90px;padding-right: 90px;'. $border.'">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;'. $border.' "> ' . $t->total . '</td>';
                 echo '</tr>';
             }
 
