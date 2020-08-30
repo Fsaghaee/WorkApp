@@ -18,14 +18,22 @@
         echo '<h7>Klosterneuburg</h7>';
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
         echo '<tr>';
-        echo '<th style="padding-left: 110px;">Day</th>';
-        echo '<th style="padding-left: 90px;">Sum</th>';
+        echo '<th style="padding-left: 90px;padding-right: 90px;">Day</th>';
+        echo '<th style="padding-left: 90px;padding-right: 90px;">Sum</th>';
         echo '</tr>';
 
         foreach ($klosSum as $t) {
-            echo '<tr>';
-            echo '<td style="padding-left: 90px;">' . date('m-d D',strtotime( $t->working_day))  . ' </td><td style="padding-left: 90px;"> ' . $t->total . '</td>';
-            echo '</tr>';
+            if (($t->total * 5.4) < 60) {
+                echo '<tr>';
+                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: #57b846;">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #57b846;"> ' . $t->total . '</td>';
+                echo '</tr>';
+            } else {
+                echo '<tr>';
+                echo '<td style="padding-left: 90px;padding-right: 90px;">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . $t->total . '</td>';
+                echo '</tr>';
+            }
+
+
         }
         echo '</table>';
         echo '</div>';
@@ -34,12 +42,12 @@
         echo '<h7>Wien</h7>';
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
         echo '<tr style="text-align: center;">';
-        echo '<th style="padding-left: 110px;">Day</th>';
-        echo '<th style="padding-left: 90px;"> Sum</th>';
+        echo '<th style="padding-left: 90px;padding-right: 90px;">Day</th>';
+        echo '<th style="padding-left: 90px;padding-right: 90px;"> Sum</th>';
         echo '</tr>';
         foreach ($WienSum as $t) {
             echo '<tr>';
-            echo '<td style="padding-left: 90px;">' . date('m-d D',strtotime( $t->working_day)) . ' </td><td style="padding-left: 90px;"> ' . $t->total . '</td>';
+            echo '<td style="padding-left: 90px;padding-right: 90px;">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . $t->total . '</td>';
             echo '</tr>';
         }
         echo '</table>';
@@ -49,9 +57,17 @@
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
 
         foreach ($avgKlos as $x) {
-            echo '<tr>';
-            echo '<td style="padding-left: 90px;">' . $x->day . ' </td><td style="padding-left: 90px;"> ' . round($x->av, 2) . '</td>';
-            echo '</tr>';
+
+            if (round($x->av, 2) < 14.8) {
+                echo '<tr>';
+                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: greenyellow;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: greenyellow;"> ' . round($x->av, 2) . '</td>';
+                echo '</tr>';
+            } else {
+                echo '<tr>';
+                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: #b1dfbb;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #b1dfbb;"> ' . round($x->av, 2) . '</td>';
+                echo '</tr>';
+            }
+
 
         }
         echo '</table>';
@@ -60,7 +76,7 @@
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
         foreach ($avgWien as $x) {
             echo '<tr>';
-            echo '<td style="padding-left: 90px;">' . $x->day . ' </td><td style="padding-left: 90px;"> ' . round($x->av, 2) . '</td>';
+            echo '<td style="padding-left: 90px;padding-right: 90px;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . round($x->av, 2) . '</td>';
             echo '</tr>';
 
         }
@@ -97,18 +113,22 @@
         <div class="row">
 
             <div class="col-3">
-                <input type="text" id="inputName" style="margin-top: 10px;" onkeyup="NameSearch()" placeholder="Name"/><br>
-                <select id="inputLocation"   onclick="LocationSearch()" style="margin-top: 20px; font-size: 1vw;">
+                <input type="text" id="inputName" style="margin-top: 10px;" onkeyup="NameSearch()"
+                       placeholder="Name"/><br>
+                <select id="inputLocation" onclick="LocationSearch()" style="margin-top: 20px; font-size: 1vw;">
                     <option value="">Select</option>
                     <option value="K">Klosterneuburg</option>
                     <option value="W">Wien</option>
                 </select><br>
-                <input type="text" style="margin-top: 20px;"  id="inputAccount" onkeyup="AccountSearch()" placeholder="Account"/>
+                <input type="text" style="margin-top: 20px;" id="inputAccount" onkeyup="AccountSearch()"
+                       placeholder="Account"/>
             </div>
 
             <div class="col-9">
 
-                <table style="overflow-y: scroll;width: 100%;display: block;height: 350px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;" id="driverTable">
+                <table
+                    style="overflow-y: scroll;width: 100%;display: block;height: 350px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;"
+                    id="driverTable">
                     <tr>
                         <th>Day</th>
                         <th>Name</th>
@@ -142,7 +162,7 @@
                             }
                             ?>
                             <td> {{$work->working_account}} </td>
-                            <td><?php echo round( abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break,2) ?>   </td>
+                            <td><?php echo round(abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break, 2) ?>   </td>
                             <td> {{$work->orders * 1.3}}  </td>
                             <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
                             <td> {{$work->wetter_main}} </td>

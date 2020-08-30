@@ -54,8 +54,6 @@ class CompanyWorksController extends Controller
             ->groupBy('day')->get();
 
 
-
-
         return view('Admin/CompanyWorks', compact('allworks', 'worksfirst', 'workssecond', 'worksLasrSecond', 'allDrivers', 'klosSum', 'WienSum', 'avgKlos', 'avgWien'));
     }
 
@@ -67,7 +65,17 @@ class CompanyWorksController extends Controller
             ->join('users', 'works.driver_id', '=', 'users.id')->select('name')
             ->where('working_day', '<=', $second)
             ->where('driver_id', '=', $driver)->sum('orders');
-        return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  </h6>';
+
+
+        if ($this->getDriverName($driver) == "Reza") {
+            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: #1e7e34;font-size: 1.4vw;font-weight: bold; padding-left: 15px;">'.$worksLasrSecond * 4.1 .' €</span></h6>';
+        } elseif ($this->getDriverName($driver) == "Farzad") {
+            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: #1e7e34;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">'.$worksLasrSecond * 5.4 .' €</span></h6>';
+
+        }else{
+            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: #1e7e34;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">'.$worksLasrSecond * 4 .' €</span></h6>';
+        }
+
     }
 
 
