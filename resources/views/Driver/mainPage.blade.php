@@ -5,6 +5,9 @@
     </div>
 @stop
 @section('centercontent')
+
+
+
     <div >
         <br>
         <h2 style="font-size:10vw;">{{auth()->user()->name }}'s Page</h2>

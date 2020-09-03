@@ -6,6 +6,7 @@ use App\Payslip;
 use App\User;
 use App\Work;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DriverPageController extends Controller
 {
@@ -21,7 +22,10 @@ class DriverPageController extends Controller
                 return view('Admin/adminPage');
             } elseif (auth()->user()->company_id != 0) {
                 $slips = Payslip::all()->where('driver_id', '=', auth()->user()->id);
-                $works = Work::all()->where('driver_id', auth()->user()->id);
+                $works = DB::table('works')
+                    ->select('works.*')->orderBy('works.working_day', 'desc')
+                    ->where('works.driver_id', '=', auth()->user()->id)->get();
+
                 return view('Driver/mainPage', compact('works', 'slips'));
             }
         }
