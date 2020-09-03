@@ -32,12 +32,12 @@
         echo '<img src="' . $Tresponse['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
         echo '</h6>';
         ?>
-        <table style="width: 90%; font-size:2.6vw; border-top: 6px solid green ;margin: 30px; text-align: center;">
+        <table style="overflow-y: scroll;width: 100%;display: block;height: 250px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">
             <tr>
-                <th>Day/Tag</th>
-                <th>Orders/Bestellungen</th>
-                <th>Account/Konto</th>
-                <th>Location/Ort</th>
+                <th  style="padding-left: 90px;padding-right: 90px;">Day/Tag</th>
+                <th  style="padding-left: 90px;padding-right: 90px;">Orders/Bestellungen</th>
+                <th  style="padding-left: 90px;padding-right: 90px;">Account/Konto</th>
+                <th  style="padding-left: 90px;padding-right: 90px;">Location/Ort</th>
             </tr>
             @if(isset( $works))
                 @foreach($works as $work)
