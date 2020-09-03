@@ -21,26 +21,29 @@
         $date = date('yy-m-d');
         $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
         $response = json_decode($response, true);
+
+        echo '<div class="row"> <div class="col">';
         echo '<h6 style="font-size:5vw;">';
-        echo date('D') . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
+        echo 'Heute:  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
             ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
         echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
-        echo '<br>';
-        echo '<br>';
+        echo '</h6>';
+        echo '</div><div class="col"><h6 style="font-size:5vw;">';
         $date = date('yy-m-d', strtotime($date . ' +1 day'));
         $Tresponse = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
         $Tresponse = json_decode($Tresponse, true);
-        echo date('D', strtotime(' +1 day')) . '  <br>' . $Tresponse['forecast']['forecastday'][0]['day']['maxtemp_c'] .
+        echo 'Morgen:  <br>' . $Tresponse['forecast']['forecastday'][0]['day']['maxtemp_c'] .
             ' <br> ' . $Tresponse['forecast']['forecastday'][0]['day']['condition']['text'];
         echo '<img src="' . $Tresponse['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
         echo '</h6>';
+        echo '</div></div>';
         ?>
         <table style="overflow-y: scroll;width: 100%;display: block;height: 250px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">
             <tr>
-                <th  style="padding-left: 90px;padding-right: 90px;">Day/Tag</th>
-                <th  style="padding-left: 90px;padding-right: 90px;">Orders/Bestellungen</th>
-                <th  style="padding-left: 90px;padding-right: 90px;">Account/Konto</th>
-                <th  style="padding-left: 90px;padding-right: 90px;">Location/Ort</th>
+                <th  style="padding-left: 30px;padding-right: 90px;">Day/Tag</th>
+                <th  style="padding-left: 30px;padding-right: 90px;">Orders/Bestellungen</th>
+                <th  style="padding-left: 30px;padding-right: 90px;">Account/Konto</th>
+                <th  style="padding-left: 30px;padding-right: 90px;">Location/Ort</th>
             </tr>
             @if(isset( $works))
                 @foreach($works as $work)
