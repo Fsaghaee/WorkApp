@@ -7,6 +7,8 @@
            href="{{route('admin-drivers.index')}}"> Drivers </a>
         <a style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px;"
            href="{{route('company-works.index')}}"> All orders </a>
+        <a style="font-size:5vw; border: 2px solid green; padding: 10px; margin-right: 10px;"
+           href="{{route('payments.index')}}"> Pay Slips </a>
     </div>
 @stop
 @section('centercontent')

@@ -42,7 +42,8 @@ class CompanyWorksController extends Controller
                 ->groupBy('working_day')->orderBy('working_day', 'desc');
         })
             ->selectraw(' DAYNAME(working_day) as day , AVG(total) as av ')
-            ->groupBy('day')->get();
+            ->groupBy('day')->orderBy('day')->get();
+
 
 
         $avgWien = DB::table(function ($query) {
