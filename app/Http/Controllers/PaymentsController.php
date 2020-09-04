@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Payslip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaymentsController extends Controller
 {
@@ -15,8 +16,11 @@ class PaymentsController extends Controller
     public function index()
     {
 
-        $payslips = Payslip::all()->where('company_id', '=', auth()->user()->id);
-
+      //  $payslips = Payslip::all()->where('company_id', '=', auth()->user()->id);
+        $payslips = DB::table('payslips')
+            ->join('users', 'payslips.driver_id', '=', 'users.id')
+            ->select('payslips.*', 'users.name')
+            ->where('payslips.company_id', '=', auth()->user()->id)->get();
         return view('Admin/PaySlips', compact('payslips'));
     }
 

@@ -32,18 +32,20 @@
         @foreach($payslips as $pay)
             <tr>
 
-                <td>{{$pay->driver_id}}</td>
+                <td>{{$pay->name}}</td>
 
-                <td><a style="font-size:2vw;" href="{{ $pay->slip_file_location }}"><?php echo str_replace(auth()->user()->id . '_', '', str_replace('.pdf', '', str_replace('payslips/', '', $pay->slip_file_location))); ?></a></td>
+                <td><a style="font-size:2vw;"
+                       href="{{ $pay->slip_file_location }}"><?php echo str_replace($pay->driver_id . '_', '', str_replace('.pdf', '', str_replace('payslips/', '', $pay->slip_file_location))); ?></a>
+                </td>
                 <td> {{$pay->status }}</td>
                 <td>{{$pay->due_date}}</td>
-<td>
-                {!! Form::open(['method' => 'DELETE',
-  'route' => ['payments.destroy', $pay->id]]) !!}
-                {!! Form::submit('Delete') !!}
-                {!! Form::close() !!}
+                <td>
+                    {!! Form::open(['method' => 'DELETE',
+      'route' => ['payments.destroy', $pay->id]]) !!}
+                    {!! Form::submit('Delete') !!}
+                    {!! Form::close() !!}
 
-</td>
+                </td>
 
             </tr>
 
