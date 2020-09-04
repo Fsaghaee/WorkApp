@@ -22,24 +22,23 @@
         echo '<th style="padding-left: 90px;padding-right: 90px;">Sum</th>';
         echo '</tr>';
 
-        $border="";
+        $border = "";
         foreach ($klosSum as $t) {
 
-            if((date('m-d', strtotime($t->working_day)) == date('m-t', strtotime($t->working_day))) || (date('m-d', strtotime($t->working_day)) == date('m-15', strtotime($t->working_day)))){
+            if ((date('m-d', strtotime($t->working_day)) == date('m-t', strtotime($t->working_day))) || (date('m-d', strtotime($t->working_day)) == date('m-15', strtotime($t->working_day)))) {
                 $border = "border-top: 4px solid black; padding-top : 5px;";
-            }else {
-                $border="";
+            } else {
+                $border = "";
             }
-
 
 
             if (($t->total * 5.4) < 60) {
                 echo '<tr>';
-                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: #57b846;'. $border.' ">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #57b846; '. $border.' "> ' . $t->total . '</td>';
+                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: #57b846;' . $border . ' ">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #57b846; ' . $border . ' "> ' . $t->total . '</td>';
                 echo '</tr>';
             } else {
                 echo '<tr>';
-                echo '<td style="padding-left: 90px;padding-right: 90px;'. $border.'">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;'. $border.' "> ' . $t->total . '</td>';
+                echo '<td style="padding-left: 90px;padding-right: 90px;' . $border . '">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;' . $border . ' "> ' . $t->total . '</td>';
                 echo '</tr>';
             }
 
@@ -122,78 +121,82 @@
         <br>
         <div class="row">
 
-            <div class="col-3">
+            <div class="col">
                 <input type="text" id="inputName" style="margin-top: 10px;" onkeyup="NameSearch()"
                        placeholder="Name"/><br>
+
+
+            </div>
+
+            <div class="col">
                 <select id="inputLocation" onclick="LocationSearch()" style="margin-top: 20px; font-size: 1vw;">
                     <option value="">Select</option>
                     <option value="K">Klosterneuburg</option>
                     <option value="W">Wien</option>
                 </select><br>
+            </div>
+            <div class="col">
                 <input type="text" style="margin-top: 20px;" id="inputAccount" onkeyup="AccountSearch()"
                        placeholder="Account"/>
             </div>
-
-            <div class="col-9">
-
-                <table
-                    style="overflow-y: scroll;width: 100%;display: block;height: 350px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;"
-                    id="driverTable">
-                    <tr>
-                        <th>Day</th>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Account</th>
-                        <th>Hours</th>
-                        <th>Earned</th>
-                        <th style="border-left: #000000 2px solid; padding-left: 5px;"> Orders</th>
-                        <th>Weather</th>
-                        <th>Temp</th>
-                    </tr>
-
-                    @foreach($allworks as $work)
-                        <?php
-                        $color = '';
-                        if (date('D', strtotime($work->working_day)) == 'Sun' || date('D', strtotime($work->working_day)) == 'Sat') {
-                            $color = '#57b846';
-                        } else {
-                            $color = 'white';
-                        }
-                        $workingDay = $work->working_day;
-                        ?>
-                        <tr style=" background-color:<?php echo $color ?>; text-align: center;">
-                            <td style="padding-right: 5px;">{{date('M-d D', strtotime($work->working_day))}} </td>
-                            <td> {{$work->name}} </td>
-                            <?php
-                            if ($work->location == 'Klosterneuburg') {
-                                echo '<td style="background-color: #6c757d;">' . $work->location[0] . '</td>';
-                            } elseif ($work->location == 'Wien') {
-                                echo '<td style="background-color: #1e7e34;">' . $work->location[0] . '</td>';
-                            }
-                            ?>
-                            <td> {{$work->working_account}} </td>
-                            <td><?php echo round(abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break, 2) ?>   </td>
-                            <td> {{$work->orders * 1.3}}  </td>
-                            <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
-                            <td> {{$work->wetter_main}} </td>
-                            <td> {{$work->wetter_temp}} </td>
-                            <td>
-
-                                <form action="{{ route('company-works.destroy', $work->id) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button style="color: red;">X</button>
-                                </form>
-
-
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
-
-            <br>
         </div>
+        <table
+            style="overflow-y: scroll;width: 100%;display: block;height: 350px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;"
+            id="driverTable">
+            <tr>
+                <th style="padding-left: 5%;">Day</th>
+                <th style="padding-left: 5%;">Name</th>
+                <th style="padding-left: 5%;">Location</th>
+                <th style="padding-left: 5%;">Account</th>
+                <th style="padding-left: 5%;">Hours</th>
+                <th style="padding-left: 5%;">Earned</th>
+                <th style="border-left: #000000 2px solid; padding-left: 5px;"> Orders</th>
+                <th style="padding-left: 5%;">Weather</th>
+                <th style="padding-left: 5%;">Temp</th>
+            </tr>
+
+            @foreach($allworks as $work)
+                <?php
+                $color = '';
+                if (date('D', strtotime($work->working_day)) == 'Sun' || date('D', strtotime($work->working_day)) == 'Sat') {
+                    $color = '#57b846';
+                } else {
+                    $color = 'white';
+                }
+                $workingDay = $work->working_day;
+                ?>
+                <tr style=" background-color:<?php echo $color ?>; text-align: center;">
+                    <td style="padding:0 3%;">{{date('M-d D', strtotime($work->working_day))}} </td>
+                    <td  style="padding: 0 5%;"> {{$work->name}} </td>
+                    <?php
+                    if ($work->location == 'Klosterneuburg') {
+                        echo '<td style="background-color: #6c757d;">' . $work->location[0] . '</td>';
+                    } elseif ($work->location == 'Wien') {
+                        echo '<td style="background-color: #1e7e34;">' . $work->location[0] . '</td>';
+                    }
+                    ?>
+                    <td> {{$work->working_account}} </td>
+                    <td><?php echo round(abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break, 2) ?>   </td>
+                    <td> {{$work->orders * 1.3}}  </td>
+                    <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
+                    <td> {{$work->wetter_main}} </td>
+                    <td> {{$work->wetter_temp}} </td>
+                    <td>
+
+                        <form style="padding:0 30px;" action="{{ route('company-works.destroy', $work->id) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button style="color: red;padding-left: 25%;">X</button>
+                        </form>
+
+
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+
+
+        <br>
 
 
         <script>
