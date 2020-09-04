@@ -144,15 +144,15 @@
             style="overflow-y: scroll;width: 100%;display: block;height: 350px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;"
             id="driverTable">
             <tr>
-                <th style="padding-left: 5%;">Day</th>
-                <th style="padding-left: 5%;">Name</th>
-                <th style="padding-left: 5%;">Location</th>
-                <th style="padding-left: 5%;">Account</th>
-                <th style="padding-left: 5%;">Hours</th>
-                <th style="padding-left: 5%;">Earned</th>
+                <th style="padding-left: 10px;">Day</th>
+                <th style="padding-left: 10px;">Name</th>
+                <th style="padding-left: 10px;">Location</th>
+                <th style="padding-left: 10px;">Account</th>
+                <th style="padding-left: 10px;">Hours</th>
+                <th style="padding-left: 10px;">Earned</th>
                 <th style="border-left: #000000 2px solid; padding-left: 5px;"> Orders</th>
-                <th style="padding-left: 5%;">Weather</th>
-                <th style="padding-left: 5%;">Temp</th>
+                <th style="padding-left: 10px;">Weather</th>
+                <th style="padding-left: 10px;">Temp</th>
             </tr>
 
             @foreach($allworks as $work)
@@ -166,8 +166,8 @@
                 $workingDay = $work->working_day;
                 ?>
                 <tr style=" background-color:<?php echo $color ?>; text-align: center;">
-                    <td style="padding:7px 0;">{{date('M-d D', strtotime($work->working_day))}} </td>
-                    <td  style="padding: 0 5%;"> {{$work->name}} </td>
+                    <td style="padding:7px 10px;">{{date('M-d D', strtotime($work->working_day))}} </td>
+                    <td  style="padding-left: 10px;"> {{$work->name}} </td>
                     <?php
                     if ($work->location == 'Klosterneuburg') {
                         echo '<td style="background-color: #6c757d;">' . $work->location[0] . '</td>';
