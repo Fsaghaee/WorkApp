@@ -151,6 +151,9 @@ class CompanyWorksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $work = Work::find($id);
+        $work->delete();
+        return redirect()->to('/company-works');
+
     }
 }

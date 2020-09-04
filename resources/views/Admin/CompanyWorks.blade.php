@@ -177,6 +177,16 @@
                             <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
                             <td> {{$work->wetter_main}} </td>
                             <td> {{$work->wetter_temp}} </td>
+                            <td>
+
+                                <form action="{{ route('company-works.destroy', $work->id) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button style="color: red;">X</button>
+                                </form>
+
+
+                            </td>
                         </tr>
                     @endforeach
                 </table>
