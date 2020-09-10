@@ -4,11 +4,13 @@
         <a style="font-size:5vw; border: 2px solid green; padding: 10px; " href="/logout">Log out</a>
     </div>
 @stop
+
+
 @section('centercontent')
 
 
 
-    <div >
+    <div>
         <br>
         <h2 style="font-size:4vw;"> Hallo {{auth()->user()->name }}</h2>
         <br>
@@ -49,22 +51,24 @@
         , date('yy-m-d', strtotime(now() . ' -5 day')) => date('M-d D', strtotime(now() . ' -5 day'))
         , date('yy-m-d', strtotime(now() . ' -6 day')) => date('M-d D', strtotime(now() . ' -6 day'))
         );
+        $templocation = array('' => 'Select/Auswählen', 'Klosterneuburg' => 'Klosterneuburg', 'Wien' => 'Wien');
+        $tempaccounts = array('' => 'Select/Auswählen', 'FarzadU1' => 'FarzadU1', 'FarzadU2' => 'FarzadU2', 'FarzadU3' => 'FarzadU3', 'FarzadU4' => 'FarzadU4', 'FarzadS' => 'FarzadS');
         ?>
-        {!! Form::open(['method'=>'POST','action'=>'DriverPageController@store','style'=>'font-size:4vw;margin: 30px;']) !!}
+        {!! Form::open(array('method'=>'POST','action'=>'DriverPageController@store','style'=>'font-size:4vw;margin: 30px;','onsubmit'=>'validateForm()')) !!}
         {!! form::label('working_day','Date/Datum :') !!}
-        {!! form::select('working_day',$TempDate,['class'=>'form-control']) !!}
+        {!! form::select('working_day',$TempDate,array('class'=>'form-control')) !!}
         {!! form::label('orders','Orders/Bestellungen :') !!}
         {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:4vw;','placeholder'=>'0','required']) !!}
         {!! form::label('working_account','Account/Konto :') !!}
-        {!! form:: select('working_account',array(''=>'Select/Auswählen','FarzadU1'=>'FarzadU1','FarzadU2'=>'FarzadU2','FarzadU3'=>'FarzadU3','FarzadU4'=>'FarzadU4','FarzadS'=>'FarzadS')) !!}
-        <br>
+        {!! form:: select('working_account',$tempaccounts,array('class'=>'form-control','id'=>'account')) !!}
         {!! form::label('location','Locations/Ort :') !!}
-        {!! form:: select('location',array(''=>'Select/Auswählen','Klosterneuburg'=>'Klosterneuburg','Wien'=>'Wien')) !!}
+        {!! form:: select('location',$templocation,array('class'=>'form-control','id'=>'locations')) !!}
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('driver_id', auth()->user()->id ,['class'=>'form-control']) !!}
         {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:5vw; padding:20px;margin: 30px;']) !!}
         {!! Form::close() !!}
+
         <br>
         <table style="width: 90%; font-size:5vw; border-top: 6px solid green; margin: 30px; ">
             <tr>
@@ -82,4 +86,21 @@
             @endif
         </table>
     </div>
+
+    <script>
+
+
+        function validateForm() {
+            var wday = document.getElementById("working_day").value;
+            var orders = document.getElementById("orders").value;
+            var loc = document.getElementById("location").value;
+          var acc = document.getElementById("working_account").value;
+            alert(
+                'Arbeitstag : ' + wday + '\nBestellungen : ' + orders + '\nKonto : ' +acc+' \nLocation : '+loc +'\nWenn etwas nicht stimmt, wenden Sie sich bitte an Ihren Manager '
+            );
+        }
+
+
+    </script>
+
 @stop

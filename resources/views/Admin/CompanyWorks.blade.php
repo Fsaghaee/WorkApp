@@ -168,7 +168,6 @@
                             <td> {{$work->wetter_main}} </td>
                             <td> {{$work->wetter_temp}} </td>
                             <td>
-
                                 <form style="padding:0 30px;" action="{{ route('company-works.destroy', $work->id) }}"
                                       method="POST">
                                     @method('DELETE')
