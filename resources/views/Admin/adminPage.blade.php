@@ -131,9 +131,6 @@
                     <th> Location</th>
                     <th> Weather</th>
                     <th> Temp</th>
-                    <th> Hours</th>
-                    <th> Break</th>
-                    <th> Total</th>
                 </tr>
                 @if($works)
                     @foreach($works as $work)
@@ -143,9 +140,6 @@
                             <td> {{$work->location[0]}} </td>
                             <td> {{$work->wetter_main}} </td>
                             <td> {{$work->wetter_temp}} </td>
-                            <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) ?>   </td>
-                            <td> {{$work->break}} </td>
-                            <td><?php echo abs(strtotime($work->end_working) - strtotime($work->start_working)) / (60 * 60) - $work->break; ?></td>
                         </tr>
 
 
