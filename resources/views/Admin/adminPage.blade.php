@@ -77,7 +77,6 @@
 
 
         <div id="summery" style="margin-top: 10px;margin-bottom: 10px; display: none;">
-            <div style="border-top: 3px solid green;"></div>
             <?php
 
             echo '<div class ="row">';
@@ -108,7 +107,7 @@
 
             <!-- shows here  -->
             <br>
-            <div style="border-bottom: 2px solid black;"></div>
+            <div style="border-bottom: 2px solid green;"></div>
 
             <?php
             echo '<div class ="row">';
@@ -119,8 +118,9 @@
             echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-01'), date('yy-m-15'));
             echo '</div><div class="col">';
             echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16'), date('yy-m-t'));
-            echo '</div></div></div>';
+            echo '</div></div>';
             ?>
+                <div  style="border-top: 3px solid green;"></div></div>
             <div id="tableDiv" style="border: 1px solid green; height: 50px; width: 100%; margin-top: 10px;"><h4
                     style="text-align: center; margin-top: 5px; font-family: 'Comic Sans MS'; "> Table </h4></div>
             <table style="width: 100%; font-size:2vw; border-top: 6px solid green; margin: 5px;display: none; "

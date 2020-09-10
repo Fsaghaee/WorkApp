@@ -22,11 +22,8 @@ class DriverPageController extends Controller
                 return view('Admin/adminPage');
             } elseif (auth()->user()->company_id != 0) {
                 $slips = Payslip::all()->where('driver_id', '=', auth()->user()->id);
-                $works = DB::table('works')
-                    ->select('works.*')->orderBy('works.working_day', 'desc')
-                    ->where('works.driver_id', '=', auth()->user()->id)->get();
 
-                return view('Driver/mainPage', compact('works', 'slips'));
+                return view('Driver/mainPage', compact( 'slips'));
             }
         }
         return view('userLogin');
@@ -61,10 +58,7 @@ class DriverPageController extends Controller
         $work->wetter_temp = $response['forecast']['forecastday'][0]['day']['maxtemp_c'];
         $work->wetter_main = $response['forecast']['forecastday'][0]['day']['condition']['text'];
         $response['forecast']['forecastday'][0]['day']['condition']['icon'];
-        $work->break = $request->break;
         $work->working_account = $request->working_account;
-        $work->start_working = $request->start_working;
-        $work->end_working = $request->end_working;
         $work->location = $request->location;
         $user->works()->save($work);
         return redirect()->to('/driver');

@@ -98,7 +98,6 @@ class CompanyWorksController extends Controller
 
             }
             echo '<h2 style="text-align: center;color: red;">'.$sum.'</h2></div>';
-            echo '<div style="border-bottom: 2px solid lightgreen;"></div>';
         }
 
 

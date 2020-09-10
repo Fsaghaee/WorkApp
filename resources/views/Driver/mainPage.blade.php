@@ -10,7 +10,7 @@
 
     <div >
         <br>
-        <h2 style="font-size:10vw;">{{auth()->user()->name }}'s Page</h2>
+        <h2 style="font-size:4vw;"> Hallo {{auth()->user()->name }}</h2>
         <br>
         <?php
         function stringInsert($str, $insertstr, $pos)
@@ -23,12 +23,12 @@
         $response = json_decode($response, true);
 
         echo '<div class="row"> <div class="col">';
-        echo '<h6 style="font-size:5vw;">';
+        echo '<h6 style="font-size:3vw;">';
         echo 'Heute:  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
             ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
         echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
         echo '</h6>';
-        echo '</div><div class="col"><h6 style="font-size:5vw;">';
+        echo '</div><div class="col"><h6 style="font-size:3vw;">';
         $date = date('yy-m-d', strtotime($date . ' +1 day'));
         $Tresponse = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
         $Tresponse = json_decode($Tresponse, true);
@@ -38,27 +38,7 @@
         echo '</h6>';
         echo '</div></div>';
         ?>
-        <table style="overflow-y: scroll;width: 100%;display: block;height: 250px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">
-            <tr>
-                <th  style="padding-left: 30px;padding-right: 90px;">Day/Tag</th>
-                <th  style="padding-left: 30px;padding-right: 90px;">Orders/Bestellungen</th>
-                <th  style="padding-left: 30px;padding-right: 90px;">Account/Konto</th>
-                <th  style="padding-left: 30px;padding-right: 90px;">Location/Ort</th>
-            </tr>
-            @if(isset( $works))
-                @foreach($works as $work)
-                    <tr>
-                        <td>  {{date('m-d',strtotime( $work->working_day))}} </td>
-                        <td> {{$work->orders}} </td>
-                        <td> {{$work->working_account}} </td>
-                        <td> {{$work->location[0]}} </td>
-                    </tr>
-                @endforeach
-            @endif
-        </table>
-        <br>
 
-        <br>
         <?php
         $TempDate = array(
             date('yy-m-d', strtotime(now())) => date('M-d D', strtotime(now()))
@@ -78,12 +58,6 @@
         {!! form::label('working_account','Account/Konto :') !!}
         {!! form:: select('working_account',array(''=>'Select/Auswählen','FarzadU1'=>'FarzadU1','FarzadU2'=>'FarzadU2','FarzadU3'=>'FarzadU3','FarzadU4'=>'FarzadU4','FarzadS'=>'FarzadS')) !!}
         <br>
-        {!! form::label('start_working','Start Time/Startzeit :') !!}
-        {!! form::time('start_working',now()->setTime(11,0,0),['class'=>'form-control','style'=>'font-size:4vw;']) !!}
-        {!! form::label('end_working','End Time/Endzeit :') !!}
-        {!! form::time('end_working',now()->setTime(22,30,0),['class'=>'form-control','style'=>'font-size:4vw;']) !!}
-        {!! form::label('break','Break/Pause (Std) :') !!}
-        {!! Form::number('break', null, ['class' => 'form-control','step' => '0.5','min'=>0,'style'=>'font-size:4vw;','placeholder'=>'0.5']) !!}
         {!! form::label('location','Locations/Ort :') !!}
         {!! form:: select('location',array(''=>'Select/Auswählen','Klosterneuburg'=>'Klosterneuburg','Wien'=>'Wien')) !!}
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
