@@ -114,12 +114,43 @@
         foreach ($allDrivers as $driver) {
             echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16'), date('yy-m-t'), $driver->driver_id);
         }
-        echo '<br></div></div>';
+        echo '</div></div></div>';
 
         ?>
 
         <br>
+
+
+        <!-- shows here  -->
+        <br>
+        <div style="border-bottom: 2px solid black;"></div>
+
+        <?php
+        echo '<div class ="row">';
+        echo '<div class="col">';
+
+        echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")));
+        echo '</div><div class="col">';
+        echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-01'), date('yy-m-15'));
+        echo '</div><div class="col">';
+        echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16'), date('yy-m-t'));
+        echo '</div></div>';
+        ?>
+
+        <br>
         <div class="row">
+            <div class="col">
+                <select id="inputDay" onclick="DaySearch()" style="margin-top: 20px; font-size: 1vw;">
+                    <option value="">Select</option>
+                    <option value="Mon">Mon</option>
+                    <option value="Tue">Din</option>
+                    <option value="Wed">Mit</option>
+                    <option value="Thu">Don</option>
+                    <option value="Fri">Fri</option>
+                    <option value="Sat">Som</option>
+                    <option value="Sun">Son</option>
+                </select><br>
+            </div>
 
             <div class="col">
                 <input type="text" id="inputName" style="margin-top: 10px;" onkeyup="NameSearch()"
@@ -127,6 +158,7 @@
 
 
             </div>
+
 
             <div class="col">
                 <select id="inputLocation" onclick="LocationSearch()" style="margin-top: 20px; font-size: 1vw;">
@@ -144,6 +176,7 @@
             style="overflow-y: scroll;width: 100%;display: block;height: 350px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;"
             id="driverTable">
             <tr>
+                <th style="padding-left: 10px;">Date</th>
                 <th style="padding-left: 10px;">Day</th>
                 <th style="padding-left: 10px;">Name</th>
                 <th style="padding-left: 10px;">Location</th>
@@ -166,8 +199,10 @@
                 $workingDay = $work->working_day;
                 ?>
                 <tr style=" background-color:<?php echo $color ?>; text-align: center;">
-                    <td style="padding:7px 10px;">{{date('M-d D', strtotime($work->working_day))}} </td>
-                    <td  style="padding-left: 10px;"> {{$work->name}} </td>
+                    <td style="padding:7px 10px;">{{date('M-d', strtotime($work->working_day))}} </td>
+                    <td style="padding:7px 10px;">{{date('D', strtotime($work->working_day))}} </td>
+
+                    <td style="padding-left: 10px;"> {{$work->name}} </td>
                     <?php
                     if ($work->location == 'Klosterneuburg') {
                         echo '<td style="background-color: #6c757d;">' . $work->location[0] . '</td>';
@@ -183,7 +218,8 @@
                     <td> {{$work->wetter_temp}} </td>
                     <td>
 
-                        <form style="padding:0 30px;" action="{{ route('company-works.destroy', $work->id) }}" method="POST">
+                        <form style="padding:0 30px;" action="{{ route('company-works.destroy', $work->id) }}"
+                              method="POST">
                             @method('DELETE')
                             @csrf
                             <button style="color: red;padding-left: 25%;">X</button>
@@ -201,6 +237,25 @@
 
         <script>
 
+            function DaySearch() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("inputDay");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("driverTable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
             function NameSearch() {
                 var input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("inputName");
@@ -208,7 +263,7 @@
                 table = document.getElementById("driverTable");
                 tr = table.getElementsByTagName("tr");
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[1];
+                    td = tr[i].getElementsByTagName("td")[2];
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -227,7 +282,7 @@
                 table = document.getElementById("driverTable");
                 tr = table.getElementsByTagName("tr");
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[2];
+                    td = tr[i].getElementsByTagName("td")[3];
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -247,7 +302,7 @@
                 table = document.getElementById("driverTable");
                 tr = table.getElementsByTagName("tr");
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[3];
+                    td = tr[i].getElementsByTagName("td")[4];
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
