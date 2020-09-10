@@ -21,17 +21,17 @@ class CompanyWorksController extends Controller
             ->select('works.*', 'users.name')->orderBy('works.working_day', 'desc')
             ->where('works.company_id', '=', auth()->user()->id)->get();
 
-        $worksfirst = DB::table('works')->where('working_day', '>=', date('yy-m-01'))
-            ->where('working_day', '<=', date('yy-m-15'))->sum('orders');
+       // $worksfirst = DB::table('works')->where('working_day', '>=', date('yy-m-01'))
+         //   ->where('working_day', '<=', date('yy-m-15'))->sum('orders');
 
-        $workssecond = DB::table('works')->where('working_day', '>=', date('yy-m-16'))
-            ->where('working_day', '<=', date('yy-m-t'))->sum('orders');
+      //  $workssecond = DB::table('works')->where('working_day', '>=', date('yy-m-16'))
+    //        ->where('working_day', '<=', date('yy-m-t'))->sum('orders');
 
-        $worksLasrSecond = DB::table('works')->where('working_day', '>=', date('yy-m-16', strtotime("-1 month")))
-            ->where('working_day', '<=', date('yy-m-t', strtotime("-1 month")))->sum('orders');
+  //      $worksLasrSecond = DB::table('works')->where('working_day', '>=', date('yy-m-16', strtotime("-1 month")))
+//            ->where('working_day', '<=', date('yy-m-t', strtotime("-1 month")))->sum('orders');
 
 
-        $allDrivers = DB::table('works')->select('driver_id')->distinct()->get();
+     //   $allDrivers = DB::table('works')->select('driver_id')->distinct()->get();
 
         $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day', 'desc')->get();
         $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day', 'desc')->get();;
@@ -54,7 +54,7 @@ class CompanyWorksController extends Controller
             ->groupBy('day')->get();
 
 
-        return view('Admin/CompanyWorks', compact('allworks', 'worksfirst', 'workssecond', 'worksLasrSecond', 'allDrivers', 'klosSum', 'WienSum', 'avgKlos', 'avgWien'));
+        return view('Admin/CompanyWorks', compact('allworks','klosSum', 'WienSum', 'avgKlos', 'avgWien'));
     }
 
 

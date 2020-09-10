@@ -25,14 +25,22 @@ class AdminPageController extends Controller
                     ->join('users', 'works.driver_id', '=', 'users.id')
                     ->select('works.*', 'users.name')
                     ->where('works.company_id', '=', auth()->user()->id)->where('working_day', '=', date('yy-m-d'))->get();
+                $worksfirst = DB::table('works')->where('working_day', '>=', date('yy-m-01'))
+                    ->where('working_day', '<=', date('yy-m-15'))->sum('orders');
 
+                $workssecond = DB::table('works')->where('working_day', '>=', date('yy-m-16'))
+                    ->where('working_day', '<=', date('yy-m-t'))->sum('orders');
+
+                $worksLasrSecond = DB::table('works')->where('working_day', '>=', date('yy-m-16', strtotime("-1 month")))
+                    ->where('working_day', '<=', date('yy-m-t', strtotime("-1 month")))->sum('orders');
 
 
                 $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day')->get();
                 $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day')->get();;
+                $allDrivers = DB::table('works')->select('driver_id')->distinct()->get();
 
 
-                return view('Admin/adminPage', compact('works','klosSum','WienSum'));
+                return view('Admin/adminPage', compact('works','klosSum','WienSum','worksfirst','worksLasrSecond','workssecond','allDrivers'));
             } elseif (auth()->user()->company_id != 0) {
                 return view('Driver/mainPage');
             }

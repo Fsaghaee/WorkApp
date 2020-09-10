@@ -1,11 +1,10 @@
 @extends('Layout.pageLayout')
 @section('MainPart')
     <div style="margin-left: 20px;  border-bottom: 6px solid green;padding: 10px; ">
-        <a style="font-size:5vw; border: 2px solid green; padding: 10px;margin-right: 10px; " href="/logout"> Log
+        <a style="font-size:3vw; border: 2px solid green; padding: 10px;margin-right: 10px; " href="/logout"> Log
             out </a>
-        <a style="font-size:5vw; border: 2px solid green; padding: 10px;margin-right: 10px; " href="/admin"> Main </a>
-        <a style="font-size:5vw; border: 2px solid green; padding: 10px;margin-right: 10px; " href="/admin-drivers">
-            Drivers </a>
+        <a style="font-size:3vw; border: 2px solid green; padding: 10px;margin-right: 10px; " href="/admin"> Main </a>
+
     </div>
 @stop
 @section('centercontent')
@@ -14,12 +13,12 @@
 
         <?php
         echo '<div class="row">';
-        echo '<div class="col">';
+        echo '<div class="col-6">';
         echo '<h7>Klosterneuburg</h7>';
-        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
+        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 5px;margin: 5px;">';
         echo '<tr>';
-        echo '<th style="padding-left: 90px;padding-right: 90px;">Day</th>';
-        echo '<th style="padding-left: 90px;padding-right: 90px;">Sum</th>';
+        echo '<th style="padding-left: 10px;padding-right: 10px;">Day</th>';
+        echo '<th style="padding-left: 10px;padding-right: 10px;">Sum</th>';
         echo '</tr>';
 
         $border = "";
@@ -34,11 +33,11 @@
 
             if (($t->total * 5.4) < 60) {
                 echo '<tr>';
-                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: #57b846;' . $border . ' ">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #57b846; ' . $border . ' "> ' . $t->total . '</td>';
+                echo '<td style="padding-left: 10px;padding-right: 90px; background-color: #57b846;' . $border . ' ">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #57b846; ' . $border . ' "> ' . $t->total . '</td>';
                 echo '</tr>';
             } else {
                 echo '<tr>';
-                echo '<td style="padding-left: 90px;padding-right: 90px;' . $border . '">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;' . $border . ' "> ' . $t->total . '</td>';
+                echo '<td style="padding-left: 10px;padding-right: 90px;' . $border . '">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;' . $border . ' "> ' . $t->total . '</td>';
                 echo '</tr>';
             }
 
@@ -46,23 +45,23 @@
         }
         echo '</table>';
         echo '</div>';
-        echo '<div class="col">';
+        echo '<div class="col-6">';
 
         echo '<h7>Wien</h7>';
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
         echo '<tr style="text-align: center;">';
-        echo '<th style="padding-left: 90px;padding-right: 90px;">Day</th>';
-        echo '<th style="padding-left: 90px;padding-right: 90px;"> Sum</th>';
+        echo '<th style="padding-left: 20px;padding-right: 20px;">Day</th>';
+        echo '<th style="padding-left: 20px;padding-right: 20px;"> Sum</th>';
         echo '</tr>';
         foreach ($WienSum as $t) {
             echo '<tr>';
-            echo '<td style="padding-left: 90px;padding-right: 90px;">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . $t->total . '</td>';
+            echo '<td style="padding-left: 20px;padding-right: 20px;">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . $t->total . '</td>';
             echo '</tr>';
         }
         echo '</table>';
         echo '</div></div>';
         echo '<div class="row">';
-        echo '<div class="col">';
+        echo '<div class="col-6">';
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
 
         foreach ($avgKlos as $x) {
@@ -81,7 +80,7 @@
         }
         echo '</table>';
         echo '</div>';
-        echo '<div class="col">';
+        echo '<div class="col-6">';
         echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
         foreach ($avgWien as $x) {
             echo '<tr>';
@@ -95,46 +94,7 @@
 
         $total = 0;
         $workingDay = null;
-        echo '<div class ="row">';
-        echo '<div class="col">';
-        echo ' <br>' . date('M.16', strtotime("-1 month")) . '  -  ' . date('M.t', strtotime("-1 month")) . '<h4>' . $worksLasrSecond . '  -  ' . $worksLasrSecond * 5.4 . ' € </h4>';
-
-        foreach ($allDrivers as $driver) {
-            echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")), $driver->driver_id);
-        }
-
-        echo '</div><div class="col">';
-        echo ' <br>' . date('M.01') . '  -  ' . date('M.15') . '<h4>' . $worksfirst . '  -  ' . $worksfirst * 5.4 . ' € </h4>';
-        foreach ($allDrivers as $driver) {
-            echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-01'), date('yy-m-15'), $driver->driver_id);
-        }
-
-        echo '</div><div class="col">';
-        echo ' <br>' . date('M.16') . '  -  ' . date('M.t') . '<h4>  ' . $workssecond . '  -  ' . $workssecond * 5.4 . ' € </h4>';
-        foreach ($allDrivers as $driver) {
-            echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16'), date('yy-m-t'), $driver->driver_id);
-        }
-        echo '</div></div></div>';
-
-        ?>
-
-        <br>
-
-
-        <!-- shows here  -->
-        <br>
-        <div style="border-bottom: 2px solid black;"></div>
-
-        <?php
-        echo '<div class ="row">';
-        echo '<div class="col">';
-
-        echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")));
-        echo '</div><div class="col">';
-        echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-01'), date('yy-m-15'));
-        echo '</div><div class="col">';
-        echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16'), date('yy-m-t'));
-        echo '</div></div>';
+        $workingDay = null;
         ?>
 
         <br>
