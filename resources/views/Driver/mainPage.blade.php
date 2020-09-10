@@ -25,12 +25,12 @@
         $response = json_decode($response, true);
 
         echo '<div class="row"> <div class="col">';
-        echo '<h6 style="font-size:3vw;">';
+        echo '<h6 style="font-size:3vw; text-align: center;">';
         echo 'Heute:  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
             ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
         echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
         echo '</h6>';
-        echo '</div><div class="col"><h6 style="font-size:3vw;">';
+        echo '</div><div class="col"><h6 style="font-size:3vw;text-align: center;">';
         $date = date('yy-m-d', strtotime($date . ' +1 day'));
         $Tresponse = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
         $Tresponse = json_decode($Tresponse, true);
