@@ -51,8 +51,8 @@
         , date('yy-m-d', strtotime(now() . ' -5 day')) => date('M-d D', strtotime(now() . ' -5 day'))
         , date('yy-m-d', strtotime(now() . ' -6 day')) => date('M-d D', strtotime(now() . ' -6 day'))
         );
-        $templocation = array('' => 'Select/Auswählen', 'Klosterneuburg' => 'Klosterneuburg', 'Wien' => 'Wien');
-        $tempaccounts = array('' => 'Select/Auswählen', 'FarzadU1' => 'FarzadU1', 'FarzadU2' => 'FarzadU2', 'FarzadU3' => 'FarzadU3', 'FarzadU4' => 'FarzadU4', 'FarzadS' => 'FarzadS');
+        $templocation = array("" => 'Select/Auswählen', 'Klosterneuburg' => 'Klosterneuburg', 'Wien' => 'Wien');
+        $tempaccounts = array("" => 'Select/Auswählen', 'FarzadU1' => 'FarzadU1', 'FarzadU2' => 'FarzadU2', 'FarzadU3' => 'FarzadU3', 'FarzadU4' => 'FarzadU4', 'FarzadS' => 'FarzadS');
         ?>
         {!! Form::open(array('method'=>'POST','action'=>'DriverPageController@store','style'=>'font-size:4vw;margin: 30px;','onsubmit'=>'validateForm()')) !!}
         {!! form::label('working_day','Date/Datum :') !!}
@@ -95,9 +95,20 @@
             var orders = document.getElementById("orders").value;
             var loc = document.getElementById("location").value;
           var acc = document.getElementById("working_account").value;
-            alert(
-                'Arbeitstag : ' + wday + '\nBestellungen : ' + orders + '\nKonto : ' +acc+' \nLocation : '+loc +'\nWenn etwas nicht stimmt, wenden Sie sich bitte an Ihren Manager '
-            );
+          if( acc == "") {
+              alert('Bitte vergessen Sie nicht, ein Konto auszuwählen');
+              return false;
+          }else if(loc == ""){
+              alert('Bitte vergessen Sie nicht, einen Ort zu wählen');
+              return false;
+          } else{
+              alert(
+                  'Arbeitstag : ' + wday + '\nBestellungen : ' + orders + '\nKonto : ' +acc+' \nLocation : '+loc +'\nWenn etwas nicht stimmt, wenden Sie sich bitte an Ihren LeiterIn\n--Die Daten wurden gespeichert-- '
+              );
+              return true;
+          }
+
+
         }
 
 

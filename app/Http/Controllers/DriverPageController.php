@@ -47,6 +47,16 @@ class DriverPageController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $validatedData = $request->validate([
+            'working_day' => 'required',
+            'orders' => 'required',
+            'location' => 'required',
+            'working_account' => 'required',
+        ]);
+
+
         $user = User::findOrfail(auth()->user()->id);
         $work = new Work;
         $work->working_day = $request->working_day;
