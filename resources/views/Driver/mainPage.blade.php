@@ -45,11 +45,7 @@
         $TempDate = array(
             date('yy-m-d', strtotime(now())) => date('M-d D', strtotime(now()))
         , date('yy-m-d', strtotime(now() . ' -1 day')) => date('M-d D', strtotime(now() . ' -1 day'))
-        , date('yy-m-d', strtotime(now() . ' -2 day')) => date('M-d D', strtotime(now() . ' -2 day'))
-        , date('yy-m-d', strtotime(now() . ' -3 day')) => date('M-d D', strtotime(now() . ' -3 day'))
-        , date('yy-m-d', strtotime(now() . ' -4 day')) => date('M-d D', strtotime(now() . ' -4 day'))
-        , date('yy-m-d', strtotime(now() . ' -5 day')) => date('M-d D', strtotime(now() . ' -5 day'))
-        , date('yy-m-d', strtotime(now() . ' -6 day')) => date('M-d D', strtotime(now() . ' -6 day'))
+
         );
         $templocation = array("" => 'Select/Auswählen', 'Klosterneuburg' => 'Klosterneuburg', 'Wien' => 'Wien');
         $tempaccounts = array("" => 'Select/Auswählen', 'FarzadU1' => 'FarzadU1', 'FarzadU2' => 'FarzadU2', 'FarzadU3' => 'FarzadU3', 'FarzadU4' => 'FarzadU4', 'FarzadS' => 'FarzadS');
