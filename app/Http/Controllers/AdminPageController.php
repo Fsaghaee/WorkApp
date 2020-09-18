@@ -37,7 +37,7 @@ class AdminPageController extends Controller
 
                 $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day')->get();
                 $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day')->get();;
-                $allDrivers = DB::table('users')->select('id')->where('company_id','=',auth()->user()->id)->distinct()->get();
+                $allDrivers = DB::table('users')->select('id')->where('company_id','=',auth()->user()->id)->get();
 
 
                 return view('Admin/adminPage', compact('works','klosSum','WienSum','worksfirst','worksLasrSecond','workssecond','allDrivers'));
