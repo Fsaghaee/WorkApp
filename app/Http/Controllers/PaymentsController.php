@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Payslip;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +22,9 @@ class PaymentsController extends Controller
             ->join('users', 'payslips.driver_id', '=', 'users.id')
             ->select('payslips.*', 'users.name')
             ->where('payslips.company_id', '=', auth()->user()->id)->get();
-        return view('Admin/PaySlips', compact('payslips'));
+        $drivers = User::all()->where('company_id', (auth()->user()->id));
+
+        return view('Admin/PaySlips', compact('payslips','drivers'));
     }
 
     /**
@@ -42,7 +45,12 @@ class PaymentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file = $request->file('file');
+        $name = $request->driver_id . '_' . $request->monat . '.' . $file->getClientOriginalExtension();
+        $file->move('payslips', $name);
+        $payslip = new Payslip(['due_date' => $request->due_date, 'status' => 'payed', 'slip_file_location' => 'payslips/' . $name, 'driver_id' => $request->driver_id, 'company_id' => auth()->user()->id]);
+        $payslip->save();
+        return redirect()->to('payments');
     }
 
     /**

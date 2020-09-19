@@ -29,7 +29,6 @@ class AdminDriversController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->has('form1')) {
             $this->validate(request(), [
                 'name' => 'required',
                 'family' => 'required',
@@ -37,18 +36,12 @@ class AdminDriversController extends Controller
                 'tell' => 'required',
                 'bank_account' => 'required',
                 'email' => 'required|email',
-                'password' => 'required'
+                'password' => 'required',
+                'insurance_number' => 'required',
+                'birthday' => 'required'
             ]);
-            $user = User::create(request(['name', 'family', 'email', 'address', 'tell', 'payment_method', 'bank_account', 'password', 'company_id']));
+            $user = User::create(request(['name', 'family', 'email', 'address', 'tell', 'payment_method', 'bank_account', 'password', 'company_id','birthday','insurance_number']));
             return redirect()->to('admin-drivers');
-        } elseif ($request->has('form2')) {
-            $file = $request->file('file');
-            $name = $request->driver_id . '_' . $request->monat . '.' . $file->getClientOriginalExtension();
-            $file->move('payslips', $name);
-            $payslip = new Payslip(['due_date' => $request->due_date, 'status' => 'not payed', 'slip_file_location' => 'payslips/' . $name, 'driver_id' => $request->driver_id, 'company_id' => auth()->user()->id]);
-            $payslip->save();
-            return redirect()->to('admin-drivers');
-        }
     }
 
     public function show($id)

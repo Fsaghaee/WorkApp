@@ -20,7 +20,6 @@ class AdminPageController extends Controller
     {
         if (auth()->user()) {
             if (auth()->user()->company_id == 0) {
-                //       $works = Work::all()->where('company_id','=',auth()->user()->id);
                 $works = DB::table('works')
                     ->join('users', 'works.driver_id', '=', 'users.id')
                     ->select('works.*', 'users.name')

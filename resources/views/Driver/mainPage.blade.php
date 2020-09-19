@@ -1,14 +1,5 @@
 @extends('Layout.pageLayout')
-@section('MainPart')
-    <div style="margin-left: 20px;  border-bottom: 6px solid green;padding: 10px; ">
-        <a style="font-size:5vw; border: 2px solid green; padding: 10px; " href="/logout">Log out</a>
-    </div>
-@stop
-
-
 @section('centercontent')
-
-
 
     <div>
         <br>
@@ -39,9 +30,7 @@
         echo '<img src="' . $Tresponse['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
         echo '</h6>';
         echo '</div></div>';
-        ?>
 
-        <?php
         $TempDate = array(
             date('yy-m-d', strtotime(now())) => date('M-d D', strtotime(now()))
         , date('yy-m-d', strtotime(now() . ' -1 day')) => date('M-d D', strtotime(now() . ' -1 day'))
@@ -62,7 +51,7 @@
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('driver_id', auth()->user()->id ,['class'=>'form-control']) !!}
-        {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:5vw; padding:20px;margin: 30px;']) !!}
+        {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:4vw; background-color: gray; padding:10px 20px;margin: 30px 5px;']) !!}
         {!! Form::close() !!}
 
         <br>

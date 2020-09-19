@@ -1,12 +1,4 @@
 @extends('Layout.pageLayout')
-@section('MainPart')
-    <div style="margin-left: 20px;  border-bottom: 6px solid green;padding: 10px; ">
-        <a style="font-size:3vw; border: 2px solid green; padding: 10px;margin-right: 10px; " href="/logout"> Log
-            out </a>
-        <a style="font-size:3vw; border: 2px solid green; padding: 10px;margin-right: 10px; " href="/admin"> Main </a>
-
-    </div>
-@stop
 @section('centercontent')
     <div style="margin: 20px;">
 
@@ -15,12 +7,7 @@
         echo '<div class="row">';
         echo '<div class="col-6">';
         echo '<h7>Klosterneuburg</h7>';
-        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 5px;margin: 5px;">';
-        echo '<tr>';
-        echo '<th style="padding-left: 10px;padding-right: 10px;">Day</th>';
-        echo '<th style="padding-left: 10px;padding-right: 10px;">Sum</th>';
-        echo '</tr>';
-
+        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding:5px 15px;margin: 10px;">';
         $border = "";
         foreach ($klosSum as $t) {
 
@@ -33,11 +20,11 @@
 
             if (($t->total * 5.4) < 60) {
                 echo '<tr>';
-                echo '<td style="padding-left: 10px;padding-right: 90px; background-color: #57b846;' . $border . ' ">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #57b846; ' . $border . ' "> ' . $t->total . '</td>';
+                echo '<td  style=" padding-left: 20px;padding-right: 90px; background-color: #57b846;' . $border . ' ">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #57b846; ' . $border . ' "> ' . $t->total . '</td>';
                 echo '</tr>';
             } else {
                 echo '<tr>';
-                echo '<td style="padding-left: 10px;padding-right: 90px;' . $border . '">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;' . $border . ' "> ' . $t->total . '</td>';
+                echo '<td style="padding-left: 20px;padding-right: 90px;' . $border . '">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;' . $border . ' "> ' . $t->total . '</td>';
                 echo '</tr>';
             }
 
@@ -48,11 +35,8 @@
         echo '<div class="col-6">';
 
         echo '<h7>Wien</h7>';
-        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
-        echo '<tr style="text-align: center;">';
-        echo '<th style="padding-left: 20px;padding-right: 20px;">Day</th>';
-        echo '<th style="padding-left: 20px;padding-right: 20px;"> Sum</th>';
-        echo '</tr>';
+        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding:5px 15px;margin: 10px;">';
+
         foreach ($WienSum as $t) {
             echo '<tr>';
             echo '<td style="padding-left: 20px;padding-right: 20px;">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . $t->total . '</td>';
@@ -130,16 +114,6 @@
                 <table
                     style="overflow-y: scroll;width: 100%;display: block;height: 350px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;"
                     id="driverTable">
-                    <tr>
-                        <th style="padding-left: 10px;">Date</th>
-                        <th style="padding-left: 10px;">Day</th>
-                        <th style="padding-left: 10px;">Name</th>
-                        <th style="padding-left: 10px;">Location</th>
-                        <th style="padding-left: 10px;">Account</th>
-                        <th style="border-left: #000000 2px solid; padding-left: 5px;"> Orders</th>
-                        <th style="padding-left: 10px;">Weather</th>
-                        <th style="padding-left: 10px;">Temp</th>
-                    </tr>
 
                     @foreach($allworks as $work)
                         <?php
@@ -155,16 +129,16 @@
                             <td style="padding:7px 10px;">{{date('M-d', strtotime($work->working_day))}} </td>
                             <td style="padding:7px 10px;">{{date('D', strtotime($work->working_day))}} </td>
 
-                            <td style="padding-left: 10px;"> {{$work->name}} </td>
+                            <td style="padding:0 10px;"> {{$work->name}} </td>
                             <?php
                             if ($work->location == 'Klosterneuburg') {
-                                echo '<td style="background-color: #6c757d;">' . $work->location[0] . '</td>';
+                                echo '<td style="background-color: #6c757d;padding:0 10px;">' . $work->location[0] . '</td>';
                             } elseif ($work->location == 'Wien') {
-                                echo '<td style="background-color: #1e7e34;">' . $work->location[0] . '</td>';
+                                echo '<td style="background-color: #1e7e34;padding:0 10px;">' . $work->location[0] . '</td>';
                             }
                             ?>
-                            <td> {{$work->working_account}} </td>
-                            <td style="border-left: #000000 2px solid;"> {{$work->orders}} </td>
+                            <td style="padding: 0 10px;"> {{$work->working_account}} </td>
+                            <td style="border-left: #000000 2px solid;padding: 0 10px;"> {{$work->orders}} </td>
                             <td> {{$work->wetter_main}} </td>
                             <td> {{$work->wetter_temp}} </td>
                             <td>
