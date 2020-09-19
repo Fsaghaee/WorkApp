@@ -4,7 +4,7 @@
     <div style="margin: 20px;">
         <h5 style="font-size:5vw;"> {{auth()->user()->name }}'s Drivers :</h5>
         <br>
-        <table style="width: 98%; font-size:1.2vw; border-top: 6px solid green ;margin:5px 0; text-align: center;">
+        <table style="width: 98%; font-size:1vw; border-top: 6px solid green ;margin:5px 0; text-align: center;">
 
             @foreach($drivers as $driver)
                 <tr>
