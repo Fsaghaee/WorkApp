@@ -31,7 +31,7 @@ class CompanyWorksController extends Controller
 //            ->where('working_day', '<=', date('yy-m-t', strtotime("-1 month")))->sum('orders');
 
 
-     //   $allDrivers = DB::table('works')->select('driver_id')->distinct()->get();
+     //
 
         $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day', 'desc')->get();
         $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day', 'desc')->get();;

@@ -8,18 +8,18 @@
     $dataPoints02 = array();
 
     foreach ($klosSum as $k) {
-        array_push($dataPoints01, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day)),"color"=>"black"));
+        array_push($dataPoints01, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day)), "color" => "black"));
 
     }
     foreach ($WienSum as $k) {
-        array_push($dataPoints02, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day)),"color"=>"black"));
+        array_push($dataPoints02, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day)), "color" => "black"));
 
     }
 
     ?>
 
     <div style="margin: 5px;">
-        <div style="margin: 0;width: 100%; background-color: gray; width: 100%; height: 50px;color: white;" >
+        <div style="margin: 0;width: 100%; background-color: gray; width: 100%; height: 50px;color: white;">
 
             <div id="summeryDiv" style="padding: 10px; display: inline-block;"><h4> Summery </h4></div>
             <div id="tableDiv" style=" display: inline-block;padding: 10px; "><h4> Table </h4></div>
@@ -54,36 +54,91 @@
             <div class="row">
                 <div class="col">
                     <?php
-
-
                     echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")));
                     echo '</div><div class="col">';
                     echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-01'), date('yy-m-15'));
                     echo '</div><div class="col">';
                     echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16'), date('yy-m-t'));
-
                     ?>
                 </div>
             </div>
-
         </div>
+        <div id="Table" style="display: none;">
 
-        <table style="width: 100%; font-size:2vw; border-top: 6px solid darkgray; margin:0;display: none;padding: 0 10px;color: white;background-color: gray;min-height: 50px; " id="Table">
+            <?php
+            $locat = array();
+            foreach ($locations as $loc) {
+                array_push($locat, $loc->location);
+            }
 
-            @if($works)
-                @foreach($works as $work)
-                    <tr>
-                        <td> {{$work->orders}} </td>
-                        <td> {{$work->name}}</td>
-                        <td> {{$work->location[0]}} </td>
-                        <td> {{$work->wetter_main}} </td>
-                        <td> {{$work->wetter_temp}} </td>
-                    </tr>
+            //array('Klosterneuburg', 'Wien', 'Tulln');
+            $Days = array('Mon', 'Din', 'Mit', 'Don', 'Fri', 'Sam', 'Sun');
+            ?>
 
 
-                @endforeach
-            @endif
-        </table>
+            <table width="100%;">
+
+                <tr>
+                    <th style="text-align: center;"> Day</th>
+                    <?php
+                    for ($x = 0; $x < count($locat); $x++) {
+                        $temp = substr($locat[$x], 0, 4);
+                        echo " <th style=\"text-align: center;\">$temp - VorM.</th><th style=\"text-align: center;\"> $temp - NachM.</th>";
+                    }
+                    ?>
+
+                </tr>
+
+                <?php
+                for ($i = 0; $i < count($Days); $i++) {
+                    echo "<tr style='border-bottom: 1px solid black;'>";
+                    echo "<td> $Days[$i]</td>";
+
+                    for ($j = 0; $j < count($locat); $j++) {#
+                        echo "<td>";
+                        $tempinput = $locat[$j] . 'v' . $Days[$i];
+
+                        echo " <div id='$tempinput'>";
+                        echo "<input type=\"button\" value=\" + \" onClick=\"addNew('$tempinput');\" style='width: 95%;margin:0 5px; border: 1px solid lightgray; background-color: lightgray;border-radius: 15px;'>";
+                        echo "</div>";
+                        echo "</td>";
+                        echo "<td>";
+
+
+                        $tempinput = $locat[$j] . 'n' . $Days[$i];
+                        echo " <div id='$tempinput'>";
+                        echo "<input type=\"button\" value=\" + \" onClick=\"addNew('$tempinput');\"style='width: 95%;margin: 5px; border: 1px solid lightgray;background-color: lightgray;border-radius: 15px;'>";
+                        echo "</div>";
+                        echo "</td>";
+
+                    }
+
+                    echo "</tr>";
+                }
+
+
+                ?>
+
+            </table>
+
+
+            <table
+                style="width: 100%; font-size:2vw; border-top: 6px solid darkgray; margin:0;padding: 0 10px;color: white;background-color: gray;min-height: 50px;">
+                @if($works)
+                    @foreach($works as $work)
+                        <tr>
+                            <td> {{$work->orders}} </td>
+                            <td> {{$work->name}}</td>
+                            <td> {{$work->location[0]}} </td>
+                            <td> {{$work->wetter_main}} </td>
+                            <td> {{$work->wetter_temp}} </td>
+                        </tr>
+
+
+                    @endforeach
+                @endif
+            </table>
+        </div>
         <div class="row">
 
             <div class="col">
@@ -124,12 +179,61 @@
     </div>
 
     <script>
+        function addNew(pos) {
+
+            var mainContainer = document.getElementById(pos);
+            var newDiv = document.createElement('div');
+            var newDropdown = document.createElement('select');
+            newDropdown.style.height = "40px";
+            newDropdown.style.float = "left";
+           // newDropdown.style.minWidth = "75% !important";
+            newDropdown.setAttribute('style','min-width: 75% !important;margin-left:5px;');
+            newDropdown.style.fontSize = "2vw";
+            newDropdown.style.padding = "5px";
+            newDropdown.style.top = "0";
+            newDropdown.style.borderRadius = "15px";
+            newDropdown.style.backgroundColor = "gray";
+            newDropdown.style.color = "white";
+                <?php
+                $z = 1;
+                foreach ($allDrivers as $driver) {
+                    echo "
+           newDropdownOption$z = document.createElement('option');
+           newDropdownOption$z.value = '$driver->name';
+           newDropdownOption$z.text = '$driver->name';
+           newDropdown.add(newDropdownOption$z);
+        ";
+                    $z++;
+                }
+                ?>
+            var newAddButton = document.createElement('input');
+            newAddButton.type = "button";
+            newAddButton.value = " + ";
+            var newDelButton = document.createElement('input');
+            newDelButton.type = "button";
+            newDelButton.value = " - ";
+            newDelButton.style.width = "30px";
+
+            newDelButton.style.borderRadius = "15px";
+            newDelButton.style.height = "30px";
+            newDelButton.style.backgroundColor = "lightsteelblue";
+            newDelButton.style.margin = " 0 5px";
+            newDelButton.style.float = "right";
+            newDiv.appendChild(newDropdown);
+            newDiv.appendChild(newDelButton);
+            mainContainer.appendChild(newDiv);
+            newAddButton.onclick = addNew;
+            newDelButton.onclick = function () {
+                mainContainer.removeChild(newDiv);
+            };
+        }
+
         window.onload = function () {
 
             var chart01 = new CanvasJS.Chart("Kloster", {
                 title: {
                     text: "Klosterneuburg"
-                },backgroundColor: "gray",
+                }, backgroundColor: "gray",
                 axisX: {
                     gridThickness: 0,
                     tickLength: 0,
@@ -144,7 +248,7 @@
                 },
                 data: [{
                     type: "area",
-                    color:"white",
+                    color: "white",
                     dataPoints:<?php echo json_encode($dataPoints01, JSON_NUMERIC_CHECK); ?>
                 }]
             });
@@ -155,8 +259,6 @@
                 backgroundColor: "gray",
 
 
-
-
                 axisX: {
                     gridThickness: 0,
                     tickLength: 0,
@@ -171,7 +273,7 @@
                 },
                 data: [{
                     type: "area",
-                    color:"white",
+                    color: "white",
                     dataPoints: <?php echo json_encode($dataPoints02, JSON_NUMERIC_CHECK); ?>
                 }]
             });
