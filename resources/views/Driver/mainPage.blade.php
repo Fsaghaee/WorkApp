@@ -3,7 +3,7 @@
 
     <div>
         <br>
-        <h2 style="font-size:4vw;"> Hallo {{auth()->user()->name }}</h2>
+        <h2 style="font-size:4vw;color: white; text-align: center;"> Hallo {{auth()->user()->name }}</h2>
         <br>
         <?php
         function stringInsert($str, $insertstr, $pos)
@@ -15,7 +15,7 @@
         $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
         $response = json_decode($response, true);
 
-        echo '<div class="row"> <div class="col">';
+        echo '<div class="row" style="color: white;"> <div class="col">';
         echo '<h6 style="font-size:3vw; text-align: center;">';
         echo 'Heute:  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
             ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
@@ -51,7 +51,7 @@
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('driver_id', auth()->user()->id ,['class'=>'form-control']) !!}
-        {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:4vw; background-color: gray; padding:10px 20px;margin: 30px 5px;']) !!}
+        {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:4vw; background-color: lightblue;color:black; padding:10px 20px;margin: 30px 5px;']) !!}
         {!! Form::close() !!}
 
         <br>
@@ -63,7 +63,7 @@
                 @foreach($slips as $slip)
                     <tr>
                         <td>
-                            <a style="font-size:5vw;"
+                            <a style="font-size:5vw;color: lightblue;"
                                href=" {{$slip->slip_file_location}}">   <?php echo str_replace(auth()->user()->id . '_', '', str_replace('.pdf', '', str_replace('payslips/', '', $slip->slip_file_location))); ?></a>
                         </td>
                     </tr>

@@ -27,6 +27,9 @@
 
 </head>
 <style>
+    body html{
+        font-family: Raleway-Regular, sans-serif !important;
+    }
     .dropbtn {
         background-color: gray;
         color: white;
@@ -74,22 +77,25 @@
     .show {
         display: block;
     }
+    ::-webkit-scrollbar {
+        width: 1px;
+    }
 </style>
-<body>
-<div class="container-fluid">
+<body style="background-color: gray;">
+<div class="container-fluid" style="background-color: gray;">
     <?php setlocale(LC_TIME, "de_DE"); ?>
 
 
     <div class="dropdown">
-        <button onclick="dropdownMenu()" class="dropbtn">Menu</button>
-        <div id="myDropdown" class="dropdown-content">
+        <button onclick="dropdownMenu()" class="dropbtn" style="background-color: slategray;" >Menu</button>
+        <div id="myDropdown" class="dropdown-content" style="background-color: lightgray;color: white;">
             <?php
             if (auth()->user()) {
                 if (auth()->user()->company_id == 0) {
                     ?>
                      <a style='font-size:2.2vw;font-weight: bold; padding: 10px;' href='/admin'> Main </a>
                    <a style='font-size:2vw; padding: 10px; ' href='{{route("company-works.index")}}'> All orders </a>
-                    <a style='font-size:2vw;  padding: 10px ;  ' href='{{route('admin-drivers.index')}}'> Drivers </a>
+                    <a style='font-size:2vw;  padding: 10px ;   ' href='{{route('admin-drivers.index')}}'> Drivers </a>
                     <a style='font-size:2vw;  padding: 10px;' href=' {{route('payments.index')}}'> Pay Slips </a>
                 <?php
                 }

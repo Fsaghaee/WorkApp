@@ -1,13 +1,13 @@
 @extends('Layout.pageLayout')
 @section('centercontent')
-    <div style="margin: 20px;">
+    <div style="margin:0 5px;background-color: gray;color: white;">
 
 
         <?php
-        echo '<div class="row">';
-        echo '<div class="col-6">';
-        echo '<h7>Klosterneuburg</h7>';
-        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding:5px 15px;margin: 10px;">';
+        echo '<div class="row" style="text-align: center;">';
+        echo '<div class="col-6" >';
+        echo '<h7 style="font-weight:600;">Klosterneuburg</h7>';
+        echo '<table style="overflow-y: scroll;  width: 100%;display: block;height: 150px; text-align: center !important;padding:5px 15px;margin: 10px;">';
         $border = "";
         foreach ($klosSum as $t) {
 
@@ -34,8 +34,8 @@
         echo '</div>';
         echo '<div class="col-6">';
 
-        echo '<h7>Wien</h7>';
-        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding:5px 15px;margin: 10px;">';
+        echo '<h7 style="font-weight:600;">Wien</h7>';
+        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;text-align: center !important;padding:5px 15px;margin: 10px;">';
 
         foreach ($WienSum as $t) {
             echo '<tr>';
@@ -46,17 +46,17 @@
         echo '</div></div>';
         echo '<div class="row">';
         echo '<div class="col-6">';
-        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 5px;">';
+        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px; text-align: center !important;padding: 10px;margin: 5px;">';
 
         foreach ($avgKlos as $x) {
 
             if (round($x->av, 2) < 14.8) {
                 echo '<tr>';
-                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: greenyellow;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: greenyellow;"> ' . round($x->av, 2) . '</td>';
+                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: slategray;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: slategray;"> ' . round($x->av, 2) . '</td>';
                 echo '</tr>';
             } else {
                 echo '<tr>';
-                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: #b1dfbb;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #b1dfbb;"> ' . round($x->av, 2) . '</td>';
+                echo '<td style="padding-left: 90px;padding-right: 90px; background-color: #117a8b;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #117a8b;"> ' . round($x->av, 2) . '</td>';
                 echo '</tr>';
             }
 
@@ -65,7 +65,7 @@
         echo '</table>';
         echo '</div>';
         echo '<div class="col-6">';
-        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;">';
+        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;text-align: center !important;padding: 10px;margin: 10px;">';
         foreach ($avgWien as $x) {
             echo '<tr>';
             echo '<td style="padding-left: 90px;padding-right: 90px;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . round($x->av, 2) . '</td>';
@@ -84,7 +84,7 @@
         <br>
         <div class="row">
             <div class="col-3">
-                <select id="inputDay" onclick="DaySearch()" style="margin-top: 20px; font-size: 1vw;">
+                <select id="inputDay" onclick="DaySearch()" style="margin-top: 20px; background-color: gray;color: white;padding-left: 15px; font-size: 1vw;margin-left: 5px;">
                     <option value="">Select</option>
                     <option value="Mon">Mon</option>
                     <option value="Tue">Din</option>
@@ -96,23 +96,21 @@
                 </select><br>
 
 
-                <input type="text" id="inputName" style="margin-top: 10px;" onkeyup="NameSearch()"
-                       placeholder="Name"/><br>
+                <input type="text" id="inputName" style="padding-left: 15px; margin-top: 10px; background-color: gray;color: white;margin-left: 5px;" onkeyup="NameSearch()" placeholder="Name"/><br>
 
 
-                <select id="inputLocation" onclick="LocationSearch()" style="margin-top: 20px; font-size: 1vw;">
+                <select id="inputLocation" onclick="LocationSearch()" style="margin-top: 20px; font-size: 1vw;background-color: gray;margin-left: 5px;color: white;padding-left: 15px;">
                     <option value="">Select</option>
                     <option value="K">Klosterneuburg</option>
                     <option value="W">Wien</option>
                 </select><br>
 
 
-                <input type="text" style="margin-top: 20px;" id="inputAccount" onkeyup="AccountSearch()"
-                       placeholder="Account"/>
+                <input type="text" style="margin-top: 20px;background-color: gray;margin-left: 5px;color: white;padding-left: 15px;" id="inputAccount" onkeyup="AccountSearch()" placeholder="Account"/>
             </div>
             <div class="col-9">
                 <table
-                    style="overflow-y: scroll;width: 100%;display: block;height: 350px;border: 2px solid green;border-radius: 5px; text-align: center !important;padding: 10px;margin: 10px;"
+                    style="overflow-y: scroll;width: 95%;display: block;height: 350px;background-color: gray; text-align: center !important;padding: 10px;margin: 10px;"
                     id="driverTable">
 
                     @foreach($allworks as $work)
@@ -121,7 +119,7 @@
                         if (date('D', strtotime($work->working_day)) == 'Sun' || date('D', strtotime($work->working_day)) == 'Sat') {
                             $color = '#57b846';
                         } else {
-                            $color = 'white';
+                            $color = 'gray';
                         }
                         $workingDay = $work->working_day;
                         ?>
@@ -146,7 +144,7 @@
                                       method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <button style="color: red;padding-left: 25%;">X</button>
+                                    <button style="color: lightgray;padding-left: 25%;">X</button>
                                 </form>
 
 

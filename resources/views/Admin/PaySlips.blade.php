@@ -53,7 +53,7 @@
 
                 <td>{{$pay->name}}</td>
 
-                <td><a style="font-size:2vw;"
+                <td><a style="font-size:2vw;color: lightblue;"
                        href="{{ $pay->slip_file_location }}"><?php echo str_replace($pay->driver_id . '_', '', str_replace('.pdf', '', str_replace('payslips/', '', $pay->slip_file_location))); ?></a>
                 </td>
                 <td> {{$pay->status }}</td>
@@ -61,7 +61,7 @@
                 <td>
                     {!! Form::open(['method' => 'DELETE',
       'route' => ['payments.destroy', $pay->id]]) !!}
-                    {!! Form::submit('X',['style'=>'cursor: pointer; width: 40px;font-weight: bold;color: red;']) !!}
+                    {!! Form::submit('X',['style'=>'cursor: pointer; width: 40px;font-weight: bold;color: red; background-color: gray;']) !!}
                     {!! Form::close() !!}
 
                 </td>

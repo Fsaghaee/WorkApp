@@ -37,7 +37,7 @@
 						Account Login
 					</span>
                     <span class="txt1 p-b-11">
-						Username
+						Email
 					</span>
                     <div class="wrap-input100 validate-input m-b-36" data-validate="Username is required">
                         <input type="email" class="input100" id="login" name="email" placeholder="Email">
@@ -57,7 +57,7 @@
                         <button type="submit" class="login100-form-btn">Log in</button>
                     </div>
                 </form>
-                <div id="formFooter">
+                <div id="formFooter" style="margin-top: 60px;text-align: center;">
                     <a href="/register" class="underlineHover"> Register new Company </a>
                 </div>
             </div>

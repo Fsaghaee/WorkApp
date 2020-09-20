@@ -4,19 +4,15 @@
     <div style="margin: 20px;">
         <h5 style="font-size:5vw;"> {{auth()->user()->name }}'s Drivers :</h5>
         <br>
-        <table style="width: 98%; font-size:1vw; border-top: 6px solid green ;margin:5px 0; text-align: center;">
+        <div style="border-top: 6px solid lightgray ;"></div>
+        <table style="width: 98%; font-size:1vw; margin:5px 0; text-align: center;color: white;padding-top: 5px;">
 
             @foreach($drivers as $driver)
                 <tr>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->name}} </td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->family}} </td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->address}}</td>
-
-
                     <td style="border-bottom: 1px dotted gray;">  <?php echo strstr($driver->tell, '6'); ?></td>
-
-
-
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->bank_account}}</td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->email}}</td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->birthday}}</td>

@@ -8,19 +8,82 @@
     $dataPoints02 = array();
 
     foreach ($klosSum as $k) {
-        array_push($dataPoints01, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day))));
+        array_push($dataPoints01, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day)),"color"=>"black"));
 
     }
     foreach ($WienSum as $k) {
-        array_push($dataPoints02, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day))));
+        array_push($dataPoints02, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day)),"color"=>"black"));
 
     }
 
-
     ?>
 
-    <div style="margin: 20px;">
+    <div style="margin: 5px;">
+        <div style="margin: 0;width: 100%; background-color: gray; width: 100%; height: 50px;color: white;" >
 
+            <div id="summeryDiv" style="padding: 10px; display: inline-block;"><h4> Summery </h4></div>
+            <div id="tableDiv" style=" display: inline-block;padding: 10px; "><h4> Table </h4></div>
+        </div>
+
+
+        <div id="summery" style=" display: none;width: 100%; background-color: gray;padding:0 10px;color: white;">
+            <br>
+            <div class="row" style="text-align: center;padding-bottom: 5px;">
+                <div class="col">
+                    <?php
+                    echo ' <br>' . date('M.16', strtotime("-1 month")) . '  -  ' . date('M.t', strtotime("-1 month")) . '<h4>' . $worksLasrSecond . '  -  ' . $worksLasrSecond * 5.4 . ' € </h4>';
+                    foreach ($allDrivers as $driver) {
+                        echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")), $driver->id);
+                    }
+                    echo '</div><div class="col">';
+                    echo ' <br>' . date('M.01') . '  -  ' . date('M.15') . '<h4>' . $worksfirst . '  -  ' . $worksfirst * 5.4 . ' € </h4>';
+                    foreach ($allDrivers as $driver) {
+                        echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-01'), date('yy-m-15'), $driver->id);
+                    }
+
+                    echo '</div><div class="col">';
+                    echo ' <br>' . date('M.16') . '  -  ' . date('M.t') . '<h4>  ' . $workssecond . '  -  ' . $workssecond * 5.4 . ' € </h4>';
+                    foreach ($allDrivers as $driver) {
+                        echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16'), date('yy-m-t'), $driver->id);
+                    }
+
+                    ?>
+                </div>
+            </div>
+            <div style="border-bottom: 2px solid darkgray;margin-top: 0px;"></div>
+            <div class="row">
+                <div class="col">
+                    <?php
+
+
+                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")));
+                    echo '</div><div class="col">';
+                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-01'), date('yy-m-15'));
+                    echo '</div><div class="col">';
+                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16'), date('yy-m-t'));
+
+                    ?>
+                </div>
+            </div>
+
+        </div>
+
+        <table style="width: 100%; font-size:2vw; border-top: 6px solid darkgray; margin:0;display: none;padding: 0 10px;color: white;background-color: gray;min-height: 50px; " id="Table">
+
+            @if($works)
+                @foreach($works as $work)
+                    <tr>
+                        <td> {{$work->orders}} </td>
+                        <td> {{$work->name}}</td>
+                        <td> {{$work->location[0]}} </td>
+                        <td> {{$work->wetter_main}} </td>
+                        <td> {{$work->wetter_temp}} </td>
+                    </tr>
+
+
+                @endforeach
+            @endif
+        </table>
         <div class="row">
 
             <div class="col">
@@ -58,80 +121,6 @@
         </div>
 
 
-        <div style="margin-top: 20px;width: 100%;">
-
-            <div id="summeryDiv" style="border: 1px solid green; height: 50px; width: 49%; float: left;"><h4
-                    style="text-align: center; margin-top: 5px; font-family: 'Comic Sans MS'; "> Summery </h4></div>
-            <div id="tableDiv" style="border: 1px solid green; height: 50px; width: 49%; float: right;"><h4
-                    style="text-align: center; margin-top: 5px; font-family: 'Comic Sans MS'; "> Table </h4></div>
-        </div>
-        <div id="summery" style="margin-top: 10px;margin-bottom: 50px; display: none;width: 100%">
-            <br>
-            <div class="row">
-                <div class="col">
-                    <?php
-
-                    echo ' <br>' . date('M.16', strtotime("-1 month")) . '  -  ' . date('M.t', strtotime("-1 month")) . '<h4>' . $worksLasrSecond . '  -  ' . $worksLasrSecond * 5.4 . ' € </h4>';
-                    foreach ($allDrivers as $driver) {
-                        echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")), $driver->id);
-                    }
-                    echo '</div><div class="col">';
-                    echo ' <br>' . date('M.01') . '  -  ' . date('M.15') . '<h4>' . $worksfirst . '  -  ' . $worksfirst * 5.4 . ' € </h4>';
-                    foreach ($allDrivers as $driver) {
-                        echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-01'), date('yy-m-15'), $driver->id);
-                    }
-
-                    echo '</div><div class="col">';
-                    echo ' <br>' . date('M.16') . '  -  ' . date('M.t') . '<h4>  ' . $workssecond . '  -  ' . $workssecond * 5.4 . ' € </h4>';
-                    foreach ($allDrivers as $driver) {
-                        echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16'), date('yy-m-t'), $driver->id);
-                    }
-
-                    ?>
-                </div>
-            </div>
-            <div style="border-bottom: 2px solid green;margin-top: 10px;"></div>
-            <div class="row">
-                <div class="col">
-                    <?php
-
-
-                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")));
-                    echo '</div><div class="col">';
-                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-01'), date('yy-m-15'));
-                    echo '</div><div class="col">';
-                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16'), date('yy-m-t'));
-
-                    ?>
-                </div>
-            </div>
-
-        </div>
-
-        <table
-            style="width: 97%; font-size:2vw; border-top: 6px solid green; margin:100px 15px;display: none;padding: 0 30px; "
-            id="Table">
-            <tr>
-                <th> Orders</th>
-                <th> Name</th>
-                <th> Location</th>
-                <th> Weather</th>
-                <th> Temp</th>
-            </tr>
-            @if($works)
-                @foreach($works as $work)
-                    <tr>
-                        <td> {{$work->orders}} </td>
-                        <td> {{$work->name}}</td>
-                        <td> {{$work->location[0]}} </td>
-                        <td> {{$work->wetter_main}} </td>
-                        <td> {{$work->wetter_temp}} </td>
-                    </tr>
-
-
-                @endforeach
-            @endif
-        </table>
     </div>
 
     <script>
@@ -140,7 +129,7 @@
             var chart01 = new CanvasJS.Chart("Kloster", {
                 title: {
                     text: "Klosterneuburg"
-                },
+                },backgroundColor: "gray",
                 axisX: {
                     gridThickness: 0,
                     tickLength: 0,
@@ -155,13 +144,19 @@
                 },
                 data: [{
                     type: "area",
-                    dataPoints: <?php echo json_encode($dataPoints01, JSON_NUMERIC_CHECK); ?>
+                    color:"white",
+                    dataPoints:<?php echo json_encode($dataPoints01, JSON_NUMERIC_CHECK); ?>
                 }]
             });
             var chart02 = new CanvasJS.Chart("wien", {
                 title: {
                     text: "Wien"
                 },
+                backgroundColor: "gray",
+
+
+
+
                 axisX: {
                     gridThickness: 0,
                     tickLength: 0,
@@ -176,6 +171,7 @@
                 },
                 data: [{
                     type: "area",
+                    color:"white",
                     dataPoints: <?php echo json_encode($dataPoints02, JSON_NUMERIC_CHECK); ?>
                 }]
             });

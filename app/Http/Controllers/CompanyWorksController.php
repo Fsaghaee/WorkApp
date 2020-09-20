@@ -68,11 +68,11 @@ class CompanyWorksController extends Controller
 
 
         if ($this->getDriverName($driver) == "Reza") {
-            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: #1e7e34;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">' . $worksLasrSecond * 4 . ' €  ( ' . $worksLasrSecond * 1.3 . ' €)</span></h6>';
+            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: white;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">' . $worksLasrSecond * 4 . ' €  ( ' . $worksLasrSecond * 1.3 . ' €)</span></h6>';
         } elseif ($this->getDriverName($driver) == "Farzad") {
-            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: #1e7e34;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">' . $worksLasrSecond * 5.4 . ' €</span></h6>';
+            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: white;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">' . $worksLasrSecond * 5.4 . ' €</span></h6>';
         } else {
-            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: #1e7e34;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">' . $worksLasrSecond * 4 . ' €  ( ' . $worksLasrSecond * 1.4 . ' €)</span></h6>';
+            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: white;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">' . $worksLasrSecond * 4 . ' €  ( ' . $worksLasrSecond * 1.4 . ' €)</span></h6>';
         }
 
     }
@@ -89,7 +89,7 @@ class CompanyWorksController extends Controller
             $worksLasrSecond = DB::table('works')->select('working_account', DB::raw('sum(orders) as total'))->where('working_day', '>=', $first)
                 ->where('working_day', '<=', $second)->where('location', '=', $location->location)->groupBy('working_account')->get();
             $sum = 0;
-            echo '<h3  style="text-align: center;color: green;">' . $location->location . '</h3><br>';
+            echo '<h3  style="text-align: center;color: white;">' . $location->location . '</h3><br>';
             foreach ($worksLasrSecond as $a) {
                 echo '<h4  style="text-align: center;color: black;">' . $a->working_account . ' : ' . $a->total . '</h4>';
                 $sum += $a->total;
