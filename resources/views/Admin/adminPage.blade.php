@@ -6,7 +6,13 @@
     <script>
         function doCapture() {
             window.scrollTo(0, 0);
-            html2canvas(document.getElementById('Table')).then(function (canvas) {
+            html2canvas(document.getElementById('Table'),{
+                ignoreElements: function( element ) {
+                    if( 'button' == element.type || "ignoredTable"==element.id) {
+                        return true;
+                    }
+                }
+            }).then(function (canvas) {
                 var img = document.createElement('a');
                 img.href = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream');
                 // Name of downloaded file
@@ -120,7 +126,7 @@
                 }
                 ?>
             </table>
-            <table
+            <table id="ignoredTable"
                 style="width: 100%; font-size:2vw; border-top: 6px solid darkgray; margin:0;padding: 0 10px;color: white;background-color: gray;min-height: 50px;">
                 @if($works)
                     @foreach($works as $work)
