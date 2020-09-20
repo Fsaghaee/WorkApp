@@ -2,6 +2,24 @@
 
 @section('centercontent')
 
+    <script src="js/html2canvas.js"></script>
+    <script>
+        function doCapture() {
+            window.scrollTo(0, 0);
+            html2canvas(document.getElementById('Table')).then(function (canvas) {
+                var img = document.createElement('a');
+                img.href = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream');
+                // Name of downloaded file
+                var today = new Date();
+                img.download =today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+`.jpg`;
+                img.click();
+            });
+        }
+
+
+    </script>
+
+
     <?php
 
     $dataPoints01 = array();
@@ -65,7 +83,8 @@
             </div>
         </div>
 
-        <div id="Table" style="display: none;">
+        <div id="Table" style="display: none;padding: 10px;">
+            <button onclick="doCapture()" style="border: 1px solid lightgray;padding: 5px;border-radius: 5px;">Dinstplan von <?php echo date('yy-M-d'); ?></button>
             <table style="width: 100%;">
                 <tr>
                     <th style="text-align: center;"> Day</th>
@@ -152,7 +171,7 @@
 
             var mainContainer = document.getElementById(pos);
             var newDiv = document.createElement('div');
-            newDiv.style.marginBottom="5px";
+            newDiv.style.marginBottom = "5px";
             var newDropdown = document.createElement('select');
 
             newDropdown.style.float = "left";
