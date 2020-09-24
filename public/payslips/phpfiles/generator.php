@@ -31,7 +31,7 @@ $result = curl_exec($ch);
 $element01= 'style="color:#1abc9c">';
 
 $temp = get_string_between($result,$element01,"<");
-echo $temp;
+echo $result;
 if($temp != 407) {
    // telegram($temp);
 }
