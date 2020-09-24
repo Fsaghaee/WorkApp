@@ -7,7 +7,8 @@
         echo '<div class="row" style="text-align: center;">';
         echo '<div class="col-6" >';
         echo '<h7 style="font-weight:600;">Klosterneuburg</h7>';
-        echo '<table style="overflow-y: scroll;  width: 100%;display: block;height: 150px; text-align: center !important;padding:5px 15px;margin: 10px;">';
+        echo '<div  style="overflow-y: scroll;display: block;height: 230px;">';
+        echo '<table style="width: 100%; text-align: center !important;padding: 10px;margin: 5px;">';
         $border = "";
         foreach ($klosSum as $t) {
 
@@ -32,22 +33,23 @@
         }
         echo '</table>';
         echo '</div>';
+        echo '</div>';
         echo '<div class="col-6">';
 
         echo '<h7 style="font-weight:600;">Wien</h7>';
-        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 150px;text-align: center !important;padding:5px 15px;margin: 10px;">';
-
+        echo '<div  style="overflow-y: scroll;display: block;height: 230px;">';
+        echo '<table style="width: 100%; text-align: center !important;padding: 10px;margin: 5px;">';
         foreach ($WienSum as $t) {
             echo '<tr>';
             echo '<td style="padding-left: 20px;padding-right: 20px;">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . $t->total . '</td>';
             echo '</tr>';
         }
         echo '</table>';
-        echo '</div></div>';
+        echo '</div></div></div>';
         echo '<div class="row">';
         echo '<div class="col-6">';
-        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px; text-align: center !important;padding: 10px;margin: 5px;">';
-
+        echo '<div  style="overflow-y: scroll;display: block;height: 190px;">';
+        echo '<table style="width: 100%; text-align: center !important;padding: 10px;margin: 5px;">';
         foreach ($avgKlos as $x) {
 
             if (round($x->av, 2) < 14.8) {
@@ -63,9 +65,10 @@
 
         }
         echo '</table>';
-        echo '</div>';
+        echo '</div></div>';
         echo '<div class="col-6">';
-        echo '<table style="overflow-y: scroll;width: 100%;display: block;height: 195px;text-align: center !important;padding: 10px;margin: 10px;">';
+        echo '<div  style="overflow-y: scroll;display: block;height: 190px;">';
+        echo '<table style="width: 100%; text-align: center !important;padding: 10px;margin: 5px;">';
         foreach ($avgWien as $x) {
             echo '<tr>';
             echo '<td style="padding-left: 90px;padding-right: 90px;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . round($x->av, 2) . '</td>';
@@ -73,7 +76,7 @@
 
         }
         echo '</table>';
-        echo '</div></div>';
+        echo '</div></div></div>';
 
 
         $total = 0;
@@ -84,7 +87,8 @@
         <br>
         <div class="row">
             <div class="col-3">
-                <select id="inputDay" onclick="DaySearch()" style="margin-top: 20px; background-color: gray;color: white;padding-left: 15px; font-size: 1vw;margin-left: 5px;">
+                <select id="inputDay" onclick="DaySearch()"
+                        style="margin-top: 20px; background-color: gray;color: white;padding-left: 15px; font-size: 1vw;margin-left: 5px;">
                     <option value="">Select</option>
                     <option value="Mon">Mon</option>
                     <option value="Tue">Din</option>
@@ -95,64 +99,72 @@
                     <option value="Sun">Son</option>
                 </select><br>
 
+            </div>
+            <div class="col-3">
+                <input type="text" id="inputName"
+                       style="padding-left: 15px; margin-top: 10px; background-color: gray;color: white;margin-left: 5px;"
+                       onkeyup="NameSearch()" placeholder="Name"/><br>
+            </div>
+            <div class="col-3">
 
-                <input type="text" id="inputName" style="padding-left: 15px; margin-top: 10px; background-color: gray;color: white;margin-left: 5px;" onkeyup="NameSearch()" placeholder="Name"/><br>
-
-
-                <select id="inputLocation" onclick="LocationSearch()" style="margin-top: 20px; font-size: 1vw;background-color: gray;margin-left: 5px;color: white;padding-left: 15px;">
+                <select id="inputLocation" onclick="LocationSearch()"
+                        style="margin-top: 20px; font-size: 1vw;background-color: gray;margin-left: 5px;color: white;padding-left: 15px;">
                     <option value="">Select</option>
                     <option value="K">Klosterneuburg</option>
                     <option value="W">Wien</option>
                 </select><br>
 
-
-                <input type="text" style="margin-top: 20px;background-color: gray;margin-left: 5px;color: white;padding-left: 15px;" id="inputAccount" onkeyup="AccountSearch()" placeholder="Account"/>
             </div>
-            <div class="col-9">
-                <table
-                    style="overflow-y: scroll;width: 95%;display: block;height: 350px;background-color: gray; text-align: center !important;padding: 10px;margin: 10px;"
-                    id="driverTable">
+            <div class="col-3">
+                <input type="text"
+                       style="margin-top: 20px;background-color: gray;margin-left: 5px;color: white;padding-left: 15px;"
+                       id="inputAccount" onkeyup="AccountSearch()" placeholder="Account"/>
+            </div>
+        </div>
+        <div style="overflow-y: scroll; display: block; height: 800px;">
+            <table
+                style="height: 350px;background-color: gray; text-align: center !important;padding: 10px;margin: 10px;width: 100%;"
+                id="driverTable">
 
-                    @foreach($allworks as $work)
+                @foreach($allworks as $work)
+                    <?php
+                    $color = '';
+                    if (date('D', strtotime($work->working_day)) == 'Sun' || date('D', strtotime($work->working_day)) == 'Sat') {
+                        $color = '#57b846';
+                    } else {
+                        $color = 'gray';
+                    }
+                    $workingDay = $work->working_day;
+                    ?>
+                    <tr style=" background-color:<?php echo $color ?>; text-align: center;">
+                        <td style="padding:7px 10px;">{{date('M-d', strtotime($work->working_day))}} </td>
+                        <td style="padding:7px 20px;">{{date('D', strtotime($work->working_day))}} </td>
+
+                        <td style="padding:0 20px;"> {{$work->name}} </td>
                         <?php
-                        $color = '';
-                        if (date('D', strtotime($work->working_day)) == 'Sun' || date('D', strtotime($work->working_day)) == 'Sat') {
-                            $color = '#57b846';
-                        } else {
-                            $color = 'gray';
+                        if ($work->location == 'Klosterneuburg') {
+                            echo '<td style="background-color: #6c757d;padding:0 20px;">' . $work->location[0] . '</td>';
+                        } elseif ($work->location == 'Wien') {
+                            echo '<td style="background-color: #1e7e34;padding:0 20px;">' . $work->location[0] . '</td>';
                         }
-                        $workingDay = $work->working_day;
                         ?>
-                        <tr style=" background-color:<?php echo $color ?>; text-align: center;">
-                            <td style="padding:7px 10px;">{{date('M-d', strtotime($work->working_day))}} </td>
-                            <td style="padding:7px 10px;">{{date('D', strtotime($work->working_day))}} </td>
-
-                            <td style="padding:0 10px;"> {{$work->name}} </td>
-                            <?php
-                            if ($work->location == 'Klosterneuburg') {
-                                echo '<td style="background-color: #6c757d;padding:0 10px;">' . $work->location[0] . '</td>';
-                            } elseif ($work->location == 'Wien') {
-                                echo '<td style="background-color: #1e7e34;padding:0 10px;">' . $work->location[0] . '</td>';
-                            }
-                            ?>
-                            <td style="padding: 0 10px;"> {{$work->working_account}} </td>
-                            <td style="border-left: #000000 2px solid;padding: 0 10px;"> {{$work->orders}} </td>
-                            <td> {{$work->wetter_main}} </td>
-                            <td> {{$work->wetter_temp}} </td>
-                            <td>
-                                <form style="padding:0 30px;" action="{{ route('company-works.destroy', $work->id) }}"
-                                      method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button style="color: lightgray;padding-left: 25%;">X</button>
-                                </form>
+                        <td style="padding: 0 20px;"> {{$work->working_account}} </td>
+                        <td style="border-left: #000000 2px solid;padding: 0 20px;"> {{$work->orders}} </td>
+                        <td> {{$work->wetter_main}} </td>
+                        <td> {{$work->wetter_temp}} </td>
+                        <td>
+                            <form style="padding:0 30px;" action="{{ route('company-works.destroy', $work->id) }}"
+                                  method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button style="color: lightgray;padding-left: 25%;">X</button>
+                            </form>
 
 
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </table>
         </div>
 
         <br>
