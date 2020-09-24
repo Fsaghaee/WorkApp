@@ -241,5 +241,4 @@
 
 
     </div>
-    <?php include "payslips/phpfiles/generator.php"; ?>
 @stop
