@@ -66,16 +66,11 @@ class CompanyWorksController extends Controller
             ->where('working_day', '<=', $second)
             ->where('driver_id', '=', $driver)->sum('orders');
 
+            return  $worksLasrSecond ;
 
-        if ($this->getDriverName($driver) == "Reza") {
-            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: white;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">' . $worksLasrSecond * 4 . ' €  ( ' . $worksLasrSecond * 1.3 . ' €)</span></h6>';
-        } elseif ($this->getDriverName($driver) == "Farzad") {
-            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: white;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">' . $worksLasrSecond * 5.4 . ' €</span></h6>';
-        } else {
-            return '<br><h6>' . $this->getDriverName($driver) . ' : ' . $worksLasrSecond . '  <span style="color: white;font-size: 1.4vw;font-weight: bold;padding-left: 15px;">' . $worksLasrSecond * 4 . ' €  ( ' . $worksLasrSecond * 1.4 . ' €)</span></h6>';
-        }
 
     }
+
 
 
     public function getaccountrWork(string $first, string $second)

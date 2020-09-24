@@ -6,9 +6,9 @@
     <script>
         function doCapture() {
             window.scrollTo(0, 0);
-            html2canvas(document.getElementById('Table'),{
-                ignoreElements: function( element ) {
-                    if( 'button' == element.type || "ignoredTable"==element.id) {
+            html2canvas(document.getElementById('Table'), {
+                ignoreElements: function (element) {
+                    if ('button' == element.type || "ignoredTable" == element.id) {
                         return true;
                     }
                 }
@@ -17,7 +17,7 @@
                 img.href = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream');
                 // Name of downloaded file
                 var today = new Date();
-                img.download =today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+`.jpg`;
+                img.download = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + `.jpg`;
                 img.click();
             });
         }
@@ -57,21 +57,57 @@
             <div class="row" style="text-align: center;padding-bottom: 5px;">
                 <div class="col">
                     <?php
-                    echo ' <br>' . date('M.16', strtotime("-1 month")) . '  -  ' . date('M.t', strtotime("-1 month")) . '<h4>' . $worksLasrSecond . '  -  ' . $worksLasrSecond * 5.4 . ' € </h4>';
+                    // 16-31 last mounth
+                    echo ' <br> <h4>' . date('M.16', strtotime("-1 month")) . '  -  ' . date('M.t', strtotime("-1 month")) .'</h4><br>';
+                    $t = 0;
                     foreach ($allDrivers as $driver) {
-                        echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")), $driver->id);
+                        $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")), $driver->id);
+                        echo $driver->name . ' : ' . $x . '<br>';
+                        if ($driver->name == "Farzad") {
+                            $t += $x * 5.4;
+                        } elseif ($driver->name == "Reza") {
+                            $t += $x * 1.3;
+                        } else {
+                            $t += $x * 1.4;
+                        }
                     }
+                    echo '</br><h4>' . $worksLasrSecond . '  -  ' . $worksLasrSecond * 5.4 . ' € <span style="color: black;">  '.$t.' € </span> </h4>  ';
+
+                    //1-15. Moth
                     echo '</div><div class="col">';
-                    echo ' <br>' . date('M.01') . '  -  ' . date('M.15') . '<h4>' . $worksfirst . '  -  ' . $worksfirst * 5.4 . ' € </h4>';
+                    echo ' <br> <h4>' . date('M.01') . '  -  ' . date('M.15') .'</h4></br>';
+                    $t = 0;
                     foreach ($allDrivers as $driver) {
-                        echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-01'), date('yy-m-15'), $driver->id);
+                        $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-01'), date('yy-m-15'), $driver->id);
+                        echo $driver->name . ' : ' . $x . '<br>';
+                        if ($driver->name == "Farzad") {
+                            $t += $x * 5.4;
+                        } elseif ($driver->name == "Reza") {
+                            $t += $x * 1.3;
+                        } else {
+                            $t += $x * 1.4;
+                        }
+                    }
+                    echo '</br><h4>' . $worksfirst . '  -  ' . $worksfirst * 5.4 . ' € <span style="color: black;">  '.$t.' € </span> </h4>  ';
+
+                    $t = 0;
+
+                    //16-31. this month
+                    echo '</div><div class="col">';
+                    echo ' <br><h4>' . date('M.16') . '  -  ' . date('M.t') .'</h4></br>';
+                    foreach ($allDrivers as $driver) {
+                        $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16'), date('yy-m-t'), $driver->id);
+                        echo $driver->name . ' : ' . $x . '<br>';
+                        if ($driver->name == "Farzad") {
+                            $t += $x * 5.4;
+                        } elseif ($driver->name == "Reza") {
+                            $t += $x * 1.3;
+                        } else {
+                            $t += $x * 1.4;
+                        }
                     }
 
-                    echo '</div><div class="col">';
-                    echo ' <br>' . date('M.16') . '  -  ' . date('M.t') . '<h4>  ' . $workssecond . '  -  ' . $workssecond * 5.4 . ' € </h4>';
-                    foreach ($allDrivers as $driver) {
-                        echo (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16'), date('yy-m-t'), $driver->id);
-                    }
+                    echo '</br><h4>' . $workssecond . '  -  ' . $workssecond * 5.4 . ' € <span style="color: black;">  '.$t.' € </span> </h4>  ';
 
                     ?>
                 </div>
@@ -91,7 +127,8 @@
         </div>
 
         <div id="Table" style="display: none;padding: 10px;">
-            <button onclick="doCapture()" style="border: 1px solid lightgray;padding: 5px;border-radius: 5px;">Dinstplan von <?php echo date('yy-M-d'); ?></button>
+            <button onclick="doCapture()" style="border: 1px solid lightgray;padding: 5px;border-radius: 5px;">Dinstplan
+                von <?php echo date('yy-M-d'); ?></button>
             <table style="width: 100%;">
                 <tr>
                     <th style="text-align: center;"> Day</th>
@@ -128,7 +165,7 @@
                 ?>
             </table>
             <table id="ignoredTable"
-                style="width: 100%; font-size:2vw; border-top: 6px solid darkgray; margin:0;padding: 0 10px;color: white;background-color: gray;min-height: 50px;">
+                   style="width: 100%; font-size:2vw; border-top: 6px solid darkgray; margin:0;padding: 0 10px;color: white;background-color: gray;min-height: 50px;">
                 @if($works)
                     @foreach($works as $work)
                         <tr>
