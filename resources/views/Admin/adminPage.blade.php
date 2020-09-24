@@ -24,8 +24,6 @@
 
 
     </script>
-
-
     <?php
 
     $dataPoints01 = array();
@@ -43,7 +41,10 @@
     //array('Klosterneuburg', 'Wien', 'Tulln');
     $Days = array('Mon', 'Din', 'Mit', 'Don', 'Fri', 'Sam', 'Sun');
     ?>
+
     <div style="margin: 5px;">
+
+
         <div style="margin: 0;width: 100%; background-color: gray; width: 100%; height: 50px;color: white;">
 
             <div id="summeryDiv" style="padding: 10px; display: inline-block;"><h4> Summery </h4></div>
