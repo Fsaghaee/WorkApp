@@ -9,6 +9,7 @@
 
             @foreach($drivers as $driver)
                 <tr>
+                    <td style="border-bottom: 1px dotted gray;"> {{$driver->id}} </td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->name}} </td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->family}} </td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->address}}</td>

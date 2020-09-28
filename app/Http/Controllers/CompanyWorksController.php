@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -130,7 +131,29 @@ class CompanyWorksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $validatedData = $request->validate([
+            'working_day' => 'required',
+            'orders' => 'required',
+            'location' => 'required',
+            'working_account' => 'required',
+
+        ]);
+
+
+        $user = User::findOrfail(auth()->user()->id);
+        $work = new Work;
+        $work->working_day = $request->working_day;
+        $work->orders = $request->orders;
+        $work->driver_id = $request->company_id;
+        $work->company_id = $request->company_id;
+        $work->wetter_temp = '99';
+        $work->wetter_main = 'Unknown';
+        $work->working_account = $request->working_account;
+        $work->location = $request->location;
+        $work->save();
+        return redirect()->to('/company-works');
     }
 
     /**

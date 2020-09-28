@@ -49,7 +49,6 @@
         {!! form::label('location','Locations/Ort :') !!}
         {!! form:: select('location',$templocation,array('class'=>'form-control','id'=>'locations')) !!}
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
-        {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('driver_id', auth()->user()->id ,['class'=>'form-control']) !!}
         {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:4vw; background-color: lightblue;color:black; padding:10px 20px;margin: 30px 5px;']) !!}
         {!! Form::close() !!}
