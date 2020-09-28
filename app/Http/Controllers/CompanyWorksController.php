@@ -146,7 +146,7 @@ class CompanyWorksController extends Controller
         $work = new Work;
         $work->working_day = $request->working_day;
         $work->orders = $request->orders;
-        $work->driver_id = $request->company_id;
+        $work->driver_id = 8;
         $work->company_id = $request->company_id;
         $work->wetter_temp = '99';
         $work->wetter_main = 'Unknown';
