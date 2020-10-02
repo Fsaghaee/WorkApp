@@ -57,13 +57,28 @@
             <div class="row" style="text-align: center;padding-bottom: 5px;">
                 <div class="col">
                     <?php
+                    // 1-15 last mounth
+                    echo ' <br> <h4>' . date('M.01', strtotime("-1 month")) . '  -  ' . date('M.15', strtotime("-1 month")) .'</h4><br>';
+                    $t = 0;
+                    foreach ($allDrivers as $driver) {
+                        $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")), $driver->id);
+                        echo $driver->name . ' : ' . $x . '<br>';
+                        if ($driver->name == "Farzad" || $driver->name == "Unknown " ) {
+                            $t += $x * 5.4;
+                        } elseif ($driver->name == "Reza") {
+                            $t += $x * 1.3;
+                        } else {
+                            $t += $x * 1.4;
+                        }
+                    }
+
                     // 16-31 last mounth
                     echo ' <br> <h4>' . date('M.16', strtotime("-1 month")) . '  -  ' . date('M.t', strtotime("-1 month")) .'</h4><br>';
                     $t = 0;
                     foreach ($allDrivers as $driver) {
                         $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")), $driver->id);
                         echo $driver->name . ' : ' . $x . '<br>';
-                        if ($driver->name == "Farzad") {
+                        if ($driver->name == "Farzad" || $driver->name == "Unknown " ) {
                             $t += $x * 5.4;
                         } elseif ($driver->name == "Reza") {
                             $t += $x * 1.3;
@@ -116,6 +131,8 @@
             <div class="row">
                 <div class="col">
                     <?php
+                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-01', strtotime("-1 month")), date('yy-m-15', strtotime("-1 month")));
+                    echo '</div><div class="col">';
                     echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")));
                     echo '</div><div class="col">';
                     echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-01'), date('yy-m-15'));
