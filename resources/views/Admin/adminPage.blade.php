@@ -71,6 +71,7 @@
                             $t += $x * 1.4;
                         }
                     }
+                    echo '</br><h4>' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;">  '.$t.' € </span> </h4>  ';
 
                     echo '</div><div class="col">';
                     // 16-31 last mounth
@@ -143,7 +144,7 @@
                 </div>
             </div>
         </div>
-
+K
         <div id="Table" style="display: none;padding: 10px;">
             <button onclick="doCapture()" style="border: 1px solid lightgray;padding: 5px;border-radius: 5px;">Dinstplan
                 von <?php echo date('yy-M-d'); ?></button>
