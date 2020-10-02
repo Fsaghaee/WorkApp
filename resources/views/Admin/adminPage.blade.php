@@ -61,7 +61,7 @@
                     echo ' <br> <h4>' . date('M.01', strtotime("-1 month")) . '  -  ' . date('M.15', strtotime("-1 month")) .'</h4><br>';
                     $t = 0;
                     foreach ($allDrivers as $driver) {
-                        $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")), $driver->id);
+                        $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-01', strtotime("-1 month")), date('yy-m-15', strtotime("-1 month")), $driver->id);
                         echo $driver->name . ' : ' . $x . '<br>';
                         if ($driver->name == "Farzad" || $driver->name == "Unknown " ) {
                             $t += $x * 5.4;
@@ -72,6 +72,7 @@
                         }
                     }
 
+                    echo '</div><div class="col">';
                     // 16-31 last mounth
                     echo ' <br> <h4>' . date('M.16', strtotime("-1 month")) . '  -  ' . date('M.t', strtotime("-1 month")) .'</h4><br>';
                     $t = 0;
