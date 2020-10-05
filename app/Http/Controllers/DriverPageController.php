@@ -19,7 +19,7 @@ class DriverPageController extends Controller
     {
 
 
-        $lastwork = DB::table('works')->select('orders')->where('driver_id','=',auth()->user()->id)->orderBy('working_day')->first();
+        $lastwork = DB::table('works')->select('orders')->where('driver_id','=',auth()->user()->id)->orderBy('working_day', 'desc')->first();
 
         if (auth()->user()) {
             if (auth()->user()->company_id == 0) {
