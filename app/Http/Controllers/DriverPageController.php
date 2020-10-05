@@ -17,13 +17,17 @@ class DriverPageController extends Controller
      */
     public function index()
     {
+
+
+        $lastwork = DB::table('works')->select('orders')->where('driver_id','=',auth()->user()->id)->orderBy('working_day')->first();
+
         if (auth()->user()) {
             if (auth()->user()->company_id == 0) {
                 return view('Admin/adminPage');
             } elseif (auth()->user()->company_id != 0) {
                 $slips = Payslip::all()->where('driver_id', '=', auth()->user()->id);
 
-                return view('Driver/mainPage', compact( 'slips'));
+                return view('Driver/mainPage', compact( 'slips','lastwork'));
             }
         }
         return view('userLogin');

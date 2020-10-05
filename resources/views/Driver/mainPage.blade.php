@@ -4,7 +4,6 @@
     <div>
         <br>
         <h2 style="font-size:4vw;color: white; text-align: center;"> Hallo {{auth()->user()->name }}</h2>
-        <br>
         <?php
         function stringInsert($str, $insertstr, $pos)
         {
@@ -39,6 +38,19 @@
         $templocation = array("" => 'Select/Auswählen', 'Klosterneuburg' => 'Klosterneuburg', 'Wien' => 'Wien','Tulln'=>'Tulln');
         $tempaccounts = array("" => 'Select/Auswählen', 'FarzadU1' => 'FarzadU1', 'FarzadU2' => 'FarzadU2', 'FarzadU3' => 'FarzadU3', 'FarzadU4' => 'FarzadU4', 'FarzadU5' => 'FarzadU5', 'FarzadU6' => 'FarzadU6', 'FarzadS' => 'FarzadS');
         ?>
+        <h3 style="font-size:3vw;color: white; text-align: center;"><br>  Letztes Mal / Last time<br><span style="font-size:4.5vw;font-weight: bold; color: #ffe8a1;">
+                <?php
+                if(!empty($lastwork->orders)){
+                    echo $lastwork->orders;
+                }else{
+                    echo 'Sie haben Keine Bestellungen.';
+                }
+
+
+                ?> </span>
+
+            Bestellungen / Orders</h3>
+        <br>
         {!! Form::open(array('method'=>'POST','action'=>'DriverPageController@store','style'=>'font-size:4vw;margin: 30px;','onsubmit'=>'validateForm()')) !!}
         {!! form::label('working_day','Date/Datum :') !!}
         {!! form::select('working_day',$TempDate,array('class'=>'form-control')) !!}
