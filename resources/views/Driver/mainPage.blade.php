@@ -38,7 +38,7 @@
         $templocation = array("" => 'Select/Auswählen', 'Klosterneuburg' => 'Klosterneuburg', 'Wien' => 'Wien','Tulln'=>'Tulln');
         $tempaccounts = array("" => 'Select/Auswählen', 'FarzadU1' => 'FarzadU1', 'FarzadU2' => 'FarzadU2', 'FarzadU3' => 'FarzadU3', 'FarzadU4' => 'FarzadU4', 'FarzadU5' => 'FarzadU5', 'FarzadU6' => 'FarzadU6', 'FarzadS' => 'FarzadS');
         ?>
-        <h3 style="font-size:3vw;color: white; text-align: center;"><br>  Letztes Mal / Last time<br><span style="font-size:4.5vw;font-weight: bold; color: #ffe8a1;">
+        <h3 style="font-size:2.4vw;color: white; text-align: center;"><br>  Letztes Mal<span style="font-size:4.5vw;font-weight: bold; color: #ffe8a1;">
                 <?php
                 if(!empty($lastwork->orders)){
                     echo $lastwork->orders;
@@ -49,7 +49,7 @@
 
                 ?> </span>
 
-            Bestellungen / Orders</h3>
+            Bestellungen.</h3>
         <br>
         {!! Form::open(array('method'=>'POST','action'=>'DriverPageController@store','style'=>'font-size:4vw;margin: 30px;','onsubmit'=>'validateForm()')) !!}
         {!! form::label('working_day','Date/Datum :') !!}
