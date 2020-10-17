@@ -78,7 +78,14 @@
                 echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday1, $lastday1);
                 $total = 0;
                 foreach ($allDrivers as $allDriver) {
-                    echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '<br>';
+
+                    if ($allDriver->name == 'Farzad') {
+                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 5.4 . ' € )<br>';
+                    } elseif ($allDriver->name == 'Reza') {
+                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4.1 . ' € )<br>';
+                    } else {
+                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4 . ' € )<br>';
+                    }
                     if ($allDriver->name == 'Farzad') {
                         $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 5.4;
                     } elseif ($allDriver->name == 'Reza') {
@@ -87,7 +94,7 @@
                         $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 1.4;
                     }
                 }
-                echo $total;
+                echo '<h3 style="color: red;font-weight: bold;">' .$total.'</h3>';
                 echo "</div>";
                 echo "<div class='five' style='overflow-y: scroll;'>";
 
@@ -95,8 +102,19 @@
                 (new App\Http\Controllers\AdminPageController)->printearn($firstday2, $lastday2);
                 echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday2, $lastday2);
                 $total = 0;
+
+
                 foreach ($allDrivers as $allDriver) {
-                    echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '<br>';
+                    if ($allDriver->name == 'Farzad') {
+                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 5.4 . ' € )<br>';
+                    }elseif ($allDriver->name == 'Farzad') {
+                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4.1 . ' € )<br>';
+                    }else{
+
+                            echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4 . ' € )<br>';
+
+                    }
+
                     if ($allDriver->name == 'Farzad') {
                         $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 5.4;
                     } elseif ($allDriver->name == 'Reza') {
@@ -106,7 +124,7 @@
                     }
 
                 }
-                echo $total;
+                echo '<h3 style="color: red;font-weight: bold;">' .$total.'</h3>';
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";
