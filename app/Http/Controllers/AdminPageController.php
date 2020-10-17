@@ -39,10 +39,10 @@ class AdminPageController extends Controller
 
                 $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day')->get();
                 $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day')->get();;
-                $allDrivers = DB::table('users')->select('id','name')->where('company_id','=',auth()->user()->id)->get();
+                $allDrivers = DB::table('users')->select('id', 'name')->where('company_id', '=', auth()->user()->id)->get();
                 $locations = DB::table('works')->select('location')->groupBy('location')->get();
 
-                return view('Admin/adminPage', compact('works','klosSum','WienSum','worksfirst','worksLasrSecond','workssecond','worksLasrFirst','allDrivers','locations'));
+                return view('Admin/adminPage', compact('works', 'klosSum', 'WienSum', 'worksfirst', 'worksLasrSecond', 'workssecond', 'worksLasrFirst', 'allDrivers', 'locations'));
             } elseif (auth()->user()->company_id != 0) {
                 return view('Driver/mainPage');
             }
@@ -59,6 +59,29 @@ class AdminPageController extends Controller
     {
         //
     }
+
+
+    public function printearn($t1, $t2)
+    {
+        $worksLasrFirst = DB::table('works')->where('working_day', '>=', date($t1))
+            ->where('working_day', '<=', date($t2))->sum('orders');
+
+        echo '' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;"> € </span>  ';
+
+    }
+
+    public function getDriverWork(string $first, string $second, int $driver)
+    {
+
+        $worksLasrSecond = DB::table('works')->where('working_day', '>=', $first)
+            ->where('working_day', '<=', $second)
+            ->where('driver_id', '=', $driver)->sum('orders');
+
+        return $worksLasrSecond;
+
+
+    }
+
 
     /**
      * Store a newly created resource in storage.

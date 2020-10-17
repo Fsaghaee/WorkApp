@@ -42,7 +42,7 @@
     $Days = array('Mon', 'Din', 'Mit', 'Don', 'Fri', 'Sam', 'Sun');
     ?>
 
-    <div style="margin: 5px;">
+    <div style="margin: 5px; overflow-y: scroll;">
 
 
         <div style="margin: 0;width: 100%; background-color: gray; width: 100%; height: 50px;color: white;">
@@ -52,179 +52,149 @@
         </div>
 
 
-        <div id="summery" style=" display: none;width: 100%; background-color: gray;padding:0 10px;color: white;">
-            <br>
-            <div class="row" style="text-align: center;padding-bottom: 5px;">
-                <div class="col">
-                    <?php
-                    // 1-15 last mounth
-                    echo ' <br> <h4>' . date('M.01', strtotime("-1 month")) . '  -  ' . date('M.15', strtotime("-1 month")) .'</h4><br>';
-                    $t = 0;
-                    foreach ($allDrivers as $driver) {
-                        $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-01', strtotime("-1 month")), date('yy-m-15', strtotime("-1 month")), $driver->id);
-                        echo $driver->name . ' : ' . $x . '<br>';
-                        if ($driver->name == "Farzad" || $driver->name == "Unknown " ) {
-                            $t += $x * 5.4;
-                        } elseif ($driver->name == "Reza") {
-                            $t += $x * 1.3;
-                        } else {
-                            $t += $x * 1.4;
-                        }
+        <div id="summery"
+             style=" display: none;width: 100%;height: 500px; background-color: gray;padding:0 10px;color: white;display: none;">
+
+
+            <?php
+            $x = (new App\Http\Controllers\CompanyWorksController)->getfirstday();
+            $t = date('m', strtotime($x));
+
+            for ($m = $t; $m <= date('m'); $m++) {
+                $firstday1 = date('yy-' . $m . '-01');
+                $firstday2 = date('yy-' . $m . '-16');
+                $lastday1 = date('yy-' . $m . '-15');
+                $lastday2 = date('yy-' . $m . '-t');
+
+                $temp = date("F", strtotime(date('yy-' . $m . '-01')));
+                $label = date("yy-M", strtotime(date('yy-' . $m . '-01')));
+
+                echo "<div  class='some'>";
+                echo "<div class='one'><button onclick = 'w3.toggleShow(\"#$temp\")' > $label</button ></div>";
+                echo "<div id=$temp class='three' style='  display: none;'>";
+                echo "<div class='four' style='overflow-y: scroll;'>";
+                echo ' <br><h3>' . $firstday1 . '  <br>  ' . $lastday1 . '</h3><br>';
+                (new App\Http\Controllers\AdminPageController)->printearn($firstday1, $lastday1);
+                echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday1, $lastday1);
+                $total = 0;
+                foreach ($allDrivers as $allDriver) {
+                    echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '<br>';
+                    if ($allDriver->name == 'Farzad') {
+                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 5.4;
+                    } elseif ($allDriver->name == 'Reza') {
+                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 1.3;
+                    } else {
+                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 1.4;
                     }
-                    echo '</br><h4>' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;">  '.$t.' € </span> </h4>  ';
+                }
+                echo $total;
+                echo "</div>";
+                echo "<div class='five' style='overflow-y: scroll;'>";
 
-                    echo '</div><div class="col">';
-                    // 16-31 last mounth
-                    echo ' <br> <h4>' . date('M.16', strtotime("-1 month")) . '  -  ' . date('M.t', strtotime("-1 month")) .'</h4><br>';
-                    $t = 0;
-                    foreach ($allDrivers as $driver) {
-                        $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")), $driver->id);
-                        echo $driver->name . ' : ' . $x . '<br>';
-                        if ($driver->name == "Farzad" || $driver->name == "Unknown " ) {
-                            $t += $x * 5.4;
-                        } elseif ($driver->name == "Reza") {
-                            $t += $x * 1.3;
-                        } else {
-                            $t += $x * 1.4;
-                        }
-                    }
-                    echo '</br><h4>' . $worksLasrSecond . '  -  ' . $worksLasrSecond * 5.4 . ' € <span style="color: black;">  '.$t.' € </span> </h4>  ';
-
-                    //1-15. Moth
-                    echo '</div><div class="col">';
-                    echo ' <br> <h4>' . date('M.01') . '  -  ' . date('M.15') .'</h4></br>';
-                    $t = 0;
-                    foreach ($allDrivers as $driver) {
-                        $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-01'), date('yy-m-15'), $driver->id);
-                        echo $driver->name . ' : ' . $x . '<br>';
-                        if ($driver->name == "Farzad") {
-                            $t += $x * 5.4;
-                        } elseif ($driver->name == "Reza") {
-                            $t += $x * 1.3;
-                        } else {
-                            $t += $x * 1.4;
-                        }
-                    }
-                    echo '</br><h4>' . $worksfirst . '  -  ' . $worksfirst * 5.4 . ' € <span style="color: black;">  '.$t.' € </span> </h4>  ';
-
-                    $t = 0;
-
-                    //16-31. this month
-                    echo '</div><div class="col">';
-                    echo ' <br><h4>' . date('M.16') . '  -  ' . date('M.t') .'</h4></br>';
-                    foreach ($allDrivers as $driver) {
-                        $x = (new App\Http\Controllers\CompanyWorksController)->getDriverWork(date('yy-m-16'), date('yy-m-t'), $driver->id);
-                        echo $driver->name . ' : ' . $x . '<br>';
-                        if ($driver->name == "Farzad") {
-                            $t += $x * 5.4;
-                        } elseif ($driver->name == "Reza") {
-                            $t += $x * 1.3;
-                        } else {
-                            $t += $x * 1.4;
-                        }
+                echo ' <br><h3>' . $firstday2 . '  <br>  ' . $lastday2 . '</h3><br>';
+                (new App\Http\Controllers\AdminPageController)->printearn($firstday2, $lastday2);
+                echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday2, $lastday2);
+                $total = 0;
+                foreach ($allDrivers as $allDriver) {
+                    echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '<br>';
+                    if ($allDriver->name == 'Farzad') {
+                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 5.4;
+                    } elseif ($allDriver->name == 'Reza') {
+                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 1.3;
+                    } else {
+                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 1.4;
                     }
 
-                    echo '</br><h4>' . $workssecond . '  -  ' . $workssecond * 5.4 . ' € <span style="color: black;">  '.$t.' € </span> </h4>  ';
+                }
+                echo $total;
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
 
-                    ?>
-                </div>
-            </div>
-            <div style="border-bottom: 2px solid darkgray;margin-top: 0px;"></div>
-            <div class="row">
-                <div class="col">
-                    <?php
-                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-01', strtotime("-1 month")), date('yy-m-15', strtotime("-1 month")));
-                    echo '</div><div class="col">';
-                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16', strtotime("-1 month")), date('yy-m-t', strtotime("-1 month")));
-                    echo '</div><div class="col">';
-                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-01'), date('yy-m-15'));
-                    echo '</div><div class="col">';
-                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork(date('yy-m-16'), date('yy-m-t'));
-                    ?>
-                </div>
-            </div>
+
+            }
+
+
+            ?>
+
         </div>
-        <div id="Table" style="display: none;padding: 10px;">
-            <button onclick="doCapture()" style="border: 1px solid lightgray;padding: 5px;border-radius: 5px;">Dinstplan
-                von <?php echo date('yy-M-d'); ?></button>
-            <table style="width: 100%;">
-                <tr>
-                    <th style="text-align: center;"> Day</th>
-                    <?php
-                    for ($x = 0; $x < count($locat); $x++) {
-                        $temp = substr($locat[$x], 0, 4);
-                        echo " <th style=\"text-align: center;\">$temp - VorM.</th><th style=\"text-align: center;\"> $temp - NachM.</th>";
-                    }
-                    ?>
-                </tr>
 
+    </div>
+    </div>
+
+
+
+
+
+
+
+    <div id="Table" style="display: none;padding: 10px;">
+        <button onclick="doCapture()" style="border: 1px solid lightgray;padding: 5px;border-radius: 5px;">Dinstplan
+            von <?php echo date('yy-M-d'); ?></button>
+        <table style="width: 100%;">
+            <tr>
+                <th style="text-align: center;"> Day</th>
                 <?php
-                for ($i = 0; $i < count($Days); $i++) {
-                    echo "<tr style='border-bottom: 1px solid black;'>";
-                    echo "<td> $Days[$i]</td>";
-
-                    for ($j = 0; $j < count($locat); $j++) {#
-                        echo "<td>";
-                        $tempinput = $locat[$j] . 'v' . $Days[$i];
-                        echo " <div id='$tempinput'>";
-                        echo "<input type=\"button\" value=\" + \" onClick=\"addNew('$tempinput');\" style='width: 95%;margin:0 5px; border: 1px solid lightgray; background-color: lightgray;border-radius: 15px;'>";
-                        echo "</div>";
-                        echo "</td>";
-                        echo "<td>";
-                        $tempinput = $locat[$j] . 'n' . $Days[$i];
-                        echo " <div id='$tempinput'>";
-                        echo "<input type=\"button\" value=\" + \" onClick=\"addNew('$tempinput');\"style='width: 95%;margin: 5px; border: 1px solid lightgray;background-color: lightgray;border-radius: 15px;'>";
-                        echo "</div>";
-                        echo "</td>";
-                    }
-
-                    echo "</tr>";
+                for ($x = 0; $x < count($locat); $x++) {
+                    $temp = substr($locat[$x], 0, 4);
+                    echo " <th style=\"text-align: center;\">$temp - VorM.</th><th style=\"text-align: center;\"> $temp - NachM.</th>";
                 }
                 ?>
-            </table>
-            <table id="ignoredTable"
-                   style="width: 100%; font-size:2vw; border-top: 6px solid darkgray; margin:0;padding: 0 10px;color: white;background-color: gray;min-height: 50px;">
-                @if($works)
-                    @foreach($works as $work)
-                        <tr>
-                            <td> {{$work->orders}} </td>
-                            <td> {{$work->name}}</td>
-                            <td> {{$work->location[0]}} </td>
-                            <td> {{$work->wetter_main}} </td>
-                            <td> {{$work->wetter_temp}} </td>
-                        </tr>
-                    @endforeach
-                @endif
-            </table>
-        </div>
-        <div class="row">
-            <div class="col">
-                <?php
-                echo '<h6 style="font-size:3vw;">';
-                $date = date('yy-m-d');
-                $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
-                $response = json_decode($response, true);
-                echo date('M.d D') . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
-                    ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
-                echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
-                echo '</h6>';
+            </tr>
 
-                echo '</div><div class="col"><h6 style="font-size:3vw;">';
-                $date = date('yy-m-d', strtotime($date . ' +1 day'));
-                $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
-                $response = json_decode($response, true);
-                echo date('M.d D', strtotime(' +1 day')) . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
-                    ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
-                echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
-                echo '</h6>';
-                ?>
-            </div>
+            <?php
+            for ($i = 0; $i < count($Days); $i++) {
+                echo "<tr style='border-bottom: 1px solid black;'>";
+                echo "<td> $Days[$i]</td>";
+
+                for ($j = 0; $j < count($locat); $j++) {#
+                    echo "<td>";
+                    $tempinput = $locat[$j] . 'v' . $Days[$i];
+                    echo " <div id='$tempinput'>";
+                    echo "<input type=\"button\" value=\" + \" onClick=\"addNew('$tempinput');\" style='width: 95%;margin:0 5px; border: 1px solid lightgray; background-color: lightgray;border-radius: 15px;'>";
+                    echo "</div>";
+                    echo "</td>";
+                    echo "<td>";
+                    $tempinput = $locat[$j] . 'n' . $Days[$i];
+                    echo " <div id='$tempinput'>";
+                    echo "<input type=\"button\" value=\" + \" onClick=\"addNew('$tempinput');\"style='width: 95%;margin: 5px; border: 1px solid lightgray;background-color: lightgray;border-radius: 15px;'>";
+                    echo "</div>";
+                    echo "</td>";
+                }
+
+                echo "</tr>";
+            }
+            ?>
+        </table>
+    </div>
+    <div class="row" style="    padding: 0 30px;">
+        <div class="col">
+            <?php
+            echo '<h6 style="font-size:3vw;">';
+            $date = date('yy-m-d');
+            $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
+            $response = json_decode($response, true);
+            echo date('M.d D') . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
+                ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
+            echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
+            echo '</h6>';
+
+            echo '</div><div class="col"><h6 style="font-size:3vw;">';
+            $date = date('yy-m-d', strtotime($date . ' +1 day'));
+            $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
+            $response = json_decode($response, true);
+            echo date('M.d D', strtotime(' +1 day')) . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
+                ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
+            echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
+            echo '</h6>';
+            ?>
         </div>
-        <div class="row">
-            <div class="col" id="Kloster" style="height: 270px; width: 100%; padding: 5px;"></div>
-            <div class="col" id="wien" style="height: 270px; width: 100%; padding: 5px;"></div>
-            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        </div>
+    </div>
+    <div class="row" style="    padding: 0 30px;">
+        <div class="col" id="Kloster" style="height: 270px; width: 100%; padding: 5px;"></div>
+        <div class="col" id="wien" style="height: 270px; width: 100%; padding: 5px;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </div>
     </div>
     <script>
 

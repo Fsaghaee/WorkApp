@@ -176,6 +176,8 @@
                                 echo '<td style="background-color: #6c757d;padding:0 20px;">' . $work->location[0] . '</td>';
                             } elseif ($work->location == 'Wien') {
                                 echo '<td style="background-color: #1e7e34;padding:0 20px;">' . $work->location[0] . '</td>';
+                            }if ($work->location == 'Tulln') {
+                                echo '<td style="background-color:#b2c2b2;padding:0 20px;">' . $work->location[0] . '</td>';
                             }
                             ?>
                             <td style="padding: 0 20px;"> {{$work->working_account}} </td>

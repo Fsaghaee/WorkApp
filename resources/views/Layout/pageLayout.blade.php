@@ -23,15 +23,63 @@
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <style>
-    body html{
+    body html {
         font-family: Raleway-Regular, sans-serif !important;
     }
+
+
+    .some {
+        display: flex;
+        margin: 10px; /* new */
+        text-align: center;
+        width: 100%;
+    }
+
+    .one {
+        border: 2px white solid;
+        border-radius: 5px;
+        margin: 3px;
+        font-size: 2.2vw !important;
+        min-width: 250px;
+        height: 70px;
+        padding: 5px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .three {
+
+        width: 100%;
+        height: 400px;
+    }
+
+    .four {
+        float: left;
+        margin: 3px;
+        border: 2px white solid;
+        border-radius: 5px;
+        width: 45%;
+        height: 400px;
+    }
+
+    .five {
+        float: right;
+        margin: 3px;
+        border: 2px white solid;
+        border-radius: 5px;
+        width: 45%;
+        height: 400px;
+    }
+
+
     .dropbtn {
         background-color: gray;
         color: white;
@@ -79,6 +127,7 @@
     .show {
         display: block;
     }
+
     ::-webkit-scrollbar {
         width: 1px;
     }
@@ -89,18 +138,18 @@
 
 
     <div class="dropdown">
-        <button onclick="dropdownMenu()" class="dropbtn" style="background-color: slategray;" >Menu</button>
+        <button onclick="dropdownMenu()" class="dropbtn" style="background-color: slategray;">Menu</button>
         <div id="myDropdown" class="dropdown-content" style="background-color: lightgray;color: white;">
             <?php
             if (auth()->user()) {
-                if (auth()->user()->company_id == 0) {
-                    ?>
-                     <a style='font-size:2.2vw;font-weight: bold; padding: 10px;' href='/admin'> Main </a>
-                   <a style='font-size:2vw; padding: 10px; ' href='{{route("company-works.index")}}'> All orders </a>
-                    <a style='font-size:2vw;  padding: 10px ;   ' href='{{route('admin-drivers.index')}}'> Drivers </a>
-                    <a style='font-size:2vw;  padding: 10px;' href=' {{route('payments.index')}}'> Pay Slips </a>
-                <?php
-                }
+            if (auth()->user()->company_id == 0) {
+            ?>
+            <a style='font-size:2.2vw;font-weight: bold; padding: 10px;' href='/admin'> Main </a>
+            <a style='font-size:2vw; padding: 10px; ' href='{{route("company-works.index")}}'> All orders </a>
+            <a style='font-size:2vw;  padding: 10px ;   ' href='{{route('admin-drivers.index')}}'> Drivers </a>
+            <a style='font-size:2vw;  padding: 10px;' href=' {{route('payments.index')}}'> Pay Slips </a>
+            <?php
+            }
             }
             ?>
             <a style="font-size:2vw; padding: 10px; font-weight: bold; color: red;" href="/logout"> Log out </a>

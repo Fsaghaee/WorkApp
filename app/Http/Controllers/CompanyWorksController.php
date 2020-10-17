@@ -10,30 +10,13 @@ use Symfony\Component\VarDumper\Cloner\Data;
 
 class CompanyWorksController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $allworks = DB::table('works')
             ->join('users', 'works.driver_id', '=', 'users.id')
             ->select('works.*', 'users.name')->orderBy('works.working_day', 'desc')
             ->where('works.company_id', '=', auth()->user()->id)->get();
-
-       // $worksfirst = DB::table('works')->where('working_day', '>=', date('yy-m-01'))
-         //   ->where('working_day', '<=', date('yy-m-15'))->sum('orders');
-
-      //  $workssecond = DB::table('works')->where('working_day', '>=', date('yy-m-16'))
-    //        ->where('working_day', '<=', date('yy-m-t'))->sum('orders');
-
-  //      $worksLasrSecond = DB::table('works')->where('working_day', '>=', date('yy-m-16', strtotime("-1 month")))
-//            ->where('working_day', '<=', date('yy-m-t', strtotime("-1 month")))->sum('orders');
-
-
-     //
-
         $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day', 'desc')->get();
         $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day', 'desc')->get();;
 
@@ -55,6 +38,8 @@ class CompanyWorksController extends Controller
             ->groupBy('day')->get();
 
 
+
+
         return view('Admin/CompanyWorks', compact('allworks','klosSum', 'WienSum', 'avgKlos', 'avgWien'));
     }
 
@@ -72,7 +57,10 @@ class CompanyWorksController extends Controller
 
     }
 
+public function getfirstday(){
+   return $firstDay=DB::table('works')->select('working_day')->orderBy('working_day','asc')->first()->working_day;
 
+}
 
     public function getaccountrWork(string $first, string $second)
     {
@@ -81,18 +69,18 @@ class CompanyWorksController extends Controller
 
         foreach ($locations as $location) {
 
-            echo '<div style="padding: 10px;">';
+            echo '<div style="padding-top: 10px;">';
             $worksLasrSecond = DB::table('works')->select('working_account', DB::raw('sum(orders) as total'))->where('working_day', '>=', $first)
                 ->where('working_day', '<=', $second)->where('location', '=', $location->location)->groupBy('working_account')->get();
             $sum = 0;
-            echo '<h3  style="text-align: center;color: white;">' . $location->location . '</h3><br>';
+            echo '<h5  style="text-align: left;color: white; text-align: center;">' . $location->location . '</h5>';
             foreach ($worksLasrSecond as $a) {
-                echo '<h4  style="text-align: center;color: black;">' . $a->working_account . ' : ' . $a->total . '</h4>';
+                echo '<h5  style="text-align: left;color: black; text-align: center;">' . $a->working_account . ' : ' . $a->total . '</h5>';
                 $sum += $a->total;
-                echo '<br>';
+
 
             }
-            echo '<h2 style="text-align: center;color: red;">'.$sum.'</h2></div>';
+            echo '<h4 style="text-align: center;color: red;">'.$sum.'</h4></div>';
         }
 
 
