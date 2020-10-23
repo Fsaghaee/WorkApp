@@ -60,7 +60,7 @@
             $x = (new App\Http\Controllers\CompanyWorksController)->getfirstday();
             $t = date('m', strtotime($x));
 
-            for ($m = $t; $m <= date('m'); $m++) {
+            for ($m = date('m'); $m >= $t; $m--) {
                 $firstday1 = date('yy-' . $m . '-01');
                 $firstday2 = date('yy-' . $m . '-16');
                 $lastday1 = date('yy-' . $m . '-15');
