@@ -73,10 +73,11 @@
                 echo "<div class='one'><button onclick = 'w3.toggleShow(\"#$temp\")' > $label</button ></div>";
                 echo "<div id=$temp class='three' style='  display: none;'>";
                 echo "<div class='four' style='overflow-y: scroll;'>";
-                echo ' <br><h3>' . $firstday1 . ' ** ' . $lastday1 . '</h3><br>';
+                echo ' <br><h3>' . $firstday1 . ' ** ' . $lastday1 . '</h3>';
+
+                (new App\Http\Controllers\AdminPageController)->printearn($firstday1, $lastday1);
                 echo "<div class='row'>";
                 echo "<div class='col'>";
-                (new App\Http\Controllers\AdminPageController)->printearn($firstday1, $lastday1);
                 echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday1, $lastday1);
                 $total = 0;
                 echo "</div><div class='col'>";
@@ -102,10 +103,11 @@
 
                 echo "<div class='five' style='overflow-y: scroll;'>";
 
-                echo ' <br><h3>' . $firstday2 . ' ** ' . $lastday2 . '</h3><br>';
+                echo ' <br><h3>' . $firstday2 . ' ** ' . $lastday2 . '</h3>';
+
+                (new App\Http\Controllers\AdminPageController)->printearn($firstday2, $lastday2);
                 echo "<div class='row'>";
                 echo "<div class='col'>";
-                (new App\Http\Controllers\AdminPageController)->printearn($firstday2, $lastday2);
                 echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday2, $lastday2);
                 $total = 0;
 
