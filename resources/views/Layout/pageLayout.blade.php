@@ -58,7 +58,7 @@
     .three {
 
         width: 100%;
-        height: 400px;
+        height: 450px;
     }
 
     .four {
@@ -66,8 +66,8 @@
         margin: 3px;
         border: 2px white solid;
         border-radius: 5px;
-        width: 45%;
-        height: 400px;
+        width: 48%;
+        height: 450px;
     }
 
     .five {
@@ -75,8 +75,8 @@
         margin: 3px;
         border: 2px white solid;
         border-radius: 5px;
-        width: 45%;
-        height: 400px;
+        width: 48%;
+        height: 450px;
     }
 
 
