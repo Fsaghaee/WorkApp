@@ -47,7 +47,7 @@
         border-radius: 5px;
         margin: 3px;
         font-size: 2.2vw !important;
-        min-width: 250px;
+        min-width: 180px;
         height: 70px;
         padding: 5px;
         overflow-x: scroll;
