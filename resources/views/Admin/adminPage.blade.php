@@ -216,11 +216,11 @@
             ?>
         </div>
     </div>
-    <div class="row" style="    padding: 0 30px;">
-        <div class="col" id="Kloster" style="height: 270px; width: 100%; padding: 5px;"></div>
-        <div class="col" id="wien" style="height: 270px; width: 100%; padding: 5px;"></div>
+
+        <div  id="Kloster" style="height: 270px; width: 100%; padding: 5px;"></div>
+        <div  id="wien" style="height: 270px; width: 100%; padding: 5px;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    </div>
+
     </div>
     <script>
 
