@@ -38,9 +38,7 @@ class CompanyWorksController extends Controller
             ->groupBy('day')->get();
 
 
-
-
-        return view('Admin/CompanyWorks', compact('allworks','klosSum', 'WienSum', 'avgKlos', 'avgWien'));
+        return view('Admin/CompanyWorks', compact('allworks', 'klosSum', 'WienSum', 'avgKlos', 'avgWien'));
     }
 
 
@@ -52,15 +50,16 @@ class CompanyWorksController extends Controller
             ->where('working_day', '<=', $second)
             ->where('driver_id', '=', $driver)->sum('orders');
 
-            return  $worksLasrSecond ;
+        return $worksLasrSecond;
 
 
     }
 
-public function getfirstday(){
-   return $firstDay=DB::table('works')->select('working_day')->orderBy('working_day','asc')->first()->working_day;
+    public function getfirstday()
+    {
+        return $firstDay = DB::table('works')->select('working_day')->orderBy('working_day', 'asc')->first()->working_day;
 
-}
+    }
 
     public function getaccountrWork(string $first, string $second)
     {
@@ -80,7 +79,7 @@ public function getfirstday(){
 
 
             }
-            echo '<h4 style="text-align: center;color: red;">'.$sum.'</h4></div>';
+            echo '<h4 style="text-align: center;color: red;">' . $sum . '</h4></div>';
         }
 
 
@@ -126,7 +125,7 @@ public function getfirstday(){
             'orders' => 'required',
             'location' => 'required',
             'working_account' => 'required',
-
+            'comment' => 'required',
         ]);
 
 
@@ -137,7 +136,7 @@ public function getfirstday(){
         $work->driver_id = 8;
         $work->company_id = $request->company_id;
         $work->wetter_temp = '99';
-        $work->wetter_main = 'Unknown';
+        $work->wetter_main =$request->comment;
         $work->working_account = $request->working_account;
         $work->location = $request->location;
         $work->save();

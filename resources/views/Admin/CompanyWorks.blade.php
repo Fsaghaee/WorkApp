@@ -22,6 +22,8 @@
             {!! form::date('working_day',null,array('class'=>'form-control')) !!}
             {!! form::label('orders','Orders/Bestellungen :') !!}
             {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:4vw;','placeholder'=>'0','required']) !!}
+            {!! form::label('comment','Comment :') !!}
+            {!! form::text('comment',null,['class'=>'form-control' ,'style'=>'font-size:4vw;','placeholder'=>'Comment','required']) !!}
             {!! form::label('working_account','Account/Konto :') !!}
             {!! form:: select('working_account',$tempaccounts,array('class'=>'form-control','id'=>'account')) !!}
             {!! form::label('location','Locations/Ort :') !!}
