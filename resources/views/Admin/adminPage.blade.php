@@ -61,8 +61,8 @@
             $t = date('m', strtotime($x));
 
             for ($m = date('m'); $m >= $t; $m--) {
+                $shouldPay = 0;
                 $firstday1 = date('yy-' . $m . '-01');
-
                 $lastday1 = date('yy-' . $m . '-15');
                 $firstday2 = date('yy-' . $m . '-16');
                 $lastday2 = date("Y-m-t", strtotime(date('yy-' . $m . '-t'))) ;
@@ -74,7 +74,9 @@
                 echo "<div class='four' style='overflow-y: scroll;'>";
                 echo ' <br><h3>' . $firstday1 . ' ** ' . $lastday1 . '</h3>';
 
-                (new App\Http\Controllers\AdminPageController)->printearn($firstday1, $lastday1);
+                $worksLasrFirst = (new App\Http\Controllers\AdminPageController)->printearn($firstday1, $lastday1);
+                echo '' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;"> € </span>  ';
+
                 echo "<div class='row'>";
                 echo "<div class='col'>";
                 echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday1, $lastday1);
@@ -84,8 +86,11 @@
                     if ($allDriver->name == 'Farzad') {
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 5.4 . ' € )<br>';
                     } elseif ($allDriver->name == 'Reza') {
+
+                        $shouldPay += ((new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4.1);
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4.1 . ' € )<br>';
                     } else {
+                       $shouldPay +=((new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4);
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4 . ' € )<br>';
                     }
                     if ($allDriver->name == 'Farzad') {
@@ -97,14 +102,14 @@
                     }
                 }
                 echo "</div></div>";
-                echo '<h3 style="color: red;font-weight: bold;">' .$total.'</h3>';
+                echo '<h5 style="color: red;"> Earned :' .$total.'<br> Pay : '.$shouldPay.' </h5>';
                 echo "</div>";
-
+                $shouldPay = 0;
                 echo "<div class='five' style='overflow-y: scroll;'>";
-
                 echo ' <br><h3>' . $firstday2 . ' ** ' . $lastday2 . '</h3>';
+                $worksLasrFirst = (new App\Http\Controllers\AdminPageController)->printearn($firstday2, $lastday2);
+                echo '' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;"> € </span>  ';
 
-                (new App\Http\Controllers\AdminPageController)->printearn($firstday2, $lastday2);
                 echo "<div class='row'>";
                 echo "<div class='col'>";
                 echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday2, $lastday2);
@@ -114,10 +119,11 @@
                 foreach ($allDrivers as $allDriver) {
                     if ($allDriver->name == 'Farzad') {
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 5.4 . ' € )<br>';
-                    }elseif ($allDriver->name == 'Farzad') {
+                    }elseif ($allDriver->name == 'Reza') {
+                        $shouldPay += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4.1;
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4.1 . ' € )<br>';
                     }else{
-
+                        $shouldPay += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4;
                             echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4 . ' € )<br>';
 
                     }
@@ -132,7 +138,7 @@
 
                 }
                 echo "</div></div>";
-                echo '<h3 style="color: red;font-weight: bold;">' .$total.'</h3>';
+                echo '<h5 style="color: red;"> Earned :' .$total.'<br> Pay : '.$shouldPay.' </h5>';
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";

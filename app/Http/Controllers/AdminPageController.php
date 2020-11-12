@@ -66,7 +66,7 @@ class AdminPageController extends Controller
         $worksLasrFirst = DB::table('works')->where('working_day', '>=', date($t1))
             ->where('working_day', '<=', date($t2))->sum('orders');
 
-        echo '' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;"> € </span>  ';
+        return $worksLasrFirst;
 
     }
 
