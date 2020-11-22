@@ -17,6 +17,7 @@ class CompanyWorksController extends Controller
             ->join('users', 'works.driver_id', '=', 'users.id')
             ->select('works.*', 'users.name')->orderBy('works.working_day', 'desc')
             ->where('works.company_id', '=', auth()->user()->id)->get();
+
         $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day', 'desc')->get();
         $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day', 'desc')->get();;
 

@@ -39,10 +39,14 @@ class AdminPageController extends Controller
 
                 $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day')->get();
                 $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day')->get();;
+                $TotalSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->groupBy('working_day')->orderBy('working_day')->get();;
+
                 $allDrivers = DB::table('users')->select('id', 'name')->where('company_id', '=', auth()->user()->id)->get();
                 $locations = DB::table('works')->select('location')->groupBy('location')->get();
 
-                return view('Admin/adminPage', compact('works', 'klosSum', 'WienSum', 'worksfirst', 'worksLasrSecond', 'workssecond', 'worksLasrFirst', 'allDrivers', 'locations'));
+
+
+                return view('Admin/adminPage', compact('works', 'klosSum', 'WienSum', 'worksfirst', 'worksLasrSecond', 'workssecond', 'worksLasrFirst', 'allDrivers', 'locations','TotalSum'));
             } elseif (auth()->user()->company_id != 0) {
                 return view('Driver/mainPage');
             }

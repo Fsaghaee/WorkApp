@@ -28,12 +28,20 @@
 
     $dataPoints01 = array();
     $dataPoints02 = array();
+    $dataPoints03 = array();
     foreach ($klosSum as $k) {
         array_push($dataPoints01, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day)), "color" => "black"));
     }
     foreach ($WienSum as $k) {
+
         array_push($dataPoints02, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day)), "color" => "black"));
     }
+
+    foreach ($TotalSum as $k) {
+
+        array_push($dataPoints03, array("y" => $k->total, "label" => date('m.d D', strtotime($k->working_day)), "color" => "red"));
+    }
+
     $locat = array();
     foreach ($locations as $loc) {
         array_push($locat, $loc->location);
@@ -65,7 +73,7 @@
                 $firstday1 = date('yy-' . $m . '-01');
                 $lastday1 = date('yy-' . $m . '-15');
                 $firstday2 = date('yy-' . $m . '-16');
-                $lastday2 = date("Y-m-t", strtotime(date('yy-' . $m . '-t'))) ;
+                $lastday2 = date("Y-m-t", strtotime(date('yy-' . $m . '-t')));
                 $temp = date("F", strtotime(date('yy-' . $m . '-01')));
                 $label = date("yy-M", strtotime(date('yy-' . $m . '-01')));
                 echo "<div  class='some'>";
@@ -90,7 +98,7 @@
                         $shouldPay += ((new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4.1);
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4.1 . ' € )<br>';
                     } else {
-                       $shouldPay +=((new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4);
+                        $shouldPay += ((new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4);
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4 . ' € )<br>';
                     }
                     if ($allDriver->name == 'Farzad') {
@@ -102,7 +110,7 @@
                     }
                 }
                 echo "</div></div>";
-                echo '<h5 style="color: red;"> Earned :' .$total.'<br> Pay : '.$shouldPay.' </h5>';
+                echo '<h5 style="color: red;"> Earned :' . $total . '<br> Pay : ' . $shouldPay . ' </h5>';
                 echo "</div>";
                 $shouldPay = 0;
                 echo "<div class='five' style='overflow-y: scroll;'>";
@@ -119,12 +127,12 @@
                 foreach ($allDrivers as $allDriver) {
                     if ($allDriver->name == 'Farzad') {
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 5.4 . ' € )<br>';
-                    }elseif ($allDriver->name == 'Reza') {
+                    } elseif ($allDriver->name == 'Reza') {
                         $shouldPay += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4.1;
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4.1 . ' € )<br>';
-                    }else{
+                    } else {
                         $shouldPay += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4;
-                            echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4 . ' € )<br>';
+                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4 . ' € )<br>';
 
                     }
 
@@ -138,7 +146,7 @@
 
                 }
                 echo "</div></div>";
-                echo '<h5 style="color: red;"> Earned :' .$total.'<br> Pay : '.$shouldPay.' </h5>';
+                echo '<h5 style="color: red;"> Earned :' . $total . '<br> Pay : ' . $shouldPay . ' </h5>';
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";
@@ -199,6 +207,8 @@
             ?>
         </table>
     </div>
+
+
     <div class="row" style="    padding: 0 30px;">
         <div class="col">
             <?php
@@ -222,10 +232,11 @@
             ?>
         </div>
     </div>
+    <div id="Total" style="height: 270px; width: 100%; padding: 5px;"></div>
+    <div id="Kloster" style="height: 270px; width: 100%; padding: 5px;"></div>
+    <div id="wien" style="height: 270px; width: 100%; padding: 5px;"></div>
 
-        <div  id="Kloster" style="height: 270px; width: 100%; padding: 5px;"></div>
-        <div  id="wien" style="height: 270px; width: 100%; padding: 5px;"></div>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
     </div>
     <script>
@@ -338,8 +349,37 @@
                     dataPoints: <?php echo json_encode($dataPoints02, JSON_NUMERIC_CHECK); ?>
                 }]
             });
+
+            var chart03 = new CanvasJS.Chart("Total", {
+                title: {
+                    text: "Total"
+                },
+                backgroundColor: "gray",
+
+
+                axisX: {
+                    gridThickness: 0,
+                    tickLength: 0,
+                    lineThickness: 0,
+
+                },
+                axisY: {
+                    gridThickness: 0,
+                    tickLength: 0,
+                    lineThickness: 0,
+
+                },
+                data: [{
+                    type: "area",
+                    color: "white",
+                    dataPoints: <?php echo json_encode($dataPoints03, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+
+
             chart01.render();
             chart02.render();
+            chart03.render();
 
         }
 
