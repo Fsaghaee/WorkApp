@@ -73,7 +73,7 @@
                 $firstday1 = date('yy-' . $m . '-01');
                 $lastday1 = date('yy-' . $m . '-15');
                 $firstday2 = date('yy-' . $m . '-16');
-                $lastday2 = date("Y-m-t", strtotime(date('yy-' . $m . '-t')));
+                $lastday2 = date("Y-m-t", strtotime(date('yy-' . $m . '-10')));
                 $temp = date("F", strtotime(date('yy-' . $m . '-01')));
                 $label = date("yy-M", strtotime(date('yy-' . $m . '-01')));
                 echo "<div  class='some'>";
