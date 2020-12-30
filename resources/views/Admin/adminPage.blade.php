@@ -216,19 +216,11 @@
             $date = date('yy-m-d');
             $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
             $response = json_decode($response, true);
-            echo date('M.d D') . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
+            echo date('M.d D') . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .'   °C'.
                 ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
             echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
             echo '</h6>';
 
-            echo '</div><div class="col"><h6 style="font-size:3vw;">';
-            $date = date('yy-m-d', strtotime($date . ' +1 day'));
-            $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
-            $response = json_decode($response, true);
-            echo date('M.d D', strtotime(' +1 day')) . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
-                ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
-            echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
-            echo '</h6>';
             ?>
         </div>
     </div>

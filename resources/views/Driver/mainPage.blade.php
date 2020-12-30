@@ -16,18 +16,13 @@
 
         echo '<div class="row" style="color: white;"> <div class="col">';
         echo '<h6 style="font-size:3vw; text-align: center;">';
-        echo 'Heute:  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .
+        echo 'Heute:  <br>' .date('M.d D').'<br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .'   °C'.
             ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
         echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
         echo '</h6>';
-        echo '</div><div class="col"><h6 style="font-size:3vw;text-align: center;">';
-        $date = date('yy-m-d', strtotime($date . ' +1 day'));
-        $Tresponse = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
-        $Tresponse = json_decode($Tresponse, true);
-        echo 'Morgen:  <br>' . $Tresponse['forecast']['forecastday'][0]['day']['maxtemp_c'] .
-            ' <br> ' . $Tresponse['forecast']['forecastday'][0]['day']['condition']['text'];
-        echo '<img src="' . $Tresponse['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
-        echo '</h6>';
+
+
+
         echo '</div></div>';
 
         $TempDate = array(
