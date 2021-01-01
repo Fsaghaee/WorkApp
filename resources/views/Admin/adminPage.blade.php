@@ -68,6 +68,7 @@
             $x = (new App\Http\Controllers\CompanyWorksController)->getfirstday();
 
             $t = date('Y-m', strtotime($x));
+
             for ($m = date('Y-m'); $m >= $t;  $m = date('Y-m', strtotime("- 1 months", strtotime($m)))     ) {
 
                 $shouldPay = 0;
