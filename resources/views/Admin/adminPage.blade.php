@@ -66,16 +66,17 @@
 
             <?php
             $x = (new App\Http\Controllers\CompanyWorksController)->getfirstday();
-            $t = date('m', strtotime($x));
 
-            for ($m = date('m'); $m >= $t; $m--) {
+            $t = date('Y-m', strtotime($x));
+            for ($m = date('Y-m'); $m >= $t;  $m = date('Y-m', strtotime("- 1 months", strtotime($m)))     ) {
+
                 $shouldPay = 0;
-                $firstday1 = date('yy-' . $m . '-01');
-                $lastday1 = date('yy-' . $m . '-15');
-                $firstday2 = date('yy-' . $m . '-16');
-                $lastday2 = date("Y-m-t", strtotime(date('yy-' . $m . '-10')));
-                $temp = date("F", strtotime(date('yy-' . $m . '-01')));
-                $label = date("yy-M", strtotime(date('yy-' . $m . '-01')));
+                $firstday1 = date($m . '-01');
+                $lastday1 = date($m . '-15');
+                $firstday2 = date( $m . '-16');
+                $lastday2 = date("Y-m-t", strtotime(date($m . '-10')));
+                $temp = date("F", strtotime(date( $m . '-01')));
+                $label = date("Y-M", strtotime(date( $m . '-01')));
                 echo "<div  class='some'>";
                 echo "<div class='one'><button onclick = 'w3.toggleShow(\"#$temp\")' > $label</button ></div>";
                 echo "<div id=$temp class='three' style='  display: none;'>";
@@ -213,7 +214,7 @@
         <div class="col">
             <?php
             echo '<h6 style="font-size:3vw;">';
-            $date = date('yy-m-d');
+            $date = date('Y-m-d');
             $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
             $response = json_decode($response, true);
             echo date('M.d D') . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .'   °C'.

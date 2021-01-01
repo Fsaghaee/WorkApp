@@ -10,7 +10,7 @@
             $str = substr($str, 0, $pos) . $insertstr . substr($str, $pos);
             return $str;
         }
-        $date = date('yy-m-d');
+        $date = date('Y-m-d');
         $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
         $response = json_decode($response, true);
 
