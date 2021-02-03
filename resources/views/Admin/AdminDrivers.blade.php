@@ -2,10 +2,27 @@
 
 @section('centercontent')
     <div style="margin: 20px;">
-        <h5 style="font-size:5vw;"> {{auth()->user()->name }}'s Drivers :</h5>
-        <br>
+        <h5 style="font-size:2vw;"> {{auth()->user()->name }}'s Drivers :</h5>
+
         <div style="border-top: 6px solid lightgray ;"></div>
-        <table style="width: 98%; font-size:1vw; margin:5px 0; text-align: center;color: black;padding-top: 5px;">
+        <table style="width: 98%; font-size:.7vw; margin:5px 0; text-align: center;color: black;padding-top: 5px;">
+
+
+            <tr>
+                <th style="text-align: center;">ID</th>
+                <th style="text-align: center;">Name</th>
+                <th style="text-align: center;">Family</th>
+                <th style="text-align: center;">Address</th>
+                <th style="text-align: center;">Tell</th>
+                <th style="text-align: center;">Bank</th>
+                <th style="text-align: center;">Email</th>
+                <th style="text-align: center;">Birthday</th>
+                <th style="text-align: center;">Insurance</th>
+                <th style="text-align: center;">Pay-order</th>
+                <th style="text-align: center;">Anm.</th>
+                <th style="text-align: center;">Abm.</th>
+            </tr>
+
 
             @foreach($drivers as $driver)
                 <tr>
@@ -13,20 +30,22 @@
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->name}} </td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->family}} </td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->address}}</td>
-                    <td style="border-bottom: 1px dotted gray;">  <?php echo strstr($driver->tell, '6'); ?></td>
+                    <td style="border-bottom: 1px dotted gray;"> {{$driver->tell}}</td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->bank_account}}</td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->email}}</td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->birthday}}</td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->insurance_number}}</td>
                     <td style="border-bottom: 1px dotted gray;"> {{$driver->pay_order}} €</td>
+                    <td style="border-bottom: 1px dotted gray;"> {{$driver->register_date}} </td>
+                    <td style="border-bottom: 1px dotted gray;"> {{$driver->unregister_date}} </td>
                 </tr>
             @endforeach
         </table>
-        <br>
+
     </div>
     <h5 style="font-size:1.vw;font-weight: bold;text-align: center;width: 100% ">Add new driver</h5>
-    <br>
-    <div class="row"style="padding: 10px;">
+
+    <div class="row" style="padding: 10px;">
         <div class="col-6">
             {!! Form::open(['method'=>'POST','action'=>'AdminDriversController@store' ,'style'=>'font-size:1vw;']) !!}
             {!! form::label('name','Name :') !!}
@@ -71,15 +90,15 @@
     <?php
 
     $t = [];
-    foreach ($drivers as $driver){
-        $t[$driver->id]=$driver->name.' '.$driver->family ;
+    foreach ($drivers as $driver) {
+        $t[$driver->id] = $driver->name . ' ' . $driver->family;
     }
 
 
     ?>
 
     <h5 style="font-size:1.vw;font-weight: bold;text-align: center;width: 100% ">Update driver</h5>
-    <div class="row"style="padding: 10px;">
+    <div class="row" style="padding: 10px;">
         <div class="col-6">
             {!! Form::open(['route'=>['drverUpdate'],'method' => 'PATCH','style'=>'font-size:1vw;']) !!}
             {!! form::label('id','Driver :') !!}
