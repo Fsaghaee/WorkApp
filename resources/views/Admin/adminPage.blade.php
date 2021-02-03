@@ -129,10 +129,11 @@
 
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) .' -- '. (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) *  $allDriver->pay_order.'€<br>';
                     }
+
+                    echo "</div></div>";
                     echo "<h6> Shoud pay :  $shouldPay </h6>";
                     $eraned=$worksLasrFirst * 5.4 -$shouldPay;
                     echo "<h6> Earned : $eraned </h6>";
-                    echo "</div></div>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";
