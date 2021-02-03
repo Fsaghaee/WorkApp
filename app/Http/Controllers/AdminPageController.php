@@ -41,7 +41,7 @@ class AdminPageController extends Controller
                 $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day')->get();;
                 $TotalSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->groupBy('working_day')->orderBy('working_day')->get();;
 
-                $allDrivers = DB::table('users')->select('id', 'name')->where('company_id', '=', auth()->user()->id)->get();
+                $allDrivers = DB::table('users')->select('id', 'name','pay_order')->where('company_id', '=', auth()->user()->id)->get();
                 $locations = DB::table('works')->select('location')->groupBy('location')->get();
 
 

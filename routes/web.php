@@ -25,10 +25,16 @@ Route::resource('/admin-drivers', 'AdminDriversController');
 Route::resource('/admin-invoices', 'AdminInvoicesController');
 Route::resource('/admin-income', 'AdminIncomeController');
 Route::resource('/payments', 'PaymentsController');
+Route::patch('/admin-drivers', 'AdminDriversController@updateDriver')->name('drverUpdate'); // note the name() method.
+
+
+
+
 
 
 Route::get('/register', 'RegistrationController@create');
 Route::post('register', 'RegistrationController@store');
+
 Route::get('/login', 'LoginController@create');
 Route::post('/login', 'LoginController@store');
 Route::get('/logout', 'LoginController@destroy');

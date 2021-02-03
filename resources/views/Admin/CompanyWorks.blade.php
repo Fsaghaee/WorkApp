@@ -1,8 +1,8 @@
 @extends('Layout.pageLayout')
 @section('centercontent')
-    <div style="margin:0 5px;background-color: gray;color: white;">
+    <div style="margin:0 5px;background-color: white;color: black;">
 
-        <div style="margin: 0;width: 100%; background-color: gray; width: 100%; height: 50px;color: white;">
+        <div style="margin: 0;width: 100%; background-color: white; width: 100%; height: 50px;color: black;">
 
             <div id="summeryDiv" style="padding: 10px; display: inline-block;"><h4> Summery </h4></div>
             <div id="unknownDiv" style="padding: 10px; display: inline-block;"><h4> Unknown Orders </h4></div>
@@ -33,13 +33,14 @@
             {!! Form::close() !!}
 
         </div>
-        <div id="summery">
+        <div id="summery" style="display: none;">
 
             <?php
             echo '<div class="row" style="text-align: center;">';
             echo '<div class="col-6" >';
             echo '<h7 style="font-weight:600;">Klosterneuburg</h7>';
             echo '<div  style="overflow-y: scroll;display: block;height: 230px;">';
+
             echo '<table style="width: 100%; text-align: center !important;padding: 10px;margin: 5px;">';
             $border = "";
             foreach ($klosSum as $t) {
@@ -51,20 +52,33 @@
                 }
 
 
-                if (($t->total * 5.4) < 60) {
+
                     echo '<tr>';
-                    echo '<td  style=" padding-left: 20px;padding-right: 90px; background-color: #57b846;' . $border . ' ">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #57b846; ' . $border . ' "> ' . $t->total . '</td>';
+                    echo '<td style="padding-left: 20px;padding-right: 90px;' . $border . '">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;' . $border . ' "> ' . $t->total . '</td>';
+                    echo '</tr>';
+
+
+
+            }
+            echo '</table>';
+            echo '</div>';
+            echo '<table style="width: 100%; text-align: center !important;padding: 10px;margin: 5px;">';
+            foreach ($avgKlos as $x) {
+
+                if (round($x->av, 2) < 14.8) {
+                    echo '<tr>';
+                    echo '<td style="padding-left: 20px;padding-right: 90px; background-color: slategray;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: slategray;"> ' . round($x->av, 2) . '</td>';
                     echo '</tr>';
                 } else {
                     echo '<tr>';
-                    echo '<td style="padding-left: 20px;padding-right: 90px;' . $border . '">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;' . $border . ' "> ' . $t->total . '</td>';
+                    echo '<td style="padding-left: 20px;padding-right: 90px; background-color: #117a8b;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #117a8b;"> ' . round($x->av, 2) . '</td>';
                     echo '</tr>';
                 }
 
 
             }
             echo '</table>';
-            echo '</div>';
+
             echo '</div>';
             echo '<div class="col-6">';
 
@@ -77,38 +91,20 @@
                 echo '</tr>';
             }
             echo '</table>';
-            echo '</div></div></div>';
-            echo '<div class="row">';
-            echo '<div class="col-6">';
-            echo '<div  style="overflow-y: scroll;display: block;height: 190px;">';
-            echo '<table style="width: 100%; text-align: center !important;padding: 10px;margin: 5px;">';
-            foreach ($avgKlos as $x) {
-
-                if (round($x->av, 2) < 14.8) {
-                    echo '<tr>';
-                    echo '<td style="padding-left: 90px;padding-right: 90px; background-color: slategray;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: slategray;"> ' . round($x->av, 2) . '</td>';
-                    echo '</tr>';
-                } else {
-                    echo '<tr>';
-                    echo '<td style="padding-left: 90px;padding-right: 90px; background-color: #117a8b;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;background-color: #117a8b;"> ' . round($x->av, 2) . '</td>';
-                    echo '</tr>';
-                }
-
-
-            }
-            echo '</table>';
-            echo '</div></div>';
-            echo '<div class="col-6">';
-            echo '<div  style="overflow-y: scroll;display: block;height: 190px;">';
+            echo '</div>';
             echo '<table style="width: 100%; text-align: center !important;padding: 10px;margin: 5px;">';
             foreach ($avgWien as $x) {
                 echo '<tr>';
-                echo '<td style="padding-left: 90px;padding-right: 90px;">' . $x->day . ' </td><td style="padding-left: 90px;padding-right: 90px;"> ' . round($x->av, 2) . '</td>';
+                echo '<td style="padding-left: 20px;padding-right: 90px;">' . $x->day . ' </td><td style="padding-left: 30px;padding-right: 90px;"> ' . round($x->av, 2) . '</td>';
                 echo '</tr>';
 
             }
             echo '</table>';
-            echo '</div></div></div></div>';
+            echo '</div></div></div>';
+
+
+
+
 
 
             $total = 0;
@@ -120,7 +116,7 @@
             <div class="row">
                 <div class="col-3">
                     <select id="inputDay" onclick="DaySearch()"
-                            style="margin-top: 20px; background-color: gray;color: white;padding-left: 15px; font-size: 1vw;margin-left: 5px;">
+                            style="margin-top: 20px; background-color: white;color: black;padding-left: 15px; font-size: 1.6vw;margin-left: 5px;height: 4vw;">
                         <option value="">Select</option>
                         <option value="Mon">Mon</option>
                         <option value="Tue">Din</option>
@@ -134,13 +130,13 @@
                 </div>
                 <div class="col-3">
                     <input type="text" id="inputName"
-                           style="padding-left: 15px; margin-top: 10px; background-color: gray;color: white;margin-left: 5px;"
+                           style="padding-left: 15px; margin-top: 10px; background-color: white;color: black;margin-left: 5px;height: 4vw;font-size: 1.6vw;"
                            onkeyup="NameSearch()" placeholder="Name"/><br>
                 </div>
                 <div class="col-3">
 
                     <select id="inputLocation" onclick="LocationSearch()"
-                            style="margin-top: 20px; font-size: 1vw;background-color: gray;margin-left: 5px;color: white;padding-left: 15px;">
+                            style="margin-top: 20px; font-size: 1.6vw;background-color: white;margin-left: 5px;color: black;padding-left: 15px;height: 4vw;">
                         <option value="">Select</option>
                         <option value="K">Klosterneuburg</option>
                         <option value="W">Wien</option>
@@ -149,13 +145,13 @@
                 </div>
                 <div class="col-3">
                     <input type="text"
-                           style="margin-top: 20px;background-color: gray;margin-left: 5px;color: white;padding-left: 15px;"
+                           style="margin-top: 20px;background-color: white;margin-left: 5px;color: black;padding-left: 15px;height: 4vw;font-size: 1.6vw;"
                            id="inputAccount" onkeyup="AccountSearch()" placeholder="Account"/>
                 </div>
             </div>
             <div style="overflow-y: scroll; display: block; height: 800px;">
                 <table
-                    style="height: 350px;background-color: gray; text-align: center !important;padding: 10px;margin: 10px;width: 100%;"
+                    style="height: 350px;background-color: white; text-align: center !important;padding: 10px;margin: 10px;width: 100%;"
                     id="driverTable">
 
                     @foreach($allworks as $work)
@@ -164,7 +160,7 @@
                         if (date('D', strtotime($work->working_day)) == 'Sun' || date('D', strtotime($work->working_day)) == 'Sat') {
                             $color = '#57b846';
                         } else {
-                            $color = 'gray';
+                            $color = 'white';
                         }
                         $workingDay = $work->working_day;
                         ?>

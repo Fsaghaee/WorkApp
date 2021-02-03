@@ -24,12 +24,13 @@ class CreateUserTable extends Migration
                         $table->string('email');
                         $table->string('password');
                         $table->string('remember_token')->nullable();
+            $table->string('pay_order')->nullable();
                         $table->timestamp('updated_at')->useCurrent();
                         $table->timestamp('created_at')->useCurrent();
-                        $table->string('working_email')->nullable()->unique();
+
                         $table->string('insurance_number')->nullable();
                         $table->date('birthday')->nullable();
-                        $table->string('payment_method')->nullable();
+
                         $table->date('register_date')->nullable();
                         $table->date('unregister_date')->nullable();
                         $table->tinyInteger('company_id')->nullable();

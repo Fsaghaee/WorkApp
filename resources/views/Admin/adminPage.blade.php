@@ -49,190 +49,110 @@
     //array('Klosterneuburg', 'Wien', 'Tulln');
     $Days = array('Mon', 'Din', 'Mit', 'Don', 'Fri', 'Sam', 'Sun');
     ?>
-
-    <div style="margin: 5px; overflow-y: scroll;">
-
-
-        <div style="margin: 0;width: 100%; background-color: gray; width: 100%; height: 50px;color: white;">
-
-            <div id="summeryDiv" style="padding: 10px; display: inline-block;"><h4> Summery </h4></div>
-            <div id="tableDiv" style=" display: inline-block;padding: 10px; "><h4> Table </h4></div>
-        </div>
+    <div class="row">
+        <div class="col-6">
 
 
-        <div id="summery"
-             style=" display: none;width: 100%;height: 500px; background-color: gray;padding:0 10px;color: white;display: none;">
+            <div id="summery"
+                 style=" width: 100%;height: 500px; background-color: white;padding:0 10px;color: white;">
 
 
-            <?php
-            $x = (new App\Http\Controllers\CompanyWorksController)->getfirstday();
-
-            $t = date('Y-m', strtotime($x));
-
-            for ($m = date('Y-m'); $m >= $t;  $m = date('Y-m', strtotime("- 1 months", strtotime($m)))     ) {
-
-                $shouldPay = 0;
-                $firstday1 = date($m . '-01');
-                $lastday1 = date($m . '-15');
-                $firstday2 = date( $m . '-16');
-                $lastday2 = date("Y-m-t", strtotime(date($m . '-10')));
-                $temp = date("F", strtotime(date( $m . '-01')));
-                $label = date("Y-M", strtotime(date( $m . '-01')));
-                echo "<div  class='some'>";
-                echo "<div class='one'><button onclick = 'w3.toggleShow(\"#$temp\")' > $label</button ></div>";
-                echo "<div id=$temp class='three' style='  display: none;'>";
-                echo "<div class='four' style='overflow-y: scroll;'>";
-                echo ' <br><h3>' . $firstday1 . ' ** ' . $lastday1 . '</h3>';
-
-                $worksLasrFirst = (new App\Http\Controllers\AdminPageController)->printearn($firstday1, $lastday1);
-                echo '' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;"> € </span>  ';
-
-                echo "<div class='row'>";
-                echo "<div class='col'>";
-                echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday1, $lastday1);
-                $total = 0;
-                echo "</div><div class='col'>";
-                foreach ($allDrivers as $allDriver) {
-                    if ($allDriver->name == 'Farzad') {
-                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 5.4 . ' € )<br>';
-                    } elseif ($allDriver->name == 'Reza') {
-
-                        $shouldPay += ((new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4.1);
-                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4.1 . ' € )<br>';
-                    } else {
-                        $shouldPay += ((new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4);
-                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 4 . ' € )<br>';
-                    }
-                    if ($allDriver->name == 'Farzad') {
-                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 5.4;
-                    } elseif ($allDriver->name == 'Reza') {
-                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 1.3;
-                    } else {
-                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) * 1.4;
-                    }
-                }
-                echo "</div></div>";
-                echo '<h5 style="color: red;"> Earned :' . $total . '<br> Pay : ' . $shouldPay . ' </h5>';
-                echo "</div>";
-                $shouldPay = 0;
-                echo "<div class='five' style='overflow-y: scroll;'>";
-                echo ' <br><h3>' . $firstday2 . ' ** ' . $lastday2 . '</h3>';
-                $worksLasrFirst = (new App\Http\Controllers\AdminPageController)->printearn($firstday2, $lastday2);
-                echo '' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;"> € </span>  ';
-
-                echo "<div class='row'>";
-                echo "<div class='col'>";
-                echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday2, $lastday2);
-                $total = 0;
-
-                echo "</div><div class='col'>";
-                foreach ($allDrivers as $allDriver) {
-                    if ($allDriver->name == 'Farzad') {
-                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 5.4 . ' € )<br>';
-                    } elseif ($allDriver->name == 'Reza') {
-                        $shouldPay += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4.1;
-                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4.1 . ' € )<br>';
-                    } else {
-                        $shouldPay += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4;
-                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) . '  ( ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 4 . ' € )<br>';
-
-                    }
-
-                    if ($allDriver->name == 'Farzad') {
-                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 5.4;
-                    } elseif ($allDriver->name == 'Reza') {
-                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 1.3;
-                    } else {
-                        $total += (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) * 1.4;
-                    }
-
-                }
-                echo "</div></div>";
-                echo '<h5 style="color: red;"> Earned :' . $total . '<br> Pay : ' . $shouldPay . ' </h5>';
-                echo "</div>";
-                echo "</div>";
-                echo "</div>";
-
-
-            }
-
-
-            ?>
-
-        </div>
-
-    </div>
-    </div>
-
-
-
-
-
-
-
-    <div id="Table" style="display: none;padding: 10px;">
-        <button onclick="doCapture()" style="border: 1px solid lightgray;padding: 5px;border-radius: 5px;">Dinstplan
-            von <?php echo date('yy-M-d'); ?></button>
-        <table style="width: 100%;">
-            <tr>
-                <th style="text-align: center;"> Day</th>
                 <?php
-                for ($x = 0; $x < count($locat); $x++) {
-                    $temp = substr($locat[$x], 0, 4);
-                    echo " <th style=\"text-align: center;\">$temp - VorM.</th><th style=\"text-align: center;\"> $temp - NachM.</th>";
+
+                $x = (new App\Http\Controllers\CompanyWorksController)->getfirstday();
+
+                $t = date('Y-m', strtotime($x));
+
+                for ($m = date('Y-m'); $m >= $t; $m = date('Y-m', strtotime("- 1 months", strtotime($m)))) {
+                    $display = "none";
+
+                    if ($m == date('Y-m')) {
+                        $display = "block";
+                    }
+                    $shouldPay = 0;
+                    $firstday1 = date($m . '-01');
+                    $lastday1 = date($m . '-15');
+                    $firstday2 = date($m . '-16');
+                    $lastday2 = date("Y-m-t", strtotime(date($m . '-10')));
+                    $temp = date("F", strtotime(date($m . '-01')));
+                    $label = date("Y-M", strtotime(date($m . '-01')));
+                    echo "<div  class='some'>";
+                    echo "<div class='one'><button onclick = 'w3.toggleShow(\"#$temp\")' > $label</button ></div>";
+                    echo "<div id=$temp class='three' style='  display: $display;'>";
+                    echo "<div class='four' style='overflow-y: scroll;'>";
+                    echo ' <br><h6>' . $firstday1 . ' <br> ' . $lastday1 . '</h6>';
+
+                    $worksLasrFirst = (new App\Http\Controllers\AdminPageController)->printearn($firstday1, $lastday1);
+                    echo '' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' <span style="color: black;"> € </span>  ';
+
+                    echo "<div class='row'>";
+                    echo "<div class='col'>";
+                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday1, $lastday1);
+
+                    echo "</div><div class='col' style='font-size: .7vw;'>";
+                    foreach ($allDrivers as $allDriver) {
+
+                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . ' -- '.(new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) *  $allDriver->pay_order.'€<br>';
+
+                    }
+                    echo "</div></div>";
+                    echo "</div>";
+
+                    echo "<div class='five' style='overflow-y: scroll;'>";
+                    echo ' <br><h6>' . $firstday2 . ' <br> ' . $lastday2 . '</h6>';
+                    $worksLasrFirst = (new App\Http\Controllers\AdminPageController)->printearn($firstday2, $lastday2);
+                    echo '' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;"> € </span>  ';
+
+                    echo "<div class='row'>";
+                    echo "<div class='col'>";
+                    echo (new App\Http\Controllers\CompanyWorksController)->getaccountrWork($firstday2, $lastday2);
+
+
+                    echo "</div><div class='col' style='font-size: .7vw;'>";
+                    foreach ($allDrivers as $allDriver) {
+                        echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) .' -- '. (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) *  $allDriver->pay_order.'€<br>';
+                    }
+                    echo "</div></div>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";
+
+
                 }
+
+
                 ?>
-            </tr>
 
-            <?php
-            for ($i = 0; $i < count($Days); $i++) {
-                echo "<tr style='border-bottom: 1px solid black;'>";
-                echo "<td> $Days[$i]</td>";
-
-                for ($j = 0; $j < count($locat); $j++) {#
-                    echo "<td>";
-                    $tempinput = $locat[$j] . 'v' . $Days[$i];
-                    echo " <div id='$tempinput'>";
-                    echo "<input type=\"button\" value=\" + \" onClick=\"addNew('$tempinput');\" style='width: 95%;margin:0 5px; border: 1px solid lightgray; background-color: lightgray;border-radius: 15px;'>";
-                    echo "</div>";
-                    echo "</td>";
-                    echo "<td>";
-                    $tempinput = $locat[$j] . 'n' . $Days[$i];
-                    echo " <div id='$tempinput'>";
-                    echo "<input type=\"button\" value=\" + \" onClick=\"addNew('$tempinput');\"style='width: 95%;margin: 5px; border: 1px solid lightgray;background-color: lightgray;border-radius: 15px;'>";
-                    echo "</div>";
-                    echo "</td>";
-                }
-
-                echo "</tr>";
-            }
-            ?>
-        </table>
-    </div>
+            </div>
+        </div>
 
 
-    <div class="row" style="    padding: 0 30px;">
-        <div class="col">
-            <?php
-            echo '<h6 style="font-size:3vw;">';
-            $date = date('Y-m-d');
-            $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
-            $response = json_decode($response, true);
-            echo date('M.d D') . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .'   °C'.
-                ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
-            echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
-            echo '</h6>';
+        <div class="col-6">
 
-            ?>
+
+            <div class="row" style="    padding: 0 30px;">
+                <div class="col">
+                    <?php
+                    echo '<h6 style="font-size:2.4vw;">';
+                    $date = date('Y-m-d');
+                    $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
+                    $response = json_decode($response, true);
+                    echo date('M.d D') . '  <br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] . '   °C' .
+                        ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
+                    echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
+                    echo '</h6>';
+
+                    ?>
+                </div>
+            </div>
+            <div id="Total" style="height: 200px; width: 100%; padding: 5px;"></div>
+            <div id="Kloster" style="height: 200px; width: 100%; padding: 5px;"></div>
+            <div id="wien" style="height: 200px; width: 100%; padding: 5px;"></div>
+
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         </div>
     </div>
-    <div id="Total" style="height: 270px; width: 100%; padding: 5px;"></div>
-    <div id="Kloster" style="height: 270px; width: 100%; padding: 5px;"></div>
-    <div id="wien" style="height: 270px; width: 100%; padding: 5px;"></div>
 
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-    </div>
     <script>
 
 
@@ -252,12 +172,12 @@
             newDropdown.style.top = "0";
             newDropdown.style.borderRadius = "15px";
             newDropdown.style.backgroundColor = "gray";
-            newDropdown.style.color = "white";
-                <?php
-                $z = 1;
-                foreach ($allDrivers as $driver) {
-                    $colortemp = "white";
-                    echo "
+            newDropdown.style.color = "black";
+            <?php
+            $z = 1;
+            foreach ($allDrivers as $driver) {
+                $colortemp = "black";
+                echo "
 
            newDropdownOption$z = document.createElement('option');
            newDropdownOption$z.value = '$driver->id';
@@ -266,9 +186,9 @@
            newDropdownOption$z.style.textAlign='center';
            newDropdown.add(newDropdownOption$z);
         ";
-                    $z++;
-                }
-                ?>
+                $z++;
+            }
+            ?>
 
 
 
@@ -299,7 +219,7 @@
             var chart01 = new CanvasJS.Chart("Kloster", {
                 title: {
                     text: "Klosterneuburg"
-                }, backgroundColor: "gray",
+                }, backgroundColor: "white",
                 axisX: {
                     gridThickness: 0,
                     tickLength: 0,
@@ -314,7 +234,7 @@
                 },
                 data: [{
                     type: "area",
-                    color: "white",
+                    color: "black",
                     dataPoints:<?php echo json_encode($dataPoints01, JSON_NUMERIC_CHECK); ?>
                 }]
             });
@@ -322,7 +242,7 @@
                 title: {
                     text: "Wien"
                 },
-                backgroundColor: "gray",
+                backgroundColor: "white",
 
 
                 axisX: {
@@ -339,7 +259,7 @@
                 },
                 data: [{
                     type: "area",
-                    color: "white",
+                    color: "black",
                     dataPoints: <?php echo json_encode($dataPoints02, JSON_NUMERIC_CHECK); ?>
                 }]
             });
@@ -348,7 +268,7 @@
                 title: {
                     text: "Total"
                 },
-                backgroundColor: "gray",
+                backgroundColor: "white",
 
 
                 axisX: {
@@ -365,7 +285,7 @@
                 },
                 data: [{
                     type: "area",
-                    color: "white",
+                    color: "black",
                     dataPoints: <?php echo json_encode($dataPoints03, JSON_NUMERIC_CHECK); ?>
                 }]
             });
@@ -376,31 +296,6 @@
             chart03.render();
 
         }
-
-
-        var something = document.getElementById('tableDiv');
-
-        something.style.cursor = 'pointer';
-        something.onclick = function () {
-            var x = document.getElementById('Table');
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        };
-
-        var something01 = document.getElementById('summeryDiv');
-
-        something01.style.cursor = 'pointer';
-        something01.onclick = function () {
-            var x = document.getElementById('summery');
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        };
 
 
     </script>

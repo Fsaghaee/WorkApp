@@ -3,7 +3,7 @@
 
     <div>
         <br>
-        <h2 style="font-size:4vw;color: white; text-align: center;"> Hallo {{auth()->user()->name }}</h2>
+        <h2 style="font-size:4vw;color: black; text-align: center;"> Hallo {{auth()->user()->name }}</h2>
         <?php
         function stringInsert($str, $insertstr, $pos)
         {
@@ -14,7 +14,7 @@
         $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
         $response = json_decode($response, true);
 
-        echo '<div class="row" style="color: white;"> <div class="col">';
+        echo '<div class="row" style="color: black;"> <div class="col">';
         echo '<h6 style="font-size:3vw; text-align: center;">';
         echo 'Heute:  <br>' .date('M.d D').'<br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .'   °C'.
             ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
@@ -37,7 +37,7 @@
         $templocation = array("" => 'Select/Auswählen', 'Klosterneuburg' => 'Klosterneuburg', 'Wien' => 'Wien');
         $tempaccounts = array("" => 'Select/Auswählen', 'FarzadU1' => 'FarzadU1', 'FarzadU2' => 'FarzadU2', 'FarzadU3' => 'FarzadU3', 'FarzadU4' => 'FarzadU4', 'FarzadU5' => 'FarzadU5', 'FarzadU6' => 'FarzadU6', 'FarzadS' => 'FarzadS');
         ?>
-        <h3 style="font-size:2.4vw;color: white; text-align: center;"><br>  Letztes Mal<span style="font-size:4.5vw;font-weight: bold; color: #ffe8a1;">
+        <h3 style="font-size:4.4vw;color: black; text-align: center;"><br>  Letztes Mal<span style="font-size:4.8vw;font-weight: bold; color: red;">
                 <?php
                 if(!empty($lastwork->orders)){
                     echo $lastwork->orders;
@@ -50,18 +50,18 @@
 
             Bestellungen.</h3>
         <br>
-        {!! Form::open(array('method'=>'POST','action'=>'DriverPageController@store','style'=>'font-size:4vw;margin: 30px;','onsubmit'=>'validateForm()')) !!}
+        {!! Form::open(array('method'=>'POST','action'=>'DriverPageController@store','style'=>'font-size:5vw;margin: 20px;','onsubmit'=>'validateForm()')) !!}
         {!! form::label('working_day','Date/Datum :') !!}
-        {!! form::select('working_day',$TempDate,array('class'=>'form-control')) !!}
+        {!! form::select('working_day',$TempDate,null,array('class'=>'form-control','style'=>'font-size:5vw; min-height: 12vw')) !!}
         {!! form::label('orders','Orders/Bestellungen :') !!}
-        {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:4vw;','placeholder'=>'0','required']) !!}
+        {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:5vw;','placeholder'=>'0','required']) !!}
         {!! form::label('working_account','Account/Konto :') !!}
-        {!! form:: select('working_account',$tempaccounts,array('class'=>'form-control','id'=>'account')) !!}
+        {!! form:: select('working_account',$tempaccounts,null,array('class'=>'form-control','id'=>'account','style'=>'font-size:5vw; min-height: 12vw')) !!}
         {!! form::label('location','Locations/Ort :') !!}
-        {!! form:: select('location',$templocation,array('class'=>'form-control','id'=>'locations')) !!}
+        {!! form:: select('location',$templocation,null,array('class'=>'form-control','id'=>'locations','style'=>'font-size:5vw; min-height: 12vw')) !!}
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('driver_id', auth()->user()->id ,['class'=>'form-control']) !!}
-        {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:4vw; background-color: lightblue;color:black; padding:10px 20px;margin: 30px 5px;']) !!}
+        {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:6vw; background-color: lightblue;color:black; padding:10px 20px;margin: 30px 5px;']) !!}
         {!! Form::close() !!}
 
         <br>

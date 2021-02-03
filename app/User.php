@@ -9,7 +9,7 @@ class User extends Authenticatable
 
 
     protected $fillable = [
-        'name', 'family', 'bank_account', 'address', 'tell', 'email', 'password', 'company_id'
+        'name', 'family', 'bank_account', 'address', 'tell', 'email', 'password', 'company_id','pay_order','register_date','unregister_date'
     ];
 
     protected $hidden = [

@@ -43,12 +43,12 @@
     }
 
     .one {
-        border: 2px white solid;
+        border: 1px black solid;
         border-radius: 5px;
         margin: 3px;
-        font-size: 2.2vw !important;
-        min-width: 180px;
-        height: 70px;
+        font-size: 1.6vw !important;
+        width: 13vw;
+        height: 4.4vw;
         padding: 5px;
         overflow-x: scroll;
         overflow-y: hidden;
@@ -62,27 +62,29 @@
     }
 
     .four {
+        color: black;
         float: left;
-        margin: 3px;
-        border: 2px white solid;
+        margin: 1px;
+        border: 1px black solid;
         border-radius: 5px;
-        width: 48%;
+        width: 49%;
         height: 450px;
     }
 
     .five {
+        color: black;
         float: right;
-        margin: 3px;
-        border: 2px white solid;
+        margin: 1px;
+        border: 1px black solid;
         border-radius: 5px;
-        width: 48%;
+        width: 49%;
         height: 450px;
     }
 
 
     .dropbtn {
-        background-color: gray;
-        color: white;
+        background-color: white;
+        color: black;
         margin-top: 10px;
         border-radius: 5px;
         padding: 10px 20px;
@@ -104,10 +106,14 @@
     }
 
     .dropdown-content {
+        margin-top: 5px;
+        text-align: center;
+        border: 1px solid black;
+        border-radius: 2px;
         display: none;
         position: absolute;
         background-color: #f1f1f1;
-        min-width: 160px;
+        min-width: 120px;
         overflow: auto;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
@@ -132,27 +138,27 @@
         width: 1px;
     }
 </style>
-<body style="background-color: gray;">
-<div class="container-fluid" style="background-color: gray;">
+<body style="background-color: white;">
+<div class="container-fluid" style="background-color: white;">
     <?php setlocale(LC_TIME, "de_DE"); ?>
 
 
     <div class="dropdown">
-        <button onclick="dropdownMenu()" class="dropbtn" style="background-color: slategray;">Menu</button>
+        <button onclick="dropdownMenu()" class="dropbtn" style="background-color: slategray;font-size: 1.3vw;">Menu</button>
         <div id="myDropdown" class="dropdown-content" style="background-color: lightgray;color: white;">
             <?php
             if (auth()->user()) {
             if (auth()->user()->company_id == 0) {
             ?>
-            <a style='font-size:2.2vw;font-weight: bold; padding: 10px;' href='/admin'> Main </a>
-            <a style='font-size:2vw; padding: 10px; ' href='{{route("company-works.index")}}'> All orders </a>
-            <a style='font-size:2vw;  padding: 10px ;   ' href='{{route('admin-drivers.index')}}'> Drivers </a>
-            <a style='font-size:2vw;  padding: 10px;' href=' {{route('payments.index')}}'> Pay Slips </a>
+            <a style='font-size:1.2vw;font-weight: bold; padding: 10px;' href='/admin'> Main </a>
+            <a style='font-size:1vw; padding: 5px; ' href='{{route("company-works.index")}}'> All orders </a>
+            <a style='font-size:1vw;  padding: 5px ;   ' href='{{route('admin-drivers.index')}}'> Drivers </a>
+            <a style='font-size:1vw;  padding: 5px;' href=' {{route('payments.index')}}'> Pay Slips </a>
             <?php
             }
             }
             ?>
-            <a style="font-size:2vw; padding: 10px; font-weight: bold; color: red;" href="/logout"> Log out </a>
+            <a style="font-size:1vw; padding: 5px; font-weight: bold; color: red;" href="/logout"> Log out </a>
         </div>
     </div>
     <script>

@@ -73,14 +73,14 @@ class CompanyWorksController extends Controller
             $worksLasrSecond = DB::table('works')->select('working_account', DB::raw('sum(orders) as total'))->where('working_day', '>=', $first)
                 ->where('working_day', '<=', $second)->where('location', '=', $location->location)->groupBy('working_account')->get();
             $sum = 0;
-            echo '<h5  style="text-align: left;color: white; text-align: center;">' . $location->location . '</h5>';
+            echo '<h6  style="text-align: left;color: black; text-align: center;">' . $location->location . '</h6>';
             foreach ($worksLasrSecond as $a) {
-                echo '<h5  style="text-align: left;color: black; text-align: center;">' . $a->working_account . ' : ' . $a->total . '</h5>';
+                echo '<h6  style="text-align: left;color: black; text-align: center;">' . $a->working_account . ' : ' . $a->total . '</h6>';
                 $sum += $a->total;
 
 
             }
-            echo '<h4 style="text-align: center;color: red;">' . $sum . '</h4></div>';
+            echo '<h5 style="text-align: center;color: red;">' . $sum . '</h5></div>';
         }
 
 
