@@ -36,8 +36,8 @@
 
 
     .some {
-        display: flex;
-        margin: 10px; /* new */
+
+
         text-align: center;
         width: 100%;
     }
@@ -46,7 +46,7 @@
         border: 1px black solid;
         border-radius: 5px;
         margin: 3px;
-        font-size: 1.6vw !important;
+        font-size: 1.8vw !important;
         width: 13vw;
         height: 4.4vw;
         padding: 5px;

@@ -30,7 +30,7 @@
 <body>
     <div class="limiter">
         <div class="container-login100">
-            <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+            <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55" style="min-width: 700px;">
                 <form method="POST" class="login100-form validate-form flex-sb flex-w" action="/login">
                     {{ csrf_field() }}
                     <span class="login100-form-title p-b-32">
@@ -40,7 +40,7 @@
 						Email
 					</span>
                     <div class="wrap-input100 validate-input m-b-36" data-validate="Username is required">
-                        <input type="email" class="input100" id="login" name="email" placeholder="Email">
+                        <input type="email" class="input100" id="login" name="email" placeholder="Email" style="min-height: 70px;">
                         <span class="focus-input100"></span>
                     </div>
                     <span class="txt1 p-b-11">
@@ -50,7 +50,7 @@
 						<span class="btn-show-pass">
 							<i class="fa fa-eye"></i>
 						</span>
-                        <input type="password" class="input100" id="password" name="password" placeholder="Password">
+                        <input type="password" class="input100" id="password" name="password" placeholder="Password" style="min-height: 70px;">
                         <span class="focus-input100"></span>
                     </div>
                     <div class="container-login100-form-btn">

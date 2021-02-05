@@ -35,7 +35,7 @@
         , date('Y-m-d', strtotime(now() . ' -6 day')) => date('M-d D', strtotime(now() . ' -6 day'))
         );
         $templocation = array("" => 'Select/Auswählen', 'Klosterneuburg' => 'Klosterneuburg', 'Wien' => 'Wien');
-        $tempaccounts = array("" => 'Select/Auswählen', 'FarzadU1' => 'FarzadU1', 'FarzadU2' => 'FarzadU2', 'FarzadU3' => 'FarzadU3', 'FarzadU4' => 'FarzadU4', 'FarzadU5' => 'FarzadU5', 'FarzadU6' => 'FarzadU6', 'FarzadS' => 'FarzadS');
+        $tempaccounts = array("" => 'Select/Auswählen', 'FarzadU1' => 'FarzadU1', 'FarzadU2' => 'FarzadU2', 'FarzadU3' => 'FarzadU3', 'FarzadU4' => 'FarzadU4', 'FarzadU5' => 'FarzadU5', 'FarzadU6' => 'FarzadU6','FarzadU7' => 'FarzadU7','FarzadU8' => 'FarzadU8', 'FarzadS' => 'FarzadS');
         ?>
         <h3 style="font-size:4.4vw;color: black; text-align: center;"><br>  Letztes Mal<span style="font-size:4.8vw;font-weight: bold; color: red;">
                 <?php
@@ -52,13 +52,13 @@
         <br>
         {!! Form::open(array('method'=>'POST','action'=>'DriverPageController@store','style'=>'font-size:5vw;margin: 20px;','onsubmit'=>'validateForm()')) !!}
         {!! form::label('working_day','Date/Datum :') !!}
-        {!! form::select('working_day',$TempDate,null,array('class'=>'form-control','style'=>'font-size:5vw; min-height: 12vw')) !!}
+        {!! form::select('working_day',$TempDate,null,array('class'=>'form-control','style'=>'font-size:5vw; height: 13vw;')) !!}
         {!! form::label('orders','Orders/Bestellungen :') !!}
-        {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:5vw;','placeholder'=>'0','required']) !!}
+        {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:5vw;height: 13vw;','placeholder'=>'0','required']) !!}
         {!! form::label('working_account','Account/Konto :') !!}
-        {!! form:: select('working_account',$tempaccounts,null,array('class'=>'form-control','id'=>'account','style'=>'font-size:5vw; min-height: 12vw')) !!}
+        {!! form:: select('working_account',$tempaccounts,null,array('class'=>'form-control','id'=>'account','style'=>'font-size:5vw; height: 13vw')) !!}
         {!! form::label('location','Locations/Ort :') !!}
-        {!! form:: select('location',$templocation,null,array('class'=>'form-control','id'=>'locations','style'=>'font-size:5vw; min-height: 12vw')) !!}
+        {!! form:: select('location',$templocation,null,array('class'=>'form-control','id'=>'locations','style'=>'font-size:5vw; height: 13vw')) !!}
         {!! form::hidden('company_id', auth()->user()->company_id ,['class'=>'form-control']) !!}
         {!! form::hidden('driver_id', auth()->user()->id ,['class'=>'form-control']) !!}
         {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:6vw; background-color: lightblue;color:black; padding:10px 20px;margin: 30px 5px;']) !!}
