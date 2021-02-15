@@ -20,7 +20,7 @@ class CompanyWorksController extends Controller
 
         $klosSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Klosterneuburg')->groupBy('working_day')->orderBy('working_day', 'desc')->get();
         $WienSum = DB::table('works')->select('working_day', DB::raw('sum(orders) as total'))->where('location', '=', 'Wien')->groupBy('working_day')->orderBy('working_day', 'desc')->get();;
-
+        $drivers = User::all()->where('company_id', (auth()->user()->id));
         $avgKlos = DB::table(function ($query) {
             $query->selectRaw('working_day,sum(orders) as total')
                 ->from('works')->where('location', '=', 'Klosterneuburg')
@@ -39,7 +39,7 @@ class CompanyWorksController extends Controller
             ->groupBy('day')->get();
 
 
-        return view('Admin/CompanyWorks', compact('allworks', 'klosSum', 'WienSum', 'avgKlos', 'avgWien'));
+        return view('Admin/CompanyWorks', compact('allworks', 'klosSum', 'WienSum', 'avgKlos', 'avgWien','drivers'));
     }
 
 
@@ -127,6 +127,7 @@ class CompanyWorksController extends Controller
             'location' => 'required',
             'working_account' => 'required',
             'comment' => 'required',
+            'driver_id' => 'required',
         ]);
 
 
@@ -134,7 +135,7 @@ class CompanyWorksController extends Controller
         $work = new Work;
         $work->working_day = $request->working_day;
         $work->orders = $request->orders;
-        $work->driver_id = 8;
+        $work->driver_id = $request->driver_id;
         $work->company_id = $request->company_id;
         $work->wetter_temp = '99';
         $work->wetter_main =$request->comment;

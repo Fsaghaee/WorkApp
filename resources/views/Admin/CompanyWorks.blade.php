@@ -14,22 +14,28 @@
             <?php
             $templocation = array("" => 'Select/Auswählen', 'Klosterneuburg' => 'Klosterneuburg', 'Wien' => 'Wien', 'Tulln' => 'Tulln');
             $tempaccounts = array("" => 'Select/Auswählen', 'FarzadU1' => 'FarzadU1', 'FarzadU2' => 'FarzadU2', 'FarzadU3' => 'FarzadU3', 'FarzadU4' => 'FarzadU4', 'FarzadU5' => 'FarzadU5', 'FarzadU6' => 'FarzadU6', 'FarzadS' => 'FarzadS');
-
+            $driversArray = array();
+            foreach ($drivers as $driver) {
+                $driversArray[$driver->id] = $driver->name;
+                //  array_push($driversArray, [ $driver->id => $driver->name]);
+            }
             ?>
 
-            {!! Form::open(array('method'=>'POST','action'=>'CompanyWorksController@store','style'=>'font-size:4vw;margin: 30px;','onsubmit'=>'validateForm()')) !!}
+            {!! Form::open(array('method'=>'POST','action'=>'CompanyWorksController@store','style'=>'font-size:2vw;margin: 30px;','onsubmit'=>'validateForm()')) !!}
             {!! form::label('working_day','Date/Datum :') !!}
             {!! form::date('working_day',null,array('class'=>'form-control')) !!}
             {!! form::label('orders','Orders/Bestellungen :') !!}
-            {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:4vw;','placeholder'=>'0','required']) !!}
+            {!! form::text('orders',null,['class'=>'form-control' ,'style'=>'font-size:2vw; height: 3vw !important; ','placeholder'=>'0','required']) !!}
             {!! form::label('comment','Comment :') !!}
-            {!! form::text('comment',null,['class'=>'form-control' ,'style'=>'font-size:4vw;','placeholder'=>'Comment','required']) !!}
+            {!! form::text('comment',null,['class'=>'form-control' ,'style'=>'font-size:2vw; height: 3vw !important; ','placeholder'=>'Comment','required']) !!}
+            {!! form::label('driver_id','Driver :',['style'=>'font-size:2vw;']) !!}
+            {!! form:: select('driver_id',$driversArray,null,array('class'=>'form-control','id'=>'account','style'=>'font-size:2vw; height: 3vw !important;    padding: 0 !important;')) !!}
             {!! form::label('working_account','Account/Konto :') !!}
-            {!! form:: select('working_account',$tempaccounts,array('class'=>'form-control','id'=>'account')) !!}
+            {!! form:: select('working_account',$tempaccounts,null,array('class'=>'form-control','id'=>'account','style'=>'font-size:2vw; height: 3vw !important;    padding: 0 !important;')) !!}
             {!! form::label('location','Locations/Ort :') !!}
-            {!! form::select('location',$templocation,array('class'=>'form-control','id'=>'locations')) !!}
+            {!! form::select('location',$templocation,null,array('class'=>'form-control','id'=>'locations','style'=>'font-size:2vw; height: 3vw !important;    padding: 0 !important;')) !!}
             {!! form::hidden('company_id', auth()->user()->id ,['class'=>'form-control']) !!}
-            {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:4vw; background-color: lightblue;color:black; padding:10px 20px;margin: 30px 5px;']) !!}
+            {!! form::submit('Add Orders',['class'=>'btn btn-primary','style'=>'font-size:2vw; background-color: lightblue;color:black; padding:10px 20px;margin: 30px 5px;']) !!}
             {!! Form::close() !!}
 
         </div>
@@ -52,11 +58,9 @@
                 }
 
 
-
-                    echo '<tr>';
-                    echo '<td style="padding-left: 20px;padding-right: 90px;' . $border . '">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;' . $border . ' "> ' . $t->total . '</td>';
-                    echo '</tr>';
-
+                echo '<tr>';
+                echo '<td style="padding-left: 20px;padding-right: 90px;' . $border . '">' . date('m-d D', strtotime($t->working_day)) . ' </td><td style="padding-left: 90px;padding-right: 90px;' . $border . ' "> ' . $t->total . '</td>';
+                echo '</tr>';
 
 
             }

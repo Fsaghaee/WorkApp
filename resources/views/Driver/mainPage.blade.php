@@ -2,28 +2,35 @@
 @section('centercontent')
 
     <div>
-        <br>
-        <h2 style="font-size:4vw;color: black; text-align: center;"> Hallo {{auth()->user()->name }}</h2>
+        <script>
+
+
+            function validateForm() {
+                var wday = document.getElementById("working_day").value;
+                var orders = document.getElementById("orders").value;
+                var loc = document.getElementById("location").value;
+                var acc = document.getElementById("working_account").value;
+                if( acc == "") {
+                    alert('Bitte vergessen Sie nicht, ein Konto auszuwählen');
+                    return false;
+                }else if(loc == ""){
+                    alert('Bitte vergessen Sie nicht, einen Ort zu wählen');
+                    return false;
+                } else{
+                    alert(
+                        'Arbeitstag : ' + wday + '\nBestellungen : ' + orders + '\nKonto : ' +acc+' \nLocation : '+loc +'\nWenn etwas nicht stimmt, wenden Sie sich bitte an Ihren LeiterIn\n--Die Daten wurden gespeichert-- '
+                    );
+                    return true;
+                }
+
+
+            }
+
+
+        </script>
+        <h2 style="font-size:4vw;color: black; text-align: center;margin-top: 10px;"> Hallo {{auth()->user()->name }}</h2>
         <?php
-        function stringInsert($str, $insertstr, $pos)
-        {
-            $str = substr($str, 0, $pos) . $insertstr . substr($str, $pos);
-            return $str;
-        }
-        $date = date('Y-m-d');
-        $response = file_get_contents('http://api.weatherapi.com/v1/history.json?key=3fa2c903934841ed92885918201808&q=vienna&dt=' . $date);
-        $response = json_decode($response, true);
 
-        echo '<div class="row" style="color: black;"> <div class="col">';
-        echo '<h6 style="font-size:3vw; text-align: center;">';
-        echo 'Heute:  <br>' .date('M.d D').'<br>' . $response['forecast']['forecastday'][0]['day']['maxtemp_c'] .'   °C'.
-            ' <br> ' . $response['forecast']['forecastday'][0]['day']['condition']['text'];
-        echo '<img src="' . $response['forecast']['forecastday'][0]['day']['condition']['icon'] . '"/>';
-        echo '</h6>';
-
-
-
-        echo '</div></div>';
 
         $TempDate = array(
             date('Y-m-d', strtotime(now())) => date('M-d D', strtotime(now()))
@@ -49,8 +56,8 @@
                 ?> </span>
 
             Bestellungen.</h3>
-        <br>
-        {!! Form::open(array('method'=>'POST','action'=>'DriverPageController@store','style'=>'font-size:5vw;margin: 20px;','onsubmit'=>'validateForm()')) !!}
+
+        {!! Form::open(array('method'=>'POST','action'=>'DriverPageController@store','onsubmit'=>'validateForm()','style'=>'font-size:5vw;margin: 20px;')) !!}
         {!! form::label('working_day','Date/Datum :') !!}
         {!! form::select('working_day',$TempDate,null,array('class'=>'form-control','style'=>'font-size:5vw; height: 13vw;')) !!}
         {!! form::label('orders','Orders/Bestellungen :') !!}
@@ -82,31 +89,6 @@
         </table>
     </div>
 
-    <script>
 
-
-        function validateForm() {
-            var wday = document.getElementById("working_day").value;
-            var orders = document.getElementById("orders").value;
-            var loc = document.getElementById("location").value;
-          var acc = document.getElementById("working_account").value;
-          if( acc == "") {
-              alert('Bitte vergessen Sie nicht, ein Konto auszuwählen');
-              return false;
-          }else if(loc == ""){
-              alert('Bitte vergessen Sie nicht, einen Ort zu wählen');
-              return false;
-          } else{
-              alert(
-                  'Arbeitstag : ' + wday + '\nBestellungen : ' + orders + '\nKonto : ' +acc+' \nLocation : '+loc +'\nWenn etwas nicht stimmt, wenden Sie sich bitte an Ihren LeiterIn\n--Die Daten wurden gespeichert-- '
-              );
-              return true;
-          }
-
-
-        }
-
-
-    </script>
 
 @stop
