@@ -83,7 +83,7 @@
                     echo ' <br><h6>' . $firstday1 . ' <br> ' . $lastday1 . '</h6>';
 
                     $worksLasrFirst = (new App\Http\Controllers\AdminPageController)->printearn($firstday1, $lastday1);
-                    echo '' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' <span style="color: black;"> € </span>  ';
+                    echo '<h5 style="font-weight:bold;"> ' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' <span style="color: black;"> € </span> </h5> ';
 
                     echo "<div class='row'>";
                     echo "<div class='col'>";
@@ -99,19 +99,20 @@
                             $shouldPay +=   (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) *  $allDriver->pay_order;
                         }
 
+                        if((new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) !=0 ){
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) . ' -- '.(new App\Http\Controllers\AdminPageController)->getDriverWork($firstday1, $lastday1, $allDriver->id) *  $allDriver->pay_order.'€<br>';
-
+}
                     }
                     echo "</div></div>";
-                    echo "<h6> Shoud pay :  $shouldPay </h6>";
+                    echo "<h6 style='font-weight:bold;'> Shoud pay :  $shouldPay </h6>";
                     $eraned=$worksLasrFirst * 5.4 -$shouldPay;
-                    echo "<h6> Earned : $eraned </h6>";
+                    echo "<h6 style='font-weight:bold;'> Earned : $eraned </h6>";
                     echo "</div>";
 
                     echo "<div class='five' style='overflow-y: scroll;'>";
                     echo ' <br><h6>' . $firstday2 . ' <br> ' . $lastday2 . '</h6>';
                     $worksLasrFirst = (new App\Http\Controllers\AdminPageController)->printearn($firstday2, $lastday2);
-                    echo '' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;"> € </span>  ';
+                    echo '<h5 style="font-weight:bold;"> ' . $worksLasrFirst . '  -  ' . $worksLasrFirst * 5.4 . ' € <span style="color: black;"> € </span>  </h5>';
 
                     echo "<div class='row'>";
                     echo "<div class='col'>";
@@ -127,13 +128,14 @@
                             $shouldPay +=   (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id)  *  $allDriver->pay_order;
                         }
 
+                        if((new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) != 0){
                         echo $allDriver->name . ' : ' . (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) .' -- '. (new App\Http\Controllers\AdminPageController)->getDriverWork($firstday2, $lastday2, $allDriver->id) *  $allDriver->pay_order.'€<br>';
-                    }
+                    }}
 
                     echo "</div></div>";
-                    echo "<h6> Shoud pay :  $shouldPay </h6>";
+                    echo "<h6 style='font-weight:bold;'>  Shoud pay :  $shouldPay </h6>";
                     $eraned=$worksLasrFirst * 5.4 -$shouldPay;
-                    echo "<h6> Earned : $eraned </h6>";
+                    echo "<h6 style='font-weight:bold;'> Earned : $eraned </h6>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";

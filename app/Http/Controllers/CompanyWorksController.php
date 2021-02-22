@@ -73,16 +73,21 @@ class CompanyWorksController extends Controller
             $worksLasrSecond = DB::table('works')->select('working_account', DB::raw('sum(orders) as total'))->where('working_day', '>=', $first)
                 ->where('working_day', '<=', $second)->where('location', '=', $location->location)->groupBy('working_account')->get();
             $sum = 0;
-            echo '<h6  style="text-align: left;color: black; text-align: center;">' . $location->location . '</h6>';
-            foreach ($worksLasrSecond as $a) {
-                echo '<h6  style="text-align: left;color: black; text-align: center;">' . $a->working_account . ' : ' . $a->total . '</h6>';
-                $sum += $a->total;
 
 
+            if ($worksLasrSecond->isNotEmpty()) {
+                echo '<h6  style="text-align: left;color: black; text-align: center;font-weight: bold;font-size: 1vw;">' . $location->location . '</h6>';
+
+                foreach ($worksLasrSecond as $a) {
+                    echo '<h6  style="text-align: left;color: black; text-align: center;">' . $a->working_account . ' : ' . $a->total . '</h6>';
+                    $sum += $a->total;
+
+
+                }
+                echo '<h5 style="text-align: center;color: red;font-weight: bold;">' . $sum . '</h5>';
             }
-            echo '<h5 style="text-align: center;color: red;">' . $sum . '</h5></div>';
+            echo "</div>";
         }
-
 
     }
 
