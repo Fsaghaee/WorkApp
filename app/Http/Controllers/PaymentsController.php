@@ -21,7 +21,7 @@ class PaymentsController extends Controller
         $payslips = DB::table('payslips')
             ->join('users', 'payslips.driver_id', '=', 'users.id')
             ->select('payslips.*', 'users.name')
-            ->where('payslips.company_id', '=', auth()->user()->id)->get();
+            ->where('payslips.company_id', '=', auth()->user()->id)->orderBy('users.name')->get();
         $drivers = User::all()->where('company_id', (auth()->user()->id));
 
         return view('Admin/PaySlips', compact('payslips','drivers'));
