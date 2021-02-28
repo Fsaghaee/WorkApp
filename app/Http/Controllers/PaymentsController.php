@@ -46,7 +46,8 @@ class PaymentsController extends Controller
     public function store(Request $request)
     {
         $file = $request->file('file');
-        $name = $request->driver_id . '_' . $request->monat . '.' . $file->getClientOriginalExtension();
+        $user = User::findOrfail($request->driver_id);
+        $name = $request->monat .' '.$user->name.' '.$user->family. '.' . $file->getClientOriginalExtension();
         $file->move('payslips', $name);
         $payslip = new Payslip(['due_date' => $request->due_date, 'status' => 'payed', 'slip_file_location' => 'payslips/' . $name, 'driver_id' => $request->driver_id, 'company_id' => auth()->user()->id]);
         $payslip->save();

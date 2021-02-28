@@ -24,7 +24,8 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -144,7 +145,8 @@
 
 
     <div class="dropdown">
-        <button onclick="dropdownMenu()" class="dropbtn" style="background-color: slategray;font-size: 1.3vw;">Menu</button>
+        <button onclick="dropdownMenu()" class="dropbtn" style="background-color: slategray;font-size: 1.3vw;">Menu
+        </button>
         <div id="myDropdown" class="dropdown-content" style="background-color: lightgray;color: white;">
             <?php
             if (auth()->user()) {
