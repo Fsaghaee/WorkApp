@@ -19,7 +19,7 @@ class LoginController extends Controller
                 return route('driver.index');
 
 
-            } elseif (auth()->user()->company_id != 0 && auth()->user()->unregister_date < date('Y-m-d', strtotime(now() . ' -5 day'))) {
+            } elseif (auth()->user()->company_id != 0 && auth()->user()->unregister_date < date('Y-m-d', strtotime(now() . ' -3 day'))) {
 
                 return redirect()->to('logout');
 
@@ -42,7 +42,7 @@ class LoginController extends Controller
             return redirect()->to('/admin')->with('warning', "Successfull");
         } elseif (auth()->user()->company_id != 0 && auth()->user()->unregister_date == "") {
             return redirect()->to('/driver')->with('warning', "Successfull");
-        }elseif (auth()->user()->company_id != 0 && auth()->user()->unregister_date > date('Y-m-d', strtotime(now() . ' -5 day'))) {
+        }elseif (auth()->user()->company_id != 0 && auth()->user()->unregister_date > date('Y-m-d', strtotime(now() . ' -3 day'))) {
 
             return redirect()->to('/driver')->with('warning', "Successfull");
         }else{
