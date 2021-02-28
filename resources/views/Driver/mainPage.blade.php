@@ -31,7 +31,6 @@
         <h2 style="font-size:4vw;color: black; text-align: center;margin-top: 10px;"> Hallo {{auth()->user()->name }}</h2>
         <?php
 
-
         $TempDate = array(
             date('Y-m-d', strtotime(now())) => date('M-d D', strtotime(now()))
         , date('Y-m-d', strtotime(now() . ' -1 day')) => date('M-d D', strtotime(now() . ' -1 day'))
